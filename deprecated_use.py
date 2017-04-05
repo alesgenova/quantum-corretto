@@ -30,3 +30,4 @@ depr = {}
 
 depr['gvect'] = None
 depr['fft_base'] = ['dfftp','dffts']
+depr['lsda_mod'] = ['nspin']

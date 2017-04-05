@@ -78,7 +78,7 @@ class Project(object):
         
     def scan_sources(self):
         for src in self.sources:
-            print('Scanning', src.name)
+            #print('Scanning', src.name)
             src.scan()
         
     def make_project_tree(self):
@@ -270,7 +270,8 @@ def line_to_context(line, context):
             check = False
             end_name = "None"
         if not check:
-            print('WARNING: ',end_name, curr_context.name, line)
+            pass
+            #print('WARNING: ',end_name, curr_context.name, line)
         #print(context[-1])
         context.pop()
         return chk
