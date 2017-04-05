@@ -22,10 +22,11 @@ import re
 use_rgx = re.compile(r'^\s*USE\s+(\w+)\s*(?:,\s*ONLY\s*:\s*)?(.*)?',re.IGNORECASE)
 #useonly_rgx = re.compile(r'USE\s+(\w+)(\s*,\s*ONLY\s*:\s*)+',re.IGNORECASE)
 vars_rgx = re.compile(r'(\w+)',re.IGNORECASE)
-module_rgx = re.compile(r'^\s*module\s+(\w+)',re.IGNORECASE)
-endmodule_rgx = re.compile(r'^\s*end\s*module\s+(\w+)',re.IGNORECASE)
+module_rgx = re.compile(r'^\s*module\s+(?!procedure\b)(\w+)',re.IGNORECASE)
+endmodule_rgx = re.compile(r'^\s*end\s*module(?:\s+(\w+))?',re.IGNORECASE)
 subroutine_rgx = re.compile(r'^\s*subroutine\s+(\w+)\s*(?:\((.*)\))?',re.IGNORECASE)
-endsubroutine_rgx = re.compile(r'^\s*end\s*subroutine\s+(\w+)',re.IGNORECASE)
-function_rgx = re.compile(r'^\s*(?:(?:real|complex|int).*\s+)?function\s+(\w+)\s*(?:\((.*?)\))?\s*(?:result\s*(?:\((.*?)\)))?'
+#endsubroutine_rgx = re.compile(r'^\s*end\s*subroutine\s+(\w+)',re.IGNORECASE)
+endsubroutine_rgx = re.compile(r'^\s*end\s*subroutine(?:\s+(\w+))?',re.IGNORECASE)
+function_rgx = re.compile(r'^\s*(?:(?:real|complex|integer|character|logical).*\s+)?function\s+(\w+)\s*(?:\((.*?)\))?\s*(?:result\s*(?:\((.*?)\)))?'
                           ,re.IGNORECASE)
-endfunction_rgx = re.compile(r'^\s*end\s*function\s+(\w+)?',re.IGNORECASE)
+endfunction_rgx = re.compile(r'^\s*end\s*function(?:\s+(\w+))?',re.IGNORECASE)

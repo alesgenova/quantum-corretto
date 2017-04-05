@@ -119,6 +119,7 @@ class Sourcefile(Codeblock):
     
     def __init__(self,name):
         super().__init__(name)
+        self.name = name
         self.parent = None
         self.tree_level = tree_root
         self.typ = 'Sourcefile'
@@ -143,9 +144,14 @@ class Sourcefile(Codeblock):
                 
                 if len(self.lines[-1].bare) > 0 :
                     output = line_to_context(self.lines[-1].bare,context)
-                
+                    #print(output,context)
+                    if abs(output) == 1:
+                        pass
+                        #print(self.lines[-1].bare)
+                        #print(output, context)
                     if  not output == 0 and not output == 1 :
-                        print('WARNING: ',line)
+                        pass
+                        #print('WARNING: ',line)
                         
     def print_source(self):
         for line in self.lines:
@@ -239,7 +245,7 @@ def line_to_context(line, context):
     # CHECK USE STATEMENTS 
     mo = use_rgx.match(line)
     if mo is not None:
-        chk += 1
+        #chk += 1
         curr_context.add_import(mo.group(1), mo.group(2))
         return chk
            
@@ -248,7 +254,7 @@ def line_to_context(line, context):
     mo = subroutine_rgx.match(line)
     if mo is not None:
         chk += 1
-        context.append(Subroutine(mo.group(1), mo.group(2),curr_context))
+        context.append(Subroutine(mo.group(1).lower(), mo.group(2),curr_context))
         curr_context.add_contains(context[-1])
         return chk
         
@@ -256,10 +262,16 @@ def line_to_context(line, context):
     # CHECK END SUBROUTINE
     mo = endsubroutine_rgx.match(line)
     if mo is not None:
-        chk += 1
-        check = mo.group(1) == curr_context.name
+        chk -= 1
+        try:
+            check = mo.group(1).lower() == curr_context.name
+            end_name = mo.group(1).lower()
+        except AttributeError:
+            check = False
+            end_name = "None"
         if not check:
-            print('WARNING: ',mo.group(1), curr_context.name, line)
+            print('WARNING: ',end_name, curr_context.name, line)
+        #print(context[-1])
         context.pop()
         return chk
     
@@ -267,14 +279,15 @@ def line_to_context(line, context):
     mo = function_rgx.match(line)
     if mo is not None:
         chk += 1
-        context.append(Function(mo.group(1), mo.group(2),curr_context))
+        context.append(Function(mo.group(1).lower(), mo.group(2),curr_context))
         curr_context.add_contains(context[-1])
         return chk
     
     # CHECK END FUNCTION
     mo = endfunction_rgx.match(line)
     if mo is not None:
-        chk += 1
+        chk -= 1
+        #print(context[-1])
         context.pop()
         return chk
     
@@ -283,14 +296,16 @@ def line_to_context(line, context):
     mo = module_rgx.match(line)
     if mo is not None:
         chk += 1
-        context.append(Module(mo.group(1),curr_context))
+        context.append(Module(mo.group(1).lower(),curr_context))
         curr_context.add_contains(context[-1])
         return chk
         
     # CHECK END MODULE
     mo = endmodule_rgx.match(line)
     if mo is not None:
-        chk += 1
+        chk -= 1
+        
+        #print(context[-1])
         context.pop()
         return chk
     
