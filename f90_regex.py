@@ -1,4 +1,4 @@
-''' 
+'''
     This file is part of fQE.
 
     Foobar is free software: you can redistribute it and/or modify
@@ -30,3 +30,7 @@ endsubroutine_rgx = re.compile(r'^\s*end\s*subroutine(?:\s+(\w+))?',re.IGNORECAS
 function_rgx = re.compile(r'^\s*(?:(?:real|complex|integer|character|logical).*\s+)?function\s+(\w+)\s*(?:\((.*?)\))?\s*(?:result\s*(?:\((.*?)\)))?'
                           ,re.IGNORECASE)
 endfunction_rgx = re.compile(r'^\s*end\s*function(?:\s+(\w+))?',re.IGNORECASE)
+
+declaration_rgx = re.compile(r'^\s*(?P<type_base>real|complex|integer|character|logical|type)\s*(?:\((?P<type_extra>.*?)\))?\s*,?(?P<options>.*)::\s*(?P<vars>.+)$',re.IGNORECASE)
+options_rgx = re.compile(r'^\s*(?:(?P<option>\w+)(?:\((?P<slice>.*)?\))?\s*,?\s*)',re.IGNORECASE)
+vars_rgx = re.compile(r'^(?P<subtract>,?\s*(?P<option>\w+)\s*(?:\((?P<slice>.*?)?\))?\s*(?:=\s*(?P<assign>.*?))?)(,.*)?$',re.IGNORECASE)
