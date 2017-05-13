@@ -79,19 +79,22 @@ class Project(object):
 
     def __init__(self, name):
         self.name = name
-        self.sources = []
+        self.sources = {}
 
     def add_sourcefile(self, filename):
-        self.sources.append(Sourcefile(filename))
+        #self.sources.append(Sourcefile(filename))
+        if filename in self.sources:
+            print("Warning, source file {} is being read twice.".format(filename))
+        self.sources[filename]=Sourcefile(filename)
 
     def scan_sources(self):
-        for src in self.sources:
+        for key, src in self.sources.items():
             #print('Scanning', src.name)
             src.scan()
 
     def make_project_tree(self):
         print('PROJECT '+self.name)
-        for src in self.sources:
+        for key, src in self.sources.items():
             print('  |')
             src.print_contains()
 
@@ -102,6 +105,10 @@ class Codeblock(object):
         self.name = name.lower()
         self.contains = OrderedDict()
         self.imports = OrderedDict()
+        self.location = {"project":None,
+                        "file":None,
+                        "module":None,
+                        "procedure":None}
 
     def add_import(self, modulename, variables):
         self.imports[modulename], trash = str_to_arg(variables)
@@ -118,6 +125,9 @@ class Codeblock(object):
             print('   '*self.tree_level+'   |')
             #print ('---'*obj.tree_level,obj.typ,obj.name)
             obj.print_contains()
+
+    def __str__(self):
+        return "{} {}".format(self.typ, self.name)
 
 
 
@@ -142,6 +152,8 @@ class Sourcefile(Codeblock):
     def scan(self):
         context = []
         context.append(self)
+        location = self.location.copy()
+        location['file'] = self
         with open(self.name,'r') as src:
             print(self.name)
             for line in src:
@@ -152,7 +164,12 @@ class Sourcefile(Codeblock):
                 # (i.e. are we entering a new module/routine/function?)
 
                 if len(self.lines[-1].bare) > 0 :
-                    output = line_to_context(self.lines[-1].bare,context)
+                    output = line_to_context(self.lines[-1].bare, context, location)
+                    if isinstance(context[-1], Module):
+                        location['module'] = context[-1]
+                    elif isinstance(context[-1], Procedure):
+                        location['procedure'] = context[-1]
+                    #print(location)
                     #print(output,context)
                     if abs(output) == 1:
                         pass
@@ -219,12 +236,29 @@ class Module(Codeblock):
         super().__init__(name)
         self.parent = parent
         self.tree_level = parent.tree_level + 1
+        self.declarations = {}
         self.typ = 'Module'
+
+    def objectify(self):
+        pass
 
     def __str__(self):
         return 'MODULE '+self.name
 
+class Quantity(Codeblock):
+
+    def __init__(name):
+        super().__init__(name)
+        self.parent = parent
+        self.tree_level = parent.tree_level + 1
+        self.declarations = []
+        self.typ = 'Quantity'
+
+
+
 def parse_declaration(context,mo):
+    if context.typ != "Module": return
+
     type_base = mo.group('type_base').strip() if mo.group('type_base') else ""
     type_base = type_base if len(type_base.strip()) > 0 else None
 
@@ -237,9 +271,17 @@ def parse_declaration(context,mo):
     variables = mo.group('vars').strip() if mo.group('vars') else ""
     variables = variables if len(variables) > 0 else None
 
-    print(type_base, type_extra, options, variables)
+    #print(type_base, type_extra, options, variables)
     attributes = _parse_declaration_options(options)
     var_list = _parse_declaration_variables(variables, type_base, type_extra, attributes)
+
+    for var in var_list:
+        var_name = var['name']
+        if var_name in context.declarations:
+            print("Warning, variable {} in module {} is being declared twice.".format(var_name,context.name))
+        context.declarations[var_name] = var
+    #context.declarations.extend(var_list)
+
     return
 
 def _parse_declaration_options(options):
@@ -284,10 +326,10 @@ def _parse_declaration_variables(variables, type_base, type_extra, attributes):
             #print(mo.group(0))
             leftover = leftover[len(mo.group('subtract')):]
             mo = vars_rgx.match(leftover)
-        print()
-        for var in var_list:
-            print(var)
-            print()
+        #print()
+        #for var in var_list:
+        #    print(var)
+        #    print()
         return var_list
 
 def str_to_arg(string):
@@ -308,7 +350,7 @@ def str_to_arg(string):
     #return args, argstring if len(args) > 0 else None, None
 
 
-def line_to_context(line, context):
+def line_to_context(line, context, location):
 
     curr_context = context[-1]
 
@@ -355,6 +397,7 @@ def line_to_context(line, context):
             #print('WARNING: ',end_name, curr_context.name, line)
         #print(context[-1])
         context.pop()
+        location['procedure'] = None
         return chk
 
     # CHECK NEW FUNCTION
@@ -371,6 +414,7 @@ def line_to_context(line, context):
         chk -= 1
         #print(context[-1])
         context.pop()
+        location['procedure'] = None
         return chk
 
 
@@ -389,6 +433,7 @@ def line_to_context(line, context):
 
         #print(context[-1])
         context.pop()
+        location['module'] = None
         return chk
 
     return chk
