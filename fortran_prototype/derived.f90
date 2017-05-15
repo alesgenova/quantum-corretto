@@ -10,6 +10,7 @@ module types
     integer, dimension(4) :: c = [1,2,3,4]
     integer, dimension(4) :: d = [5,6,7,8]
     integer, allocatable, dimension(:) :: e
+    !integer, dimension(:), pointer :: f => null()
   contains
     procedure, pass :: allocate => allocate_custom1
     procedure, pass :: initialize => initialize_custom1
@@ -38,6 +39,8 @@ contains
     integer, intent(in), dimension(:) :: array
 
     this%e(:) = array
+
+    !this%f => this%e(::2)
 
     write(*,*) size(this%e)
 
@@ -88,8 +91,8 @@ program test
   type(custom0) :: obj0
   type(custom1) :: obj1
 
-  obj0 = custom0()
-  obj1 = custom1()
+  !obj0 = custom0([5,6],[7,8])
+  !obj1 = custom1()
 
   call obj1%allocate(4)
   call obj1%initialize([11,12,13,14])

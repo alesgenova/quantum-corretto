@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-
+import os
 from f90_regex import *
 from collections import OrderedDict
 tree_root = 1
@@ -52,15 +52,18 @@ class EmptyLine(Line):
 
 class Project(object):
 
-    def __init__(self, name):
+    def __init__(self, name, root):
         self.name = name
+        self.root = root
         self.sources = {}
 
     def add_sourcefile(self, filename):
         #self.sources.append(Sourcefile(filename))
         if filename in self.sources:
             print("Warning, source file {} is being read twice.".format(filename))
-        self.sources[filename]=Sourcefile(filename)
+        shortdir = os.path.relpath(os.path.dirname(filename), start=self.root)+"/"
+        name = shortdir+os.path.split(filename)[1]
+        self.sources[name]=Sourcefile(shortdir, name, filename)
 
     def scan_sources(self):
         for key, src in self.sources.items():
@@ -75,12 +78,28 @@ class Project(object):
 
     def locate(self, name):
         location_ = []
+        if name in self.sources:
+            return self.sources[name], location_
         for key, src in self.sources.items():
             #print('Scanning', src.name)
             block, location = src.locate(name, location_)
             if block is not None:
                 return block, location
         return None, None
+
+    def get_blocktypes(self, class_obj):
+        blocks = []
+        for key, src in self.sources.items():
+            if isinstance(src, class_obj):
+                blocks.append(src)
+            else:
+                blocks.extend(src.get_blocktypes(class_obj))
+
+        if len(blocks) > 0: return blocks
+
+
+        return blocks
+
 
 
 class Codeblock(object):
@@ -89,6 +108,7 @@ class Codeblock(object):
         self.name = name.lower()
         self.contains = OrderedDict()
         self.imports = OrderedDict()
+        self.typ = ''
         self.location = {"project":None,
                         "file":None,
                         "module":None,
@@ -120,18 +140,29 @@ class Codeblock(object):
                 return block, location
         return None, None
 
+    def get_blocktypes(self, class_obj):
+        blocks = []
+        for key, obj in self.contains.items():
+            if isinstance(obj, class_obj):
+                blocks.append(obj)
+            else:
+                blocks.extend(obj.get_blocktypes(class_obj))
+        return blocks
+
     def __str__(self):
         return "{} {}".format(self.typ, self.name)
 
 
 class Sourcefile(Codeblock):
 
-    def __init__(self,name):
+    def __init__(self, shortdir, name, fullname):
         super().__init__(name)
-        self.name = name
+        self.fullname = fullname
         self.parent = None
         self.tree_level = tree_root
         self.typ = 'Sourcefile'
+        self.shortdir = shortdir
+        self.name = name
         self.lines = []
 
     def __str__(self):
@@ -145,7 +176,7 @@ class Sourcefile(Codeblock):
         context.append(self)
         location = self.location.copy()
         location['file'] = self
-        with open(self.name,'r') as src:
+        with open(self.fullname,'r') as src:
             print(self.name)
             for line in src:
 
