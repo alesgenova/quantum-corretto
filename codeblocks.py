@@ -1,26 +1,8 @@
-'''
-    This file is part of fQE.
-
-    Foobar is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Foobar is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with fQE.  If not, see <http://www.gnu.org/licenses/>.
-'''
-
 #! /usr/bin/env python3
 
 from f90_regex import *
 from collections import OrderedDict
 tree_root = 1
-
 
 class Line(object):
 
@@ -32,17 +14,13 @@ class Line(object):
         continuing = False
         #self.empty = False
         while continue_line:
-
             # Remove comments
-
             try:
                 code, comment = re.match(r'\s*(.*?)(\s*!.*)$', input_string).groups()
             except:
                 #pass
                 code = re.match(r'\s*(.*?)\s*$', input_string).group(1)
                 comment = ''
-
-
 
             # Concatenate continued lines
 
@@ -65,15 +43,12 @@ class Line(object):
             self.comment.append(comment)
         self.empty = len(self.bare) < 2
 
-
-
 class EmptyLine(Line):
 
     def __init__(self):
         self.bare = ''
         self.code = ['']
         self.comment = ['']
-
 
 class Project(object):
 
@@ -135,7 +110,7 @@ class Codeblock(object):
             #print ('---'*obj.tree_level,obj.typ,obj.name)
             obj.print_contains()
 
-    def locate(self, name, location_):
+    def locate(self, name, location_=[]):
         if name in self.contains:
             return self.contains[name], location_+[self.name]
         for key, src in self.contains.items():
@@ -147,9 +122,6 @@ class Codeblock(object):
 
     def __str__(self):
         return "{} {}".format(self.typ, self.name)
-
-
-
 
 
 class Sourcefile(Codeblock):
@@ -217,8 +189,6 @@ class Sourcefile(Codeblock):
                 print(line.bare)
 
 
-
-
 class Procedure(Codeblock):
 
     def __init__(self, name, argstring, parent):
@@ -226,7 +196,6 @@ class Procedure(Codeblock):
         self.parent = parent
         self.tree_level = parent.tree_level + 1
         self.args, self.argstring = str_to_arg(argstring)
-
 
 
 class Subroutine(Procedure):
@@ -261,7 +230,7 @@ class Module(Codeblock):
     def objectify(self):
         pass
 
-    def locate(self, name, location_):
+    def locate(self, name, location_=[]):
         block, location = super().locate(name, location_)
         if block is not None:
             return block, location
@@ -280,7 +249,6 @@ class Quantity(Codeblock):
         self.tree_level = parent.tree_level + 1
         self.declarations = []
         self.typ = 'Quantity'
-
 
 
 def parse_declaration(context,mo):
@@ -308,7 +276,6 @@ def parse_declaration(context,mo):
             print("Warning, variable {} in module {} is being declared twice.".format(var_name,context.name))
         context.declarations[var_name] = var
     #context.declarations.extend(var_list)
-
     return
 
 def _parse_declaration_options(options):
@@ -464,7 +431,6 @@ def line_to_context(line, context, location):
         return chk
 
     return chk
-
 
 
 if __name__ == "__main__":
