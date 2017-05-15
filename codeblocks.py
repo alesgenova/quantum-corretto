@@ -228,7 +228,19 @@ class Module(Codeblock):
         self.typ = 'Module'
 
     def objectify(self):
-        pass
+        print("type :: {}_type".format(self.name))
+        for key, var in self.declarations.items():
+            string = "  "+var['type_base']
+            if var['type_extra'] is not None: string += "({})".format(var['type_extra'])
+            if var['allocatable']: string += ", allocatable"
+            if var['dimension'] is not None: string += ", dimension({})".format(var['dimension'])
+            if var['pointer']: string += ", pointer"
+            string += ", target :: "
+            string += var['name']
+            if var['default'] is not None: string += " = {}".format(var['default'])
+            print (string)
+        print("end type {}_type".format(self.name))
+
 
     def locate(self, name, location_=[]):
         block, location = super().locate(name, location_)
@@ -255,10 +267,10 @@ def parse_declaration(context,mo):
     if context.typ != "Module": return
 
     type_base = mo.group('type_base').strip() if mo.group('type_base') else ""
-    type_base = type_base if len(type_base.strip()) > 0 else None
+    type_base = type_base.lower() if len(type_base.strip()) > 0 else None
 
     type_extra = mo.group('type_extra').strip() if mo.group('type_extra') else ""
-    type_extra = type_extra if len(type_extra) > 0 else None
+    type_extra = type_extra.lower() if len(type_extra) > 0 else None
 
     options = mo.group('options').strip() if mo.group('options') else ""
     options = options if len(options) > 0 else None
@@ -313,7 +325,7 @@ def _parse_declaration_variables(variables, type_base, type_extra, attributes):
             var_dict['intent'] = attributes['intent']
             var_dict['pointer'] = attributes['pointer']
             var_dict['target'] = attributes['target']
-            var_dict['default'] = mo.group('assign')
+            var_dict['default'] = mo.group('assign').lower() if mo.group('assign') else None
             if mo.group('slice') is not None:
                 var_dict['dimension'] = mo.group('slice').strip()
             var_list.append(var_dict)
