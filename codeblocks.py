@@ -98,6 +98,15 @@ class Project(object):
             print('  |')
             src.print_contains()
 
+    def locate(self, name):
+        location_ = []
+        for key, src in self.sources.items():
+            #print('Scanning', src.name)
+            block, location = src.locate(name, location_)
+            if block is not None:
+                return block, location
+        return None, None
+
 
 class Codeblock(object):
 
@@ -125,6 +134,16 @@ class Codeblock(object):
             print('   '*self.tree_level+'   |')
             #print ('---'*obj.tree_level,obj.typ,obj.name)
             obj.print_contains()
+
+    def locate(self, name, location_):
+        if name in self.contains:
+            return self.contains[name], location_+[self.name]
+        for key, src in self.contains.items():
+            location = location_+[self.name]
+            block, location = src.locate(name, location)
+            if block is not None:
+                return block, location
+        return None, None
 
     def __str__(self):
         return "{} {}".format(self.typ, self.name)
@@ -165,10 +184,10 @@ class Sourcefile(Codeblock):
 
                 if len(self.lines[-1].bare) > 0 :
                     output = line_to_context(self.lines[-1].bare, context, location)
-                    if isinstance(context[-1], Module):
-                        location['module'] = context[-1]
-                    elif isinstance(context[-1], Procedure):
-                        location['procedure'] = context[-1]
+                    #if isinstance(context[-1], Module):
+                    #    location['module'] = context[-1]
+                    #elif isinstance(context[-1], Procedure):
+                    #    location['procedure'] = context[-1]
                     #print(location)
                     #print(output,context)
                     if abs(output) == 1:
@@ -241,6 +260,14 @@ class Module(Codeblock):
 
     def objectify(self):
         pass
+
+    def locate(self, name, location_):
+        block, location = super().locate(name, location_)
+        if block is not None:
+            return block, location
+        if name in self.declarations:
+            return self.declarations[name], location_+[self.name]
+        return None, None
 
     def __str__(self):
         return 'MODULE '+self.name
