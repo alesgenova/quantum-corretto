@@ -10,4 +10,5 @@ type :: ktetra_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type ktetra_type

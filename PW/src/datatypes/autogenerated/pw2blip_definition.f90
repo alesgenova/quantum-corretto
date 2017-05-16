@@ -25,4 +25,5 @@ type :: pw2blip_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type pw2blip_type

@@ -6,4 +6,5 @@ type :: a2f_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type a2f_type

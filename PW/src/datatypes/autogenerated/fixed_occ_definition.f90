@@ -8,4 +8,5 @@ type :: fixed_occ_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type fixed_occ_type

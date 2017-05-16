@@ -1,4 +1,4 @@
-['alloc', 'init']
+['alloc', 'init', 'dealloc']
 
 subroutine alloc(this, n0)
   use memory_manager_module, only: memory_manager
@@ -11,20 +11,36 @@ subroutine alloc(this, n0)
   integer :: istat
 
   allocate( msmall_lm(:,:,:), stat=istat )
-  call memory_manager('paw_onecenter%alloc', 'msmall_lm', msmall_lm, istat)
-
+  call memory_manager('paw_onecenter%alloc', 'msmall_lm', msmall_lm(:,:,:), 1, istat)
   allocate( g_lm(:,:,:), stat=istat )
-  call memory_manager('paw_onecenter%alloc', 'g_lm', g_lm, istat)
-
-  this%is_alloc = .true. return
+  call memory_manager('paw_onecenter%alloc', 'g_lm', g_lm(:,:,:), 1, istat)
+  this%is_alloc = .true.
+  return
 end subroutine alloc
 
 subroutine init(this)
   implicit none
 
   class(paw_onecenter_type), intent(inout) :: this
-  if (this%is_init) return
 
-  this%is_init = .true. return
+  this%is_init = .true.
+  return
 
 end subroutine init
+
+subroutine dealloc(this)
+  use memory_manager_module, only: memory_manager
+
+  implicit none
+
+  class(paw_onecenter_type), intent(inout) :: this
+  integer :: istat
+
+  deallocate( msmall_lm, stat=istat )
+  call memory_manager('paw_onecenter%dealloc', 'msmall_lm', msmall_lm(:,:,:), -1, istat)
+  deallocate( g_lm, stat=istat )
+  call memory_manager('paw_onecenter%dealloc', 'g_lm', g_lm(:,:,:), -1, istat)
+  this%is_alloc = .false.
+  return
+end subroutine dealloc
+

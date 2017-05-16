@@ -11,4 +11,5 @@ type :: spin_orb_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type spin_orb_type

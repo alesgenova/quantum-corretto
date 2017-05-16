@@ -7,4 +7,5 @@ type :: g_psi_mod_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type g_psi_mod_type

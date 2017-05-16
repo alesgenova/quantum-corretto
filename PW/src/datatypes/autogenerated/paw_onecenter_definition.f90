@@ -17,4 +17,5 @@ type :: paw_onecenter_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type paw_onecenter_type

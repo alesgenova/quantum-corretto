@@ -34,4 +34,5 @@ type :: bp_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type bp_type

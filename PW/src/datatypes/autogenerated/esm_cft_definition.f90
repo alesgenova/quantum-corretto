@@ -14,4 +14,5 @@ type :: esm_cft_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type esm_cft_type

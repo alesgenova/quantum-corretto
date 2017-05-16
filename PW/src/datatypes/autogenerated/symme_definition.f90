@@ -3,7 +3,6 @@ type :: symme_type
   logical :: is_init = .false.
   logical :: no_rho_sym = .true.
   integer :: ngs
-  integer, dimension(:), pointer :: vect
   type(shell_type), allocatable, dimension(:) :: shell
   integer, allocatable, dimension(:) :: sendcnt
   integer, allocatable, dimension(:) :: recvcnt
@@ -13,4 +12,5 @@ type :: symme_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type symme_type

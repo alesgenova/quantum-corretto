@@ -15,4 +15,5 @@ type :: cellmd_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type cellmd_type

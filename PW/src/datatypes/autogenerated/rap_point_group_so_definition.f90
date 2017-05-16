@@ -16,4 +16,5 @@ type :: rap_point_group_so_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type rap_point_group_so_type

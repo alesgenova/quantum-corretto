@@ -7,4 +7,5 @@ type :: mix_save_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type mix_save_type

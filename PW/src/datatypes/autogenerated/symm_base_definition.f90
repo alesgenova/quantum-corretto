@@ -31,4 +31,5 @@ type :: symm_base_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type symm_base_type

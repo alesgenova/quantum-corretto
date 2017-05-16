@@ -51,9 +51,6 @@ type :: exx_type
   real(dp) :: fock2 = 0.0_dp
   real(dp) :: dexx = 0.0_dp
   real(dp) :: ecutfock
-  integer :: size
-  integer, allocatable, dimension(:) :: indices
-  complex(dp), allocatable, dimension(:,:,:) :: msg
   type(comm_packet), allocatable, dimension(:,:) :: comm_recv
   type(comm_packet), allocatable, dimension(:,:) :: comm_send
   type(comm_packet), allocatable, dimension(:,:) :: comm_recv_reverse
@@ -111,4 +108,5 @@ type :: exx_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type exx_type

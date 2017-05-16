@@ -7,4 +7,5 @@ type :: acfdt_ener_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type acfdt_ener_type

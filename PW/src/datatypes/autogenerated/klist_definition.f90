@@ -25,4 +25,5 @@ type :: klist_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type klist_type

@@ -1,14 +1,6 @@
 type :: scf_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
-  real(dp), allocatable, dimension(:,:) :: of_r
-  complex(dp), allocatable, dimension(:,:) :: of_g
-  real(dp), allocatable, dimension(:,:) :: kin_r
-  complex(dp), allocatable, dimension(:,:) :: kin_g
-  real(dp), allocatable, dimension(:,:,:,:) :: ns
-  complex(dp), allocatable, dimension(:,:,:,:) :: ns_nc
-  real(dp), allocatable, dimension(:,:,:) :: bec
-  real(dp) :: el_dipole
   type(scf_type) :: rho
   type(scf_type) :: v
   type(scf_type) :: vnew
@@ -36,4 +28,5 @@ type :: scf_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type scf_type

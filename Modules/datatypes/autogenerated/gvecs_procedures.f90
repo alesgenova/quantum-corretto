@@ -22,6 +22,7 @@ subroutine init(this)
   implicit none
 
   class(gvecs_type), intent(inout) :: this
+
   this%is_init = .true.
   return
 

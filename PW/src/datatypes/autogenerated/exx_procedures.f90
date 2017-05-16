@@ -1,4 +1,4 @@
-['alloc', 'init']
+['alloc', 'init', 'dealloc']
 
 subroutine alloc(this, n0)
   use memory_manager_module, only: memory_manager
@@ -11,140 +11,188 @@ subroutine alloc(this, n0)
   integer :: istat
 
   allocate( psi_exx(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'psi_exx', psi_exx, istat)
-
+  call memory_manager('exx%alloc', 'psi_exx', psi_exx(:,:), 1, istat)
   allocate( hpsi_exx(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'hpsi_exx', hpsi_exx, istat)
-
+  call memory_manager('exx%alloc', 'hpsi_exx', hpsi_exx(:,:), 1, istat)
   allocate( evc_exx(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'evc_exx', evc_exx, istat)
-
+  call memory_manager('exx%alloc', 'evc_exx', evc_exx(:,:), 1, istat)
   allocate( psic_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'psic_exx', psic_exx, istat)
-
+  call memory_manager('exx%alloc', 'psic_exx', psic_exx(:), 1, istat)
   allocate( xkq_collect(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'xkq_collect', xkq_collect, istat)
-
+  call memory_manager('exx%alloc', 'xkq_collect', xkq_collect(:,:), 1, istat)
   allocate( x_occupation(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'x_occupation', x_occupation, istat)
-
+  call memory_manager('exx%alloc', 'x_occupation', x_occupation(:,:), 1, istat)
   allocate( exxbuff(:,:,:), stat=istat )
-  call memory_manager('exx%alloc', 'exxbuff', exxbuff, istat)
-
+  call memory_manager('exx%alloc', 'exxbuff', exxbuff(:,:,:), 1, istat)
   allocate( xi(:,:,:), stat=istat )
-  call memory_manager('exx%alloc', 'xi', xi, istat)
-
+  call memory_manager('exx%alloc', 'xi', xi(:,:,:), 1, istat)
   allocate( index_xkq(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'index_xkq', index_xkq, istat)
-
+  call memory_manager('exx%alloc', 'index_xkq', index_xkq(:,:), 1, istat)
   allocate( index_xk(:), stat=istat )
-  call memory_manager('exx%alloc', 'index_xk', index_xk, istat)
-
+  call memory_manager('exx%alloc', 'index_xk', index_xk(:), 1, istat)
   allocate( index_sym(:), stat=istat )
-  call memory_manager('exx%alloc', 'index_sym', index_sym, istat)
-
+  call memory_manager('exx%alloc', 'index_sym', index_sym(:), 1, istat)
   allocate( rir(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'rir', rir, istat)
-
+  call memory_manager('exx%alloc', 'rir', rir(:,:), 1, istat)
   allocate( working_pool(:), stat=istat )
-  call memory_manager('exx%alloc', 'working_pool', working_pool, istat)
-
-  allocate( indices(:), stat=istat )
-  call memory_manager('exx%alloc', 'indices', indices, istat)
-
-  allocate( msg(:,:,:), stat=istat )
-  call memory_manager('exx%alloc', 'msg', msg, istat)
-
+  call memory_manager('exx%alloc', 'working_pool', working_pool(:), 1, istat)
   allocate( comm_recv(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'comm_recv', comm_recv, istat)
-
+  call memory_manager('exx%alloc', 'comm_recv', comm_recv(:,:), 1, istat)
   allocate( comm_send(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'comm_send', comm_send, istat)
-
+  call memory_manager('exx%alloc', 'comm_send', comm_send(:,:), 1, istat)
   allocate( comm_recv_reverse(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'comm_recv_reverse', comm_recv_reverse, istat)
-
+  call memory_manager('exx%alloc', 'comm_recv_reverse', comm_recv_reverse(:,:), 1, istat)
   allocate( comm_send_reverse(:,:,:), stat=istat )
-  call memory_manager('exx%alloc', 'comm_send_reverse', comm_send_reverse, istat)
-
+  call memory_manager('exx%alloc', 'comm_send_reverse', comm_send_reverse(:,:,:), 1, istat)
   allocate( lda_local(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'lda_local', lda_local, istat)
-
+  call memory_manager('exx%alloc', 'lda_local', lda_local(:,:), 1, istat)
   allocate( lda_exx(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'lda_exx', lda_exx, istat)
-
+  call memory_manager('exx%alloc', 'lda_exx', lda_exx(:,:), 1, istat)
   allocate( ngk_local(:), stat=istat )
-  call memory_manager('exx%alloc', 'ngk_local', ngk_local, istat)
-
+  call memory_manager('exx%alloc', 'ngk_local', ngk_local(:), 1, istat)
   allocate( ngk_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'ngk_exx', ngk_exx, istat)
-
+  call memory_manager('exx%alloc', 'ngk_exx', ngk_exx(:), 1, istat)
   allocate( igk_exx(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'igk_exx', igk_exx, istat)
-
+  call memory_manager('exx%alloc', 'igk_exx', igk_exx(:,:), 1, istat)
   allocate( ig_l2g_loc(:), stat=istat )
-  call memory_manager('exx%alloc', 'ig_l2g_loc', ig_l2g_loc, istat)
-
+  call memory_manager('exx%alloc', 'ig_l2g_loc', ig_l2g_loc(:), 1, istat)
   allocate( g_loc(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'g_loc', g_loc, istat)
-
+  call memory_manager('exx%alloc', 'g_loc', g_loc(:,:), 1, istat)
   allocate( gg_loc(:), stat=istat )
-  call memory_manager('exx%alloc', 'gg_loc', gg_loc, istat)
-
+  call memory_manager('exx%alloc', 'gg_loc', gg_loc(:), 1, istat)
   allocate( mill_loc(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'mill_loc', mill_loc, istat)
-
+  call memory_manager('exx%alloc', 'mill_loc', mill_loc(:,:), 1, istat)
   allocate( nl_loc(:), stat=istat )
-  call memory_manager('exx%alloc', 'nl_loc', nl_loc, istat)
-
+  call memory_manager('exx%alloc', 'nl_loc', nl_loc(:), 1, istat)
   allocate( nls_loc(:), stat=istat )
-  call memory_manager('exx%alloc', 'nls_loc', nls_loc, istat)
-
+  call memory_manager('exx%alloc', 'nls_loc', nls_loc(:), 1, istat)
   allocate( nlm_loc(:), stat=istat )
-  call memory_manager('exx%alloc', 'nlm_loc', nlm_loc, istat)
-
+  call memory_manager('exx%alloc', 'nlm_loc', nlm_loc(:), 1, istat)
   allocate( nlsm_loc(:), stat=istat )
-  call memory_manager('exx%alloc', 'nlsm_loc', nlsm_loc, istat)
-
+  call memory_manager('exx%alloc', 'nlsm_loc', nlsm_loc(:), 1, istat)
   allocate( ig_l2g_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'ig_l2g_exx', ig_l2g_exx, istat)
-
+  call memory_manager('exx%alloc', 'ig_l2g_exx', ig_l2g_exx(:), 1, istat)
   allocate( g_exx(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'g_exx', g_exx, istat)
-
+  call memory_manager('exx%alloc', 'g_exx', g_exx(:,:), 1, istat)
   allocate( gg_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'gg_exx', gg_exx, istat)
-
+  call memory_manager('exx%alloc', 'gg_exx', gg_exx(:), 1, istat)
   allocate( mill_exx(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'mill_exx', mill_exx, istat)
-
+  call memory_manager('exx%alloc', 'mill_exx', mill_exx(:,:), 1, istat)
   allocate( nl_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'nl_exx', nl_exx, istat)
-
+  call memory_manager('exx%alloc', 'nl_exx', nl_exx(:), 1, istat)
   allocate( nls_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'nls_exx', nls_exx, istat)
-
+  call memory_manager('exx%alloc', 'nls_exx', nls_exx(:), 1, istat)
   allocate( nlm_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'nlm_exx', nlm_exx, istat)
-
+  call memory_manager('exx%alloc', 'nlm_exx', nlm_exx(:), 1, istat)
   allocate( nlsm_exx(:), stat=istat )
-  call memory_manager('exx%alloc', 'nlsm_exx', nlsm_exx, istat)
-
+  call memory_manager('exx%alloc', 'nlsm_exx', nlsm_exx(:), 1, istat)
   allocate( coulomb_fac(:,:,:), stat=istat )
-  call memory_manager('exx%alloc', 'coulomb_fac', coulomb_fac, istat)
-
+  call memory_manager('exx%alloc', 'coulomb_fac', coulomb_fac(:,:,:), 1, istat)
   allocate( coulomb_done(:,:), stat=istat )
-  call memory_manager('exx%alloc', 'coulomb_done', coulomb_done, istat)
-
-  this%is_alloc = .true. return
+  call memory_manager('exx%alloc', 'coulomb_done', coulomb_done(:,:), 1, istat)
+  this%is_alloc = .true.
+  return
 end subroutine alloc
 
 subroutine init(this)
   implicit none
 
   class(exx_type), intent(inout) :: this
-  if (this%is_init) return
 
-  this%is_init = .true. return
+  this%is_init = .true.
+  return
 
 end subroutine init
+
+subroutine dealloc(this)
+  use memory_manager_module, only: memory_manager
+
+  implicit none
+
+  class(exx_type), intent(inout) :: this
+  integer :: istat
+
+  deallocate( psi_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'psi_exx', psi_exx(:,:), -1, istat)
+  deallocate( hpsi_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'hpsi_exx', hpsi_exx(:,:), -1, istat)
+  deallocate( evc_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'evc_exx', evc_exx(:,:), -1, istat)
+  deallocate( psic_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'psic_exx', psic_exx(:), -1, istat)
+  deallocate( xkq_collect, stat=istat )
+  call memory_manager('exx%dealloc', 'xkq_collect', xkq_collect(:,:), -1, istat)
+  deallocate( x_occupation, stat=istat )
+  call memory_manager('exx%dealloc', 'x_occupation', x_occupation(:,:), -1, istat)
+  deallocate( exxbuff, stat=istat )
+  call memory_manager('exx%dealloc', 'exxbuff', exxbuff(:,:,:), -1, istat)
+  deallocate( xi, stat=istat )
+  call memory_manager('exx%dealloc', 'xi', xi(:,:,:), -1, istat)
+  deallocate( index_xkq, stat=istat )
+  call memory_manager('exx%dealloc', 'index_xkq', index_xkq(:,:), -1, istat)
+  deallocate( index_xk, stat=istat )
+  call memory_manager('exx%dealloc', 'index_xk', index_xk(:), -1, istat)
+  deallocate( index_sym, stat=istat )
+  call memory_manager('exx%dealloc', 'index_sym', index_sym(:), -1, istat)
+  deallocate( rir, stat=istat )
+  call memory_manager('exx%dealloc', 'rir', rir(:,:), -1, istat)
+  deallocate( working_pool, stat=istat )
+  call memory_manager('exx%dealloc', 'working_pool', working_pool(:), -1, istat)
+  deallocate( comm_recv, stat=istat )
+  call memory_manager('exx%dealloc', 'comm_recv', comm_recv(:,:), -1, istat)
+  deallocate( comm_send, stat=istat )
+  call memory_manager('exx%dealloc', 'comm_send', comm_send(:,:), -1, istat)
+  deallocate( comm_recv_reverse, stat=istat )
+  call memory_manager('exx%dealloc', 'comm_recv_reverse', comm_recv_reverse(:,:), -1, istat)
+  deallocate( comm_send_reverse, stat=istat )
+  call memory_manager('exx%dealloc', 'comm_send_reverse', comm_send_reverse(:,:,:), -1, istat)
+  deallocate( lda_local, stat=istat )
+  call memory_manager('exx%dealloc', 'lda_local', lda_local(:,:), -1, istat)
+  deallocate( lda_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'lda_exx', lda_exx(:,:), -1, istat)
+  deallocate( ngk_local, stat=istat )
+  call memory_manager('exx%dealloc', 'ngk_local', ngk_local(:), -1, istat)
+  deallocate( ngk_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'ngk_exx', ngk_exx(:), -1, istat)
+  deallocate( igk_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'igk_exx', igk_exx(:,:), -1, istat)
+  deallocate( ig_l2g_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'ig_l2g_loc', ig_l2g_loc(:), -1, istat)
+  deallocate( g_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'g_loc', g_loc(:,:), -1, istat)
+  deallocate( gg_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'gg_loc', gg_loc(:), -1, istat)
+  deallocate( mill_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'mill_loc', mill_loc(:,:), -1, istat)
+  deallocate( nl_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'nl_loc', nl_loc(:), -1, istat)
+  deallocate( nls_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'nls_loc', nls_loc(:), -1, istat)
+  deallocate( nlm_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'nlm_loc', nlm_loc(:), -1, istat)
+  deallocate( nlsm_loc, stat=istat )
+  call memory_manager('exx%dealloc', 'nlsm_loc', nlsm_loc(:), -1, istat)
+  deallocate( ig_l2g_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'ig_l2g_exx', ig_l2g_exx(:), -1, istat)
+  deallocate( g_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'g_exx', g_exx(:,:), -1, istat)
+  deallocate( gg_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'gg_exx', gg_exx(:), -1, istat)
+  deallocate( mill_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'mill_exx', mill_exx(:,:), -1, istat)
+  deallocate( nl_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'nl_exx', nl_exx(:), -1, istat)
+  deallocate( nls_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'nls_exx', nls_exx(:), -1, istat)
+  deallocate( nlm_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'nlm_exx', nlm_exx(:), -1, istat)
+  deallocate( nlsm_exx, stat=istat )
+  call memory_manager('exx%dealloc', 'nlsm_exx', nlsm_exx(:), -1, istat)
+  deallocate( coulomb_fac, stat=istat )
+  call memory_manager('exx%dealloc', 'coulomb_fac', coulomb_fac(:,:,:), -1, istat)
+  deallocate( coulomb_done, stat=istat )
+  call memory_manager('exx%dealloc', 'coulomb_done', coulomb_done(:,:), -1, istat)
+  this%is_alloc = .false.
+  return
+end subroutine dealloc
+

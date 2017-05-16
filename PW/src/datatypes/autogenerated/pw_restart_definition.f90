@@ -19,4 +19,5 @@ type :: pw_restart_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type pw_restart_type

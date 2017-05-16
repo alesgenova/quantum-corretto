@@ -5,18 +5,11 @@ type :: buiol_type
   real(dp) :: fact0 = 1.5_dp
   real(dp) :: fact1 = 1.2_dp
   integer :: size0 = dp
-  type(data_in_the_list), dimension(:), pointer :: index
-  integer :: nrec
-  integer :: unit
-  integer :: recl
-  character(len=256) :: extension
-  character(len=256) :: save_dir
-  type(index_of_list), pointer :: next = > null()
-  complex(dp), dimension(:), pointer :: data = > null()
   type(index_of_list), pointer :: ENTRY = > null()
   logical :: is_init_buiol = .false.
   logical :: is_init_buiol = .false.
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type buiol_type

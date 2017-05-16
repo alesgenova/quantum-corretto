@@ -42,6 +42,7 @@ subroutine init(this)
   implicit none
 
   class(gvect_type), intent(inout) :: this
+
   this%is_init = .true.
   return
 

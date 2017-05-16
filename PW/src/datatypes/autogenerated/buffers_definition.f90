@@ -6,4 +6,5 @@ type :: buffers_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type buffers_type

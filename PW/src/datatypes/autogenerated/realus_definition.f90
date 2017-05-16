@@ -21,15 +21,11 @@ type :: realus_type
   complex(dp), allocatable, dimension(:) :: tg_vrs
   complex(dp), allocatable, dimension(:) :: psic_box_temp
   complex(dp), allocatable, dimension(:) :: tg_psic_box_temp
-  integer :: maxbox = 0
-  integer, allocatable, dimension(:) :: box
-  real(dp), allocatable, dimension(:) :: dist
-  real(dp), allocatable, dimension(:,:) :: xyz
-  real(dp), allocatable, dimension(:,:) :: qr
   type(realsp_augmentation), dimension(:), pointer :: tabp = > null()
   type(realsp_augmentation), dimension(:), pointer :: tabxx = > null()
   type(realsp_augmentation), dimension(:), pointer :: tabxx = > null()
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type realus_type

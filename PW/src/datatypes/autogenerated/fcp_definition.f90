@@ -11,4 +11,5 @@ type :: fcp_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type fcp_type
