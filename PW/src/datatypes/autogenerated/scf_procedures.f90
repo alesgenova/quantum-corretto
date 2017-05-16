@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(scf_type), intent(inout) :: this
@@ -8,20 +10,45 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(of_r)) allocate( of_r(:,:), stat=istat )
-  if (.not. allocated(of_g)) allocate( of_g(:,:), stat=istat )
-  if (.not. allocated(kin_r)) allocate( kin_r(:,:), stat=istat )
-  if (.not. allocated(kin_g)) allocate( kin_g(:,:), stat=istat )
-  if (.not. allocated(ns)) allocate( ns(:,:,:,:), stat=istat )
-  if (.not. allocated(ns_nc)) allocate( ns_nc(:,:,:,:), stat=istat )
-  if (.not. allocated(bec)) allocate( bec(:,:,:), stat=istat )
-  if (.not. allocated(vltot)) allocate( vltot(:), stat=istat )
-  if (.not. allocated(vrs)) allocate( vrs(:,:), stat=istat )
-  if (.not. allocated(rho_core)) allocate( rho_core(:), stat=istat )
-  if (.not. allocated(kedtau)) allocate( kedtau(:,:), stat=istat )
-  if (.not. allocated(rhog_core)) allocate( rhog_core(:), stat=istat )
-  if (.not. allocated(io_buffer)) allocate( io_buffer(:), stat=istat )
+  allocate( of_r(:,:), stat=istat )
+  call memory_manager('scf%alloc', 'of_r', of_r, istat)
+
+  allocate( of_g(:,:), stat=istat )
+  call memory_manager('scf%alloc', 'of_g', of_g, istat)
+
+  allocate( kin_r(:,:), stat=istat )
+  call memory_manager('scf%alloc', 'kin_r', kin_r, istat)
+
+  allocate( kin_g(:,:), stat=istat )
+  call memory_manager('scf%alloc', 'kin_g', kin_g, istat)
+
+  allocate( ns(:,:,:,:), stat=istat )
+  call memory_manager('scf%alloc', 'ns', ns, istat)
+
+  allocate( ns_nc(:,:,:,:), stat=istat )
+  call memory_manager('scf%alloc', 'ns_nc', ns_nc, istat)
+
+  allocate( bec(:,:,:), stat=istat )
+  call memory_manager('scf%alloc', 'bec', bec, istat)
+
+  allocate( vltot(:), stat=istat )
+  call memory_manager('scf%alloc', 'vltot', vltot, istat)
+
+  allocate( vrs(:,:), stat=istat )
+  call memory_manager('scf%alloc', 'vrs', vrs, istat)
+
+  allocate( rho_core(:), stat=istat )
+  call memory_manager('scf%alloc', 'rho_core', rho_core, istat)
+
+  allocate( kedtau(:,:), stat=istat )
+  call memory_manager('scf%alloc', 'kedtau', kedtau, istat)
+
+  allocate( rhog_core(:), stat=istat )
+  call memory_manager('scf%alloc', 'rhog_core', rhog_core, istat)
+
+  allocate( io_buffer(:), stat=istat )
+  call memory_manager('scf%alloc', 'io_buffer', io_buffer, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

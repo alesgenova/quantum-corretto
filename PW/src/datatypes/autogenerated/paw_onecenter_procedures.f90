@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(paw_onecenter_type), intent(inout) :: this
@@ -8,9 +10,12 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(msmall_lm)) allocate( msmall_lm(:,:,:), stat=istat )
-  if (.not. allocated(g_lm)) allocate( g_lm(:,:,:), stat=istat )
+  allocate( msmall_lm(:,:,:), stat=istat )
+  call memory_manager('paw_onecenter%alloc', 'msmall_lm', msmall_lm, istat)
+
+  allocate( g_lm(:,:,:), stat=istat )
+  call memory_manager('paw_onecenter%alloc', 'g_lm', g_lm, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

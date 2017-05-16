@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(vlocal_type), intent(inout) :: this
@@ -8,9 +10,12 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(strf)) allocate( strf(:,:), stat=istat )
-  if (.not. allocated(vloc)) allocate( vloc(:,:), stat=istat )
+  allocate( strf(:,:), stat=istat )
+  call memory_manager('vlocal%alloc', 'strf', strf, istat)
+
+  allocate( vloc(:,:), stat=istat )
+  call memory_manager('vlocal%alloc', 'vloc', vloc, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

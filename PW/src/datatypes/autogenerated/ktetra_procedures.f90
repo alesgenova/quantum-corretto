@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(ktetra_type), intent(inout) :: this
@@ -8,9 +10,12 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(tetra)) allocate( tetra(:,:), stat=istat )
-  if (.not. allocated(wlsm)) allocate( wlsm(:,:), stat=istat )
+  allocate( tetra(:,:), stat=istat )
+  call memory_manager('ktetra%alloc', 'tetra', tetra, istat)
+
+  allocate( wlsm(:,:), stat=istat )
+  call memory_manager('ktetra%alloc', 'wlsm', wlsm, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

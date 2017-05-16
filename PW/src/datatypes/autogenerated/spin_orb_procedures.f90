@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(spin_orb_type), intent(inout) :: this
@@ -8,8 +10,9 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(fcoef)) allocate( fcoef(:,:,:,:,:), stat=istat )
+  allocate( fcoef(:,:,:,:,:), stat=istat )
+  call memory_manager('spin_orb%alloc', 'fcoef', fcoef, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

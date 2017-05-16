@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(martyna_tuckerman_type), intent(inout) :: this
@@ -8,8 +10,9 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(wg_corr)) allocate( wg_corr(:), stat=istat )
+  allocate( wg_corr(:), stat=istat )
+  call memory_manager('martyna_tuckerman%alloc', 'wg_corr', wg_corr, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(basis_type), intent(inout) :: this
@@ -8,8 +10,9 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(swfcatom)) allocate( swfcatom(:,:), stat=istat )
+  allocate( swfcatom(:,:), stat=istat )
+  call memory_manager('basis%alloc', 'swfcatom', swfcatom, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

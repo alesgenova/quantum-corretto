@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(gvect_type), intent(inout) :: this
@@ -8,19 +10,30 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(nl)) allocate( nl(:), stat=istat )
-  if (.not. allocated(nlm)) allocate( nlm(:), stat=istat )
-  if (.not. allocated(gg)) allocate( gg(:), stat=istat )
-  if (.not. allocated(igtongl)) allocate( igtongl(:), stat=istat )
-  if (.not. allocated(g)) allocate( g(:,:), stat=istat )
-  if (.not. allocated(mill)) allocate( mill(:,:), stat=istat )
-  if (.not. allocated(ig_l2g)) allocate( ig_l2g(:), stat=istat )
-  if (.not. allocated(sortedig_l2g)) allocate( sortedig_l2g(:), stat=istat )
-  if (.not. allocated(mill_g)) allocate( mill_g(:,:), stat=istat )
-  if (.not. allocated(eigts1)) allocate( eigts1(:,:), stat=istat )
-  if (.not. allocated(eigts2)) allocate( eigts2(:,:), stat=istat )
-  if (.not. allocated(eigts3)) allocate( eigts3(:,:), stat=istat )
+  allocate( nl(:), stat=istat )
+  call memory_manager('gvect%alloc', 'nl', nl, istat)
+  allocate( nlm(:), stat=istat )
+  call memory_manager('gvect%alloc', 'nlm', nlm, istat)
+  allocate( gg(:), stat=istat )
+  call memory_manager('gvect%alloc', 'gg', gg, istat)
+  allocate( igtongl(:), stat=istat )
+  call memory_manager('gvect%alloc', 'igtongl', igtongl, istat)
+  allocate( g(:,:), stat=istat )
+  call memory_manager('gvect%alloc', 'g', g, istat)
+  allocate( mill(:,:), stat=istat )
+  call memory_manager('gvect%alloc', 'mill', mill, istat)
+  allocate( ig_l2g(:), stat=istat )
+  call memory_manager('gvect%alloc', 'ig_l2g', ig_l2g, istat)
+  allocate( sortedig_l2g(:), stat=istat )
+  call memory_manager('gvect%alloc', 'sortedig_l2g', sortedig_l2g, istat)
+  allocate( mill_g(:,:), stat=istat )
+  call memory_manager('gvect%alloc', 'mill_g', mill_g, istat)
+  allocate( eigts1(:,:), stat=istat )
+  call memory_manager('gvect%alloc', 'eigts1', eigts1, istat)
+  allocate( eigts2(:,:), stat=istat )
+  call memory_manager('gvect%alloc', 'eigts2', eigts2, istat)
+  allocate( eigts3(:,:), stat=istat )
+  call memory_manager('gvect%alloc', 'eigts3', eigts3, istat)
   this%is_alloc = .true. return
 end subroutine alloc
 

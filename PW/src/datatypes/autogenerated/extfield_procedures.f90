@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(extfield_type), intent(inout) :: this
@@ -8,9 +10,12 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(forcefield)) allocate( forcefield(:,:), stat=istat )
-  if (.not. allocated(forcemono)) allocate( forcemono(:,:), stat=istat )
+  allocate( forcefield(:,:), stat=istat )
+  call memory_manager('extfield%alloc', 'forcefield', forcefield, istat)
+
+  allocate( forcemono(:,:), stat=istat )
+  call memory_manager('extfield%alloc', 'forcemono', forcemono, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

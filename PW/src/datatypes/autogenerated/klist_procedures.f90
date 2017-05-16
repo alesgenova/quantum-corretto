@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(klist_type), intent(inout) :: this
@@ -8,9 +10,12 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(igk_k)) allocate( igk_k(:,:), stat=istat )
-  if (.not. allocated(ngk)) allocate( ngk(:), stat=istat )
+  allocate( igk_k(:,:), stat=istat )
+  call memory_manager('klist%alloc', 'igk_k', igk_k, istat)
+
+  allocate( ngk(:), stat=istat )
+  call memory_manager('klist%alloc', 'ngk', ngk, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

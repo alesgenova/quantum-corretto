@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(us_exx_type), intent(inout) :: this
@@ -8,10 +10,15 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(becxx)) allocate( becxx(:), stat=istat )
-  if (.not. allocated(becxx0)) allocate( becxx0(:), stat=istat )
-  if (.not. allocated(qgm)) allocate( qgm(:,:), stat=istat )
+  allocate( becxx(:), stat=istat )
+  call memory_manager('us_exx%alloc', 'becxx', becxx, istat)
+
+  allocate( becxx0(:), stat=istat )
+  call memory_manager('us_exx%alloc', 'becxx0', becxx0, istat)
+
+  allocate( qgm(:,:), stat=istat )
+  call memory_manager('us_exx%alloc', 'qgm', qgm, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

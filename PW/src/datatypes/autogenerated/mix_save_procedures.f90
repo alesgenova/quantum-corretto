@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(mix_save_type), intent(inout) :: this
@@ -8,9 +10,12 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(df)) allocate( df(:), stat=istat )
-  if (.not. allocated(dv)) allocate( dv(:), stat=istat )
+  allocate( df(:), stat=istat )
+  call memory_manager('mix_save%alloc', 'df', df, istat)
+
+  allocate( dv(:), stat=istat )
+  call memory_manager('mix_save%alloc', 'dv', dv, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

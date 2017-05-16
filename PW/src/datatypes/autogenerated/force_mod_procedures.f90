@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(force_mod_type), intent(inout) :: this
@@ -8,8 +10,9 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
-  if (.not. allocated(force)) allocate( force(:,:), stat=istat )
+  allocate( force(:,:), stat=istat )
+  call memory_manager('force_mod%alloc', 'force', force, istat)
+
   this%is_alloc = .true. return
 end subroutine alloc
 

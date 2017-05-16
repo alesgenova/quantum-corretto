@@ -1,6 +1,8 @@
 ['alloc', 'init']
 
 subroutine alloc(this, n0)
+  use memory_manager_module, only: memory_manager
+
   implicit none
 
   class(relax_type), intent(inout) :: this
@@ -8,7 +10,6 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
-  if (this%is_alloc) return
   this%is_alloc = .true. return
 end subroutine alloc
 
