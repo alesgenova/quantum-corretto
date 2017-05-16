@@ -14,4 +14,5 @@ type :: gvecs_type
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: dealloc
 end type gvecs_type
