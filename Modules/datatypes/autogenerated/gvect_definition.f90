@@ -21,6 +21,6 @@ type :: gvect_type
   complex(dp), allocatable, dimension(:,:) :: eigts3
   complex(dp), allocatable, dimension(:,:) :: eigts3
 contains
-  procedure, pass :: allocate
+  procedure, pass :: alloc
   procedure, pass :: init
 end type gvect_type
