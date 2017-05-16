@@ -1,4 +1,6 @@
 type :: gvect_type
+  logical :: is_alloc = .false.
+  logical :: is_init = .false.
   integer :: ngm = 0
   integer :: ngm_g = 0
   integer :: ngl = 0

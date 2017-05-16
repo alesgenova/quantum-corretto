@@ -8,6 +8,7 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
+  if (this%is_alloc) return
   if (.not. allocated(nl)) allocate( nl(:), stat=istat )
   if (.not. allocated(nlm)) allocate( nlm(:), stat=istat )
   if (.not. allocated(gg)) allocate( gg(:), stat=istat )
@@ -20,11 +21,15 @@ subroutine alloc(this, n0)
   if (.not. allocated(eigts1)) allocate( eigts1(:,:), stat=istat )
   if (.not. allocated(eigts2)) allocate( eigts2(:,:), stat=istat )
   if (.not. allocated(eigts3)) allocate( eigts3(:,:), stat=istat )
+  this%is_alloc = .true. return
 end subroutine alloc
 
 subroutine init(this)
   implicit none
 
   class(gvect_type), intent(inout) :: this
+  if (this%is_init) return
+
+  this%is_init = .true. return
 
 end subroutine init

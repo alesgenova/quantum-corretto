@@ -267,6 +267,9 @@ class Module(Codeblock):
         procedures = ["alloc","init"]
         with open(definition_file,"w") as f:
             f.write("type :: {}_type".format(self.name)+"\n")
+            f.write("  logical :: is_alloc = .false.\n")
+            f.write("  logical :: is_init = .false.\n")
+            string = ""
             for key, var in self.declarations.items():
                 string = "  "+var['type_base']
                 if var['type_extra'] is not None: string += "({})".format(var['type_extra'])
@@ -292,15 +295,19 @@ class Module(Codeblock):
             f.write("  class({}_type), intent(inout) :: this\n".format(self.name))
             f.write("  integer, intent(in) :: n0\n\n")
             f.write("  integer :: istat\n\n")
+            f.write("  if (this%is_alloc) return\n")
             for key, var in self.declarations.items():
                 if var['allocatable']:
                     f.write("  if (.not. allocated({})) ".format(var['name']))
                     f.write("allocate( {}({}), stat=istat )\n".format(var['name'], var['dimension']))
+            f.write("  this%is_alloc = .true. return\n")
             f.write("end subroutine alloc\n\n")
             # the init blueprint
             f.write("subroutine init(this)\n")
             f.write("  implicit none\n\n")
             f.write("  class({}_type), intent(inout) :: this\n".format(self.name))
+            f.write("  if (this%is_init) return\n\n")
+            f.write("  this%is_init = .true. return\n")
             f.write("\nend subroutine init\n")
 
 
