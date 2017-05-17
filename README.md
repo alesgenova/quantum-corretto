@@ -179,10 +179,12 @@ In this specific case it would probably be advisable to blacklist the `scf_modul
 
 These files will be added to the source files pool of my script, and will be treated as if they came with the upstream version of QE.
 
-#### Blacklisting a file
+## Blacklisting a file
 Add the name of the file you wish to blacklist to a new line in the `*/datatypes/human/skip_files.txt`.
 
-#### Providing an additional / overriding file
+Any file that gets blacklisted will not be scanned by the script, and its modules/procedures won't be patched.
+
+## Providing an additional / overriding file
 Add as many `f90` files as you wish to the `*/datatypes/human/additional_files/` folder.
 
 Files in this folder will be treated as if they came directly with the upstream source code.
@@ -192,10 +194,18 @@ It is understood that any file added this way will either:
   - OR be patchable with the usual automatic procedure.
 
 
-
-## Modules that shouldn't be objectified
+## Exclude modules from the objectification procedure
 By default the script generates a datatype for each and every module in Quantum Espresso.
-If for whatever reason, turns out a module shouldn't undergo this transformation, please add its name to the `Modules/datatypes/human/exceptions.txt` or `PW/src/datatypes/human/exceptions.txt` files.
+
+If for whatever reason, turns out a module shouldn't undergo this transformation, add its name to the `*/datatypes/human/skip_modules.txt` file.
+
+This could be useful if the module only contains parameters and procedures, or if you want to blacklist a module without blacklisting the entire source file containing it (i.e. if there are other modules in the same file that you want to be included instead.)
+
+
+## Mark an objectified module as completed
+Whenever you complete the objectification of a module, add the name of the module to the `*/datatypes/human/completed_modules.txt` file.
 
 ## Errors
-Datatypes mimic the structure of the original modules. It is possible that some quantities (or even modules) have eluded my poorly written regular expressions. If you come across such cases, please notify it to me so I can fix the script upstream.
+Datatypes mimic the structure of the original modules. It is possible that some quantities (or even modules) have eluded my poorly written regular expressions.
+
+If you come across such cases, please notify it to me so I can fix the script upstream.
