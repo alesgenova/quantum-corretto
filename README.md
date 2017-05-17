@@ -28,7 +28,7 @@ The type definition will need to look like the following:
 ### `gvect_definition.f90`
 ```fortran
 type :: gvect_type
-  ! init_args={"ngm": {"type": "integer", "dimension": null}, "ngm_g": {"type": "integer", "dimension": null},"ngl": {"type": "integer", "dimension": null}, "ngmx": {"type": "integer", "dimension": null}, "gstart": {"type": "integer", "dimension": null}, "gcutm": {"type": "real(dp)", "dimension": null}, "ecutrho": {"type": "real(dp)", "dimension": null}}
+  ! init_args={"ngm": {"type": "integer", "dimension": null}, "ngm_g": {"type": "integer", "dimension": null},"ngl": {"type": "integer", "dimension": null}, "ngmx": {"type": "integer", "dimension": null}, "gstart": {"type": "integer", "dimension": null}, "gcutm": {"type": "real(dp)", "dimension": null}, "ecutrho": {"type": "real(dp)", "dimension": null}, "nl": {"type": "integer", "dimension": "this%ngm"},...}
   ! alloc_args={"fft_base":"type(fft_base_type)", "ions_base": "type(ions_base_type)"}
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -123,14 +123,22 @@ subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
   integer, optional :: ngl
   integer, optional :: ngmx
   integer, optional :: gstart
+  integer, optional :: gcutm
+  integer, optional :: ecutrho
+  
 
   class(gvect_type), intent(inout) :: this
 
-   this%ngm    = ngm
-   this%ngm_g  = ngm_g
-   this%ngl    = ngl
-   this%ngmx   = ngmx
-   this%gstart = gstart
+   if (present(ngm))     this%ngm     = ngm
+   if (present(ngm_g))   this%ngm_g   = ngm_g
+   if (present(ngl))     this%ngl     = ngl
+   if (present(ngmx))    this%ngmx    = ngmx
+   if (present(gstart))  this%gstart  = gstart
+   if (present(gcutm))   this%gcutm   = gcutm
+   if (present(ecutrho)) this%ecutrho = ecutrho
+   ...
+   if (present(nl))      this%nl      = nl
+   ...
    this%is_init = .true.
 
   return
