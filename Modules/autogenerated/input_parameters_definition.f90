@@ -33,6 +33,9 @@ type :: input_parameters_type
   logical :: lorbm = .false.
   logical :: dipfield = .false.
   logical :: lberry = .false.
+  logical :: lcalc_z2 = .false.
+  real(dp) :: z2_m_threshold = 0.8d0
+  real(dp) :: z2_z_threshold = 0.05d0
   integer :: gdir = 0
   integer :: nppstr = 0
   integer :: nberrycyc = 1
@@ -254,6 +257,7 @@ type :: input_parameters_type
   real(dp) :: emass_cutoff_emin = 0.0_dp
   real(dp) :: electron_damping_emin = 0.0_dp
   real(dp) :: dt_emin = 0.0_dp
+  character(256) :: external_potential = ''
   character(len=80) :: ion_dynamics = 'none'
   character(len=80), dimension(9) :: ion_dynamics_allowed
   real(dp), dimension(nsx) :: ion_radius = 0.5_dp

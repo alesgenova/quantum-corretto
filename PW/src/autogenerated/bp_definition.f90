@@ -4,6 +4,9 @@ type :: bp_type
   logical :: lberry = .false.
   logical :: lelfield = .false.
   logical :: lorbm = .false.
+  logical :: lcalc_z2 = .false.
+  real(dp) :: z2_m_threshold
+  real(dp) :: z2_z_threshold
   integer :: gdir
   integer :: nppstr
   integer :: nberrycyc

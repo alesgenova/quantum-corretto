@@ -26,7 +26,7 @@ type :: funct_type
   integer :: ncc = 10
   integer :: ngcx = 27
   integer :: ngcc = 12
-  integer :: nmeta = 3
+  integer :: nmeta = 5
   integer :: ncnl = 6
   character(len=4) :: exc
   character(len=4) :: corr
@@ -34,7 +34,10 @@ type :: funct_type
   character(len=4) :: gradc
   character(len=4) :: meta
   character(len=4) :: nonlocc
-  character(len=4) :: nonlocc
+  integer :: libxc_major = 0
+  integer :: libxc_minor = 0
+  integer :: libxc_micro = 0
+  integer :: libxc_micro = 0
 contains
   procedure, pass :: alloc
   procedure, pass :: init

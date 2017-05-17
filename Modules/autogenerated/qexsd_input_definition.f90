@@ -1,8 +1,8 @@
 type :: qexsd_input_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
-  integer :: dummy__
-  integer :: dummy__
+  type(input_type) :: input
+  type(input_type) :: input
 contains
   procedure, pass :: alloc
   procedure, pass :: init

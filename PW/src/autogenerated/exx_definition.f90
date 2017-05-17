@@ -19,7 +19,7 @@ type :: exx_type
   integer :: ibnd_start = 0
   integer :: ibnd_end = 0
   complex(dp), allocatable, dimension(:,:,:) :: exxbuff
-  logical :: use_ace = .false.
+  logical :: use_ace = .true.
   complex(dp), allocatable, dimension(:,:,:) :: xi
   integer :: nbndproj
   logical :: domat

@@ -8,6 +8,7 @@ type :: symm_base_type
   integer, dimension(3,48) :: ftau
   integer, dimension(3) :: fft_fact
   integer :: nrot
+  integer :: spacegroup = 0
   integer :: nsym = 1
   integer :: nsym_ns = 0
   integer :: nsym_na = 0
