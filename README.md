@@ -29,7 +29,7 @@ The type definition will look like the following:
 ```fortran
 type :: gvect_type
   ! init_args={"ngm": "integer", "ngm_g": "integer", "ngl": "integer", "ngmx": "integer", "gstart": "integer"}
-  ! alloc_args={}
+  ! alloc_args={"fft_base":"type(fft_base_type)", "ions_base": "type(ions_base_type)"}
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   integer :: ngm = 0
@@ -49,9 +49,9 @@ type :: gvect_type
   integer, allocatable, dimension(:) :: ig_l2g !dimension=[this%ngm"]
   integer, allocatable, dimension(:) :: sortedig_l2g !dimension=["this%ngm"]
   integer, allocatable, dimension(:,:) :: mill_g !dimension=["3", "this%ngm_g"]
-  complex(dp), allocatable, dimension(:,:) :: eigts1 ! still need to find dim
-  complex(dp), allocatable, dimension(:,:) :: eigts2 ! still need to find dim
-  complex(dp), allocatable, dimension(:,:) :: eigts3 ! still need to find dim
+  complex(dp), allocatable, dimension(:,:) :: eigts1 !dimension=["-fft_base%nr1:fft_base%nr1","ions_base%nat"]
+  complex(dp), allocatable, dimension(:,:) :: eigts2 !dimension=["-fft_base%nr2:fft_base%nr2","ions_base%nat"]
+  complex(dp), allocatable, dimension(:,:) :: eigts3 !dimension=["-fft_base%nr3:fft_base%nr3","ions_base%nat"]
 contains
   procedure, pass :: alloc
   procedure, pass :: init
@@ -59,11 +59,6 @@ contains
 end type gvect_type
 ```
 [](Files with a `_definition` suffix such as this, should never be manually modified. If something is to be changed, notify me and I'll change it upstream in the script.)
-
-
-
-
-
 
 ### `gvect_procedures.f90`
 Files with a `_procedures` suffix are just blueprint, and are expected to be manually modified. I provide the scheleton to make it faster (esprecially the `alloc` method), but the actual logic has to be written by a human.
