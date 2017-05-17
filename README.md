@@ -125,7 +125,9 @@ subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
   integer, optional :: gstart
   integer, optional :: gcutm
   integer, optional :: ecutrho
-  
+  ...
+  integer, dimension(this%ngm) :: nl
+  ...
 
   class(gvect_type), intent(inout) :: this
 
@@ -143,12 +145,12 @@ subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
 
   return
 end subroutine init
+```
 
 
 
 
-
-
+```fortran
 subroutine dealloc(this)
   use memory_manager_module, only: memory_manager
 
