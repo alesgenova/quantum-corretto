@@ -103,7 +103,6 @@ subroutine init(this)
 
   this%is_init = .true.
   return
-
 end subroutine init
 
 subroutine dealloc(this)
