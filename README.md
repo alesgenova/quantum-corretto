@@ -28,7 +28,7 @@ The type definition will need to look like the following:
 ### `gvect_definition.f90`
 ```fortran
 type :: gvect_type
-  ! init_args={"ngm": "integer", "ngm_g": "integer", "ngl": "integer", "ngmx": "integer", "gstart": "integer"}
+  ! init_args={"ngm": {"type": "integer", "dimension": null}, "ngm_g": {"type": "integer", "dimension": null},"ngl": {"type": "integer", "dimension": null}, "ngmx": {"type": "integer", "dimension": null}, "gstart": {"type": "integer", "dimension": null}}
   ! alloc_args={"fft_base":"type(fft_base_type)", "ions_base": "type(ions_base_type)"}
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -80,39 +80,60 @@ Every datatype is automatically given three bound methods, `alloc`, `init`, and 
 
 If you want to add other procedures to the datatype, add them below, and also add the name of the procedure to the list in the first line (this is important to automate everything).
 
+#### Alloc bound procedure
 ```fortran
 ['alloc', 'init', 'dealloc']
 
-subroutine alloc(this, n0)
+subroutine alloc(this, fft_base, ions_base )
   use memory_manager_module, only: memory_manager
 
   implicit none
 
   class(gvect_type), intent(inout) :: this
-  integer, intent(in) :: n0
+  type(fft_base_type), intent(in)  :: fft_base
+  type(ions_base_type), intent(in) :: ions_base
 
   integer :: istat
 
-  allocate( nl(:), stat=istat )
+  allocate( nl(this%ngm), stat=istat )
   call memory_manager('gvect%alloc', 'nl', nl(:), 1, istat)
-  allocate( nlm(:), stat=istat )
+  allocate( nlm(this%ngm), stat=istat )
   call memory_manager('gvect%alloc', 'nlm', nlm(:), 1, istat)
-  allocate( gg(:), stat=istat )
+  allocate( gg(this%ngm), stat=istat )
   call memory_manager('gvect%alloc', 'gg', gg(:), 1, istat)
-  allocate( igtongl(:), stat=istat )
+  allocate( igtongl(this%ngm), stat=istat )
+  call memory_manager('gvect%alloc', 'igtongl', igtongl(:), 1, istat)
+  ...
+  allocate( eigts1(-fft_base%nr1:fft_base%nr1,ions_base%nat), stat=istat )
+  call memory_manager('gvect%alloc', 'eigts1', eigts1(:), 1, istat)
   ...
   this%is_alloc = .true.
   return
 end subroutine alloc
+```
 
-subroutine init(this)
+#### Init bound procedure
+
+```fortran
+subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
   implicit none
+  
+  integer, optional :: ngm
+  integer, optional :: ngm_g
+  integer, optional :: ngl
+  integer, optional :: ngmx
+  integer, optional :: gstart
 
   class(gvect_type), intent(inout) :: this
 
   this%is_init = .true.
   return
 end subroutine init
+
+
+
+
+
 
 subroutine dealloc(this)
   use memory_manager_module, only: memory_manager
