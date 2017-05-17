@@ -126,7 +126,7 @@ subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
   integer, optional :: gcutm
   integer, optional :: ecutrho
   ...
-  integer, dimension(this%ngm) :: nl
+  integer, dimension(:), optional :: nl
   ...
 
   class(gvect_type), intent(inout) :: this
@@ -139,7 +139,7 @@ subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
    if (present(gcutm))   this%gcutm   = gcutm
    if (present(ecutrho)) this%ecutrho = ecutrho
    ...
-   if (present(nl))      this%nl      = nl
+   if (present(nl)),     this%nl      = nl
    ...
    this%is_init = .true.
 
