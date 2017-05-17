@@ -118,6 +118,7 @@ end subroutine alloc
 subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
   implicit none
   
+  type(gvect_type), intent(inout) :: this
   integer, optional :: ngm
   integer, optional :: ngm_g
   integer, optional :: ngl
@@ -128,8 +129,6 @@ subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
   ...
   integer, dimension(:), optional :: nl
   ...
-
-  class(gvect_type), intent(inout) :: this
 
    if (present(ngm))     this%ngm     = ngm
    if (present(ngm_g))   this%ngm_g   = ngm_g
