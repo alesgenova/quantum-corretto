@@ -1,4 +1,4 @@
-['alloc', 'init', 'dealloc']
+['alloc', 'init', 'update', 'dealloc']
 
 subroutine alloc(this, n0)
   use memory_manager_module, only: memory_manager
@@ -12,6 +12,14 @@ subroutine alloc(this, n0)
 
   allocate( pointlist(:), stat=istat )
   call memory_manager('noncollin_module%alloc', 'pointlist', pointlist(:), 1, istat)
+  allocate( angle1(:), stat=istat )
+  call memory_manager('noncollin_module%alloc', 'angle1', angle1(:), 1, istat)
+  allocate( angle2(:), stat=istat )
+  call memory_manager('noncollin_module%alloc', 'angle2', angle2(:), 1, istat)
+  allocate( mcons(:,:), stat=istat )
+  call memory_manager('noncollin_module%alloc', 'mcons', mcons(:,:), 1, istat)
+  allocate( r_m(:), stat=istat )
+  call memory_manager('noncollin_module%alloc', 'r_m', r_m(:), 1, istat)
   allocate( factlist(:), stat=istat )
   call memory_manager('noncollin_module%alloc', 'factlist', factlist(:), 1, istat)
   allocate( r_loc(:), stat=istat )
@@ -42,6 +50,14 @@ subroutine dealloc(this)
 
   deallocate( pointlist, stat=istat )
   call memory_manager('noncollin_module%dealloc', 'pointlist', pointlist(:), -1, istat)
+  deallocate( angle1, stat=istat )
+  call memory_manager('noncollin_module%dealloc', 'angle1', angle1(:), -1, istat)
+  deallocate( angle2, stat=istat )
+  call memory_manager('noncollin_module%dealloc', 'angle2', angle2(:), -1, istat)
+  deallocate( mcons, stat=istat )
+  call memory_manager('noncollin_module%dealloc', 'mcons', mcons(:,:), -1, istat)
+  deallocate( r_m, stat=istat )
+  call memory_manager('noncollin_module%dealloc', 'r_m', r_m(:), -1, istat)
   deallocate( factlist, stat=istat )
   call memory_manager('noncollin_module%dealloc', 'factlist', factlist(:), -1, istat)
   deallocate( r_loc, stat=istat )

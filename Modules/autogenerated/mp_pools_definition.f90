@@ -1,3 +1,4 @@
+init_args = {"npool": {"type": "integer", "dimension": null}, "nproc_pool": {"type": "integer", "dimension": null}, "me_pool": {"type": "integer", "dimension": null}, "root_pool": {"type": "integer", "dimension": null}, "my_pool_id": {"type": "integer", "dimension": null}, "inter_pool_comm": {"type": "integer", "dimension": null}, "intra_pool_comm": {"type": "integer", "dimension": null}, "kunit": {"type": "integer", "dimension": null}}
 type :: mp_pools_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -11,7 +12,6 @@ type :: mp_pools_type
   integer :: kunit = 1
   integer :: kunit = 1
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type mp_pools_type

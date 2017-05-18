@@ -1,3 +1,4 @@
+init_args = {"np_ortho": {"type": "integer", "dimension": "2"}, "me_ortho": {"type": "integer", "dimension": "2"}, "me_ortho1": {"type": "integer", "dimension": null}, "nproc_ortho": {"type": "integer", "dimension": null}, "leg_ortho": {"type": "integer", "dimension": null}, "ortho_comm": {"type": "integer", "dimension": null}, "ortho_row_comm": {"type": "integer", "dimension": null}, "ortho_col_comm": {"type": "integer", "dimension": null}, "ortho_comm_id": {"type": "integer", "dimension": null}, "ortho_parent_comm": {"type": "integer", "dimension": null}, "me_blacs": {"type": "integer", "dimension": null}, "np_blacs": {"type": "integer", "dimension": null}, "world_cntx": {"type": "integer", "dimension": null}, "ortho_cntx": {"type": "integer", "dimension": null}}
 type :: mp_diag_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -17,7 +18,6 @@ type :: mp_diag_type
   integer :: ortho_cntx = -1
   integer :: ortho_cntx = -1
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type mp_diag_type

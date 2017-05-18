@@ -1,3 +1,4 @@
+init_args = {"dft": {"type": "character(len=25)", "dimension": null}, "notset": {"type": "integer", "dimension": null}, "iexch": {"type": "integer", "dimension": null}, "icorr": {"type": "integer", "dimension": null}, "igcx": {"type": "integer", "dimension": null}, "igcc": {"type": "integer", "dimension": null}, "imeta": {"type": "integer", "dimension": null}, "inlc": {"type": "integer", "dimension": null}, "exx_fraction": {"type": "real(dp)", "dimension": null}, "screening_parameter": {"type": "real(dp)", "dimension": null}, "gau_parameter": {"type": "real(dp)", "dimension": null}, "islda": {"type": "logical", "dimension": null}, "isgradient": {"type": "logical", "dimension": null}, "ismeta": {"type": "logical", "dimension": null}, "ishybrid": {"type": "logical", "dimension": null}, "isnonlocc": {"type": "logical", "dimension": null}, "exx_started": {"type": "logical", "dimension": null}, "has_finite_size_correction": {"type": "logical", "dimension": null}, "finite_size_cell_volume_set": {"type": "logical", "dimension": null}, "finite_size_cell_volume": {"type": "real(dp)", "dimension": null}, "discard_input_dft": {"type": "logical", "dimension": null}, "nxc": {"type": "integer", "dimension": null}, "ncc": {"type": "integer", "dimension": null}, "ngcx": {"type": "integer", "dimension": null}, "ngcc": {"type": "integer", "dimension": null}, "nmeta": {"type": "integer", "dimension": null}, "ncnl": {"type": "integer", "dimension": null}, "exc": {"type": "character(len=4)", "dimension": null}, "corr": {"type": "character(len=4)", "dimension": null}, "gradx": {"type": "character(len=4)", "dimension": null}, "gradc": {"type": "character(len=4)", "dimension": null}, "meta": {"type": "character(len=4)", "dimension": null}, "nonlocc": {"type": "character(len=4)", "dimension": null}, "libxc_major": {"type": "integer", "dimension": null}, "libxc_minor": {"type": "integer", "dimension": null}, "libxc_micro": {"type": "integer", "dimension": null}}
 type :: funct_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -39,7 +40,6 @@ type :: funct_type
   integer :: libxc_micro = 0
   integer :: libxc_micro = 0
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type funct_type

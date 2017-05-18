@@ -21,4 +21,6 @@ endtype_rgx = re.compile(r'^\s*end\s*type\s*(?:\w+)?\s*$',re.IGNORECASE)
 
 declaration_rgx = re.compile(r'^\s*(?P<type_base>real|complex|integer|character|logical|type)\s*(?:\((?P<type_extra>.*?)\))?\s*,?(?P<options>.*)::\s*(?P<vars>.+)$',re.IGNORECASE)
 options_rgx = re.compile(r'^\s*(?:(?P<option>\w+)\s*(?:\((?P<slice>.*)?\))?\s*,?\s*)',re.IGNORECASE)
-vars_rgx = re.compile(r'^(?P<subtract>,?\s*(?P<variable>\w+)\s*(?:\((?P<slice>.*?)?\))?\s*(?:=\s*(?P<assign>.*?))?)(,.*)?$',re.IGNORECASE)
+vars_rgx = re.compile(r'^(?P<subtract>,?\s*(?P<variable>\w+)\s*(?:\((?P<slice>.*?)?\))?\s*(?:=\s*(?P<assign>(reshape[\(].*[\)]|.*?)))?)(,\s*\D\w.*)?$',re.IGNORECASE)
+
+dimensions_rgx = re.compile(r"([-+a-zA-Z0-9]+(?:\s*%\s*[a-zA-Z0-9]+)?(?::[-+a-zA-Z0-9]+(?:\s*%\s*[a-zA-Z0-9]+)?)?)\s*,?", re.IGNORECASE)

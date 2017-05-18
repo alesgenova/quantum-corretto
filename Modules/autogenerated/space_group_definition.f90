@@ -1,3 +1,4 @@
+init_args = {"unterz": {"type": "real(dp)", "dimension": null}, "duterz": {"type": "real(dp)", "dimension": null}, "unsest": {"type": "real(dp)", "dimension": null}, "cisest": {"type": "real(dp)", "dimension": null}}
 type :: space_group_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -7,7 +8,6 @@ type :: space_group_type
   real(dp) :: cisest = (5.0_dp)/(6.0_dp)
   real(dp) :: cisest = (5.0_dp)/(6.0_dp)
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type space_group_type

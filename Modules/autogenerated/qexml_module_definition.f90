@@ -1,3 +1,4 @@
+init_args = {"fmt_name": {"type": "character(5)", "dimension": null}, "fmt_version": {"type": "character(5)", "dimension": null}, "datadir_in": {"type": "character(256)", "dimension": null}, "datadir_out": {"type": "character(256)", "dimension": null}, "iunit": {"type": "integer", "dimension": null}, "ounit": {"type": "integer", "dimension": null}, "qexml_current_version": {"type": "character(10)", "dimension": null}, "qexml_default_version": {"type": "character(10)", "dimension": null}, "qexml_current_version_init": {"type": "logical", "dimension": null}, "qexml_version_before_1_4_0": {"type": "logical", "dimension": null}, "attr": {"type": "character(iotk_attlenx)", "dimension": null}}
 type :: qexml_module_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -14,7 +15,6 @@ type :: qexml_module_type
   character(iotk_attlenx) :: attr
   character(iotk_attlenx) :: attr
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type qexml_module_type

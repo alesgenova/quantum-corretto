@@ -1,3 +1,4 @@
+init_args = {"routine_chain": {"type": "type(chain)", "dimension": null}, "error_code": {"type": "integer", "dimension": null}}
 type :: error_handler_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -5,7 +6,6 @@ type :: error_handler_type
   integer :: error_code
   integer :: error_code
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type error_handler_type

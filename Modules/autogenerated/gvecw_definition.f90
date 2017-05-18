@@ -1,3 +1,5 @@
+alloc_args = {}
+init_args = {"ngw": {"type": "integer", "dimension": null}, "ngw_g": {"type": "integer", "dimension": null}, "ngwx": {"type": "integer", "dimension": null}, "ecutwfc": {"type": "real(dp)", "dimension": null}, "gcutw": {"type": "real(dp)", "dimension": null}, "ecfixed": {"type": "real(dp)", "dimension": null}, "qcutz": {"type": "real(dp)", "dimension": null}, "q2sigma": {"type": "real(dp)", "dimension": null}, "ekcut": {"type": "real(dp)", "dimension": null}, "gkcut": {"type": "real(dp)", "dimension": null}, "g2kin": {"type": "real(dp)", "dimension": ":"}}
 type :: gvecw_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -11,10 +13,11 @@ type :: gvecw_type
   real(dp) :: q2sigma = 0.0_dp
   real(dp) :: ekcut = 0.0_dp
   real(dp) :: gkcut = 0.0_dp
-  real(dp), allocatable, dimension(:) :: g2kin
-  real(dp), allocatable, dimension(:) :: g2kin
+  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [:]
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: update
   procedure, pass :: dealloc
 end type gvecw_type

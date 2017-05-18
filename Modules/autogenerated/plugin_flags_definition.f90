@@ -1,3 +1,4 @@
+init_args = {"plugin_name": {"type": "character(len=256)", "dimension": null}, "use_plumed": {"type": "logical", "dimension": null}, "use_pw2casino": {"type": "logical", "dimension": null}, "use_environ": {"type": "logical", "dimension": null}}
 type :: plugin_flags_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -7,7 +8,6 @@ type :: plugin_flags_type
   logical :: use_environ
   logical :: use_environ
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type plugin_flags_type

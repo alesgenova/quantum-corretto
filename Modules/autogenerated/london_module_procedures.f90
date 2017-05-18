@@ -1,4 +1,4 @@
-['alloc', 'init', 'dealloc']
+['alloc', 'init', 'update', 'dealloc']
 
 subroutine alloc(this, n0)
   use memory_manager_module, only: memory_manager
@@ -22,6 +22,10 @@ subroutine alloc(this, n0)
   call memory_manager('london_module%alloc', 'r', r(: , :), 1, istat)
   allocate( dist2(:), stat=istat )
   call memory_manager('london_module%alloc', 'dist2', dist2(:), 1, istat)
+  allocate( in_C6(:), stat=istat )
+  call memory_manager('london_module%alloc', 'in_C6', in_C6(:), 1, istat)
+  allocate( in_rvdw(:), stat=istat )
+  call memory_manager('london_module%alloc', 'in_rvdw', in_rvdw(:), 1, istat)
   this%is_alloc = .true.
   return
 end subroutine alloc
@@ -56,6 +60,10 @@ subroutine dealloc(this)
   call memory_manager('london_module%dealloc', 'r', r(: , :), -1, istat)
   deallocate( dist2, stat=istat )
   call memory_manager('london_module%dealloc', 'dist2', dist2(:), -1, istat)
+  deallocate( in_C6, stat=istat )
+  call memory_manager('london_module%dealloc', 'in_C6', in_C6(:), -1, istat)
+  deallocate( in_rvdw, stat=istat )
+  call memory_manager('london_module%dealloc', 'in_rvdw', in_rvdw(:), -1, istat)
   this%is_alloc = .false.
   return
 end subroutine dealloc

@@ -1,3 +1,4 @@
+init_args = {"epsr": {"type": "real(dp)", "dimension": null}, "epsg": {"type": "real(dp)", "dimension": null}, "b_value": {"type": "real(dp)", "dimension": null}, "C_value": {"type": "real(dp)", "dimension": null}}
 type :: rvv10_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -7,7 +8,6 @@ type :: rvv10_type
   real(dp) :: C_value = 0.0093
   real(dp) :: C_value = 0.0093
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type rvv10_type

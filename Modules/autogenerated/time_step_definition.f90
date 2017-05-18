@@ -1,3 +1,4 @@
+init_args = {"delthal": {"type": "real(dp)", "dimension": null}, "twodelt": {"type": "real(dp)", "dimension": null}, "fordt2": {"type": "real(dp)", "dimension": null}, "dt2": {"type": "real(dp)", "dimension": null}, "dt2by2": {"type": "real(dp)", "dimension": null}, "delt": {"type": "real(dp)", "dimension": null}, "tps": {"type": "real(dp)", "dimension": null}}
 type :: time_step_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -10,7 +11,6 @@ type :: time_step_type
   real(dp) :: tps
   real(dp) :: tps
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type time_step_type

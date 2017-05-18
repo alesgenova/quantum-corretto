@@ -1,3 +1,4 @@
+init_args = {"signal_trapped": {"type": "logical", "dimension": null}, "SIGINT": {"type": "integer(kind=c_int)", "dimension": null}}
 type :: set_signal_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -5,7 +6,6 @@ type :: set_signal_type
   integer(kind=c_int) :: SIGINT = 2_c_int
   integer(kind=c_int) :: SIGINT = 2_c_int
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type set_signal_type

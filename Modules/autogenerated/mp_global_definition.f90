@@ -1,3 +1,4 @@
+init_args = {"nproc_file": {"type": "integer", "dimension": null}, "nproc_image_file": {"type": "integer", "dimension": null}, "nproc_pool_file": {"type": "integer", "dimension": null}, "nproc_ortho_file": {"type": "integer", "dimension": null}, "nproc_bgrp_file": {"type": "integer", "dimension": null}, "ntask_groups_file": {"type": "integer", "dimension": null}}
 type :: mp_global_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -9,7 +10,6 @@ type :: mp_global_type
   integer :: ntask_groups_file = 1
   integer :: ntask_groups_file = 1
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type mp_global_type

@@ -1,4 +1,4 @@
-['alloc', 'init', 'dealloc']
+['alloc', 'init', 'update', 'dealloc']
 
 subroutine alloc(this, n0)
   use memory_manager_module, only: memory_manager
@@ -10,6 +10,12 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
+  allocate( lpx(:,:), stat=istat )
+  call memory_manager('uspp%alloc', 'lpx', lpx(:,:), 1, istat)
+  allocate( lpl(:,:,:), stat=istat )
+  call memory_manager('uspp%alloc', 'lpl', lpl(:,:,:), 1, istat)
+  allocate( ap(:,:,:,:), stat=istat )
+  call memory_manager('uspp%alloc', 'ap', ap(:,:,:,:), 1, istat)
   allocate( indv(:,:), stat=istat )
   call memory_manager('uspp%alloc', 'indv', indv(:,:), 1, istat)
   allocate( nhtol(:,:), stat=istat )
@@ -64,6 +70,12 @@ subroutine dealloc(this)
   class(uspp_type), intent(inout) :: this
   integer :: istat
 
+  deallocate( lpx, stat=istat )
+  call memory_manager('uspp%dealloc', 'lpx', lpx(:,:), -1, istat)
+  deallocate( lpl, stat=istat )
+  call memory_manager('uspp%dealloc', 'lpl', lpl(:,:,:), -1, istat)
+  deallocate( ap, stat=istat )
+  call memory_manager('uspp%dealloc', 'ap', ap(:,:,:,:), -1, istat)
   deallocate( indv, stat=istat )
   call memory_manager('uspp%dealloc', 'indv', indv(:,:), -1, istat)
   deallocate( nhtol, stat=istat )

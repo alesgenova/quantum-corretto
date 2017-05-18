@@ -1,4 +1,4 @@
-['alloc', 'init', 'dealloc']
+['alloc', 'init', 'update', 'dealloc']
 
 subroutine alloc(this, n0)
   use memory_manager_module, only: memory_manager
@@ -10,6 +10,14 @@ subroutine alloc(this, n0)
 
   integer :: istat
 
+  allocate( na(:), stat=istat )
+  call memory_manager('ions_base%alloc', 'na', na(:), 1, istat)
+  allocate( zv(:), stat=istat )
+  call memory_manager('ions_base%alloc', 'zv', zv(:), 1, istat)
+  allocate( amass(:), stat=istat )
+  call memory_manager('ions_base%alloc', 'amass', amass(:), 1, istat)
+  allocate( rcmax(:), stat=istat )
+  call memory_manager('ions_base%alloc', 'rcmax', rcmax(:), 1, istat)
   allocate( ityp(:), stat=istat )
   call memory_manager('ions_base%alloc', 'ityp', ityp(:), 1, istat)
   allocate( tau(:,:), stat=istat )
@@ -24,6 +32,8 @@ subroutine alloc(this, n0)
   call memory_manager('ions_base%alloc', 'ind_srt', ind_srt(:), 1, istat)
   allocate( ind_bck(:), stat=istat )
   call memory_manager('ions_base%alloc', 'ind_bck', ind_bck(:), 1, istat)
+  allocate( atm(:), stat=istat )
+  call memory_manager('ions_base%alloc', 'atm', atm(:), 1, istat)
   allocate( label_srt(:), stat=istat )
   call memory_manager('ions_base%alloc', 'label_srt', label_srt(:), 1, istat)
   allocate( if_pos(:,:), stat=istat )
@@ -56,6 +66,14 @@ subroutine dealloc(this)
   class(ions_base_type), intent(inout) :: this
   integer :: istat
 
+  deallocate( na, stat=istat )
+  call memory_manager('ions_base%dealloc', 'na', na(:), -1, istat)
+  deallocate( zv, stat=istat )
+  call memory_manager('ions_base%dealloc', 'zv', zv(:), -1, istat)
+  deallocate( amass, stat=istat )
+  call memory_manager('ions_base%dealloc', 'amass', amass(:), -1, istat)
+  deallocate( rcmax, stat=istat )
+  call memory_manager('ions_base%dealloc', 'rcmax', rcmax(:), -1, istat)
   deallocate( ityp, stat=istat )
   call memory_manager('ions_base%dealloc', 'ityp', ityp(:), -1, istat)
   deallocate( tau, stat=istat )
@@ -70,6 +88,8 @@ subroutine dealloc(this)
   call memory_manager('ions_base%dealloc', 'ind_srt', ind_srt(:), -1, istat)
   deallocate( ind_bck, stat=istat )
   call memory_manager('ions_base%dealloc', 'ind_bck', ind_bck(:), -1, istat)
+  deallocate( atm, stat=istat )
+  call memory_manager('ions_base%dealloc', 'atm', atm(:), -1, istat)
   deallocate( label_srt, stat=istat )
   call memory_manager('ions_base%dealloc', 'label_srt', label_srt(:), -1, istat)
   deallocate( if_pos, stat=istat )

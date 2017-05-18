@@ -1,3 +1,4 @@
+init_args = {"nargs": {"type": "integer", "dimension": null}, "nimage_": {"type": "integer", "dimension": null}, "npool_": {"type": "integer", "dimension": null}, "ndiag_": {"type": "integer", "dimension": null}, "nband_": {"type": "integer", "dimension": null}, "ntg_": {"type": "integer", "dimension": null}, "library_init": {"type": "logical", "dimension": null}, "input_file_": {"type": "character(len=256)", "dimension": null}, "command_line": {"type": "character(len=512)", "dimension": null}}
 type :: command_line_options_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -12,7 +13,6 @@ type :: command_line_options_type
   character(len=512) :: command_line = ' '
   character(len=512) :: command_line = ' '
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type command_line_options_type

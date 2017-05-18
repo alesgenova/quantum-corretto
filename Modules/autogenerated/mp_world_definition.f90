@@ -1,3 +1,4 @@
+init_args = {"nproc": {"type": "integer", "dimension": null}, "mpime": {"type": "integer", "dimension": null}, "root": {"type": "integer", "dimension": null}, "world_comm": {"type": "integer", "dimension": null}, "library_mode": {"type": "logical", "dimension": null}}
 type :: mp_world_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -8,7 +9,6 @@ type :: mp_world_type
   logical :: library_mode = .false.
   logical :: library_mode = .false.
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type mp_world_type

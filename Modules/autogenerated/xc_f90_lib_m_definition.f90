@@ -1,3 +1,4 @@
+init_args = {"XC_FAMILY_UNKNOWN": {"type": "integer", "dimension": null}, "XC_FAMILY_NONE": {"type": "integer", "dimension": null}, "XC_FAMILY_LDA": {"type": "integer", "dimension": null}, "XC_FAMILY_GGA": {"type": "integer", "dimension": null}, "XC_FAMILY_MGGA": {"type": "integer", "dimension": null}, "XC_FAMILY_LCA": {"type": "integer", "dimension": null}, "XC_FAMILY_OEP": {"type": "integer", "dimension": null}, "XC_FAMILY_HYB_GGA": {"type": "integer", "dimension": null}, "XC_FAMILY_HYB_MGGA": {"type": "integer", "dimension": null}, "XC_UNPOLARIZED": {"type": "integer", "dimension": null}, "XC_POLARIZED": {"type": "integer", "dimension": null}, "XC_NON_RELATIVISTIC": {"type": "integer", "dimension": null}, "XC_RELATIVISTIC": {"type": "integer", "dimension": null}, "XC_EXCHANGE": {"type": "integer", "dimension": null}, "XC_CORRELATION": {"type": "integer", "dimension": null}, "XC_EXCHANGE_CORRELATION": {"type": "integer", "dimension": null}, "XC_KINETIC": {"type": "integer", "dimension": null}, "XC_FLAGS_HAVE_EXC": {"type": "integer", "dimension": null}, "XC_FLAGS_HAVE_VXC": {"type": "integer", "dimension": null}, "XC_FLAGS_HAVE_FXC": {"type": "integer", "dimension": null}, "XC_FLAGS_HAVE_KXC": {"type": "integer", "dimension": null}, "XC_FLAGS_HAVE_LXC": {"type": "integer", "dimension": null}, "XC_FLAGS_1D": {"type": "integer", "dimension": null}, "XC_FLAGS_2D": {"type": "integer", "dimension": null}, "XC_FLAGS_3D": {"type": "integer", "dimension": null}, "XC_FLAGS_STABLE": {"type": "integer", "dimension": null}, "XC_FLAGS_DEVELOPMENT": {"type": "integer", "dimension": null}, "XC_GGA_XC_LB": {"type": "integer", "dimension": null}, "XC_GGA_K_ABSR1": {"type": "integer", "dimension": null}, "XC_GGA_K_ABSR2": {"type": "integer", "dimension": null}}
 type :: xc_f90_lib_m_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -33,7 +34,6 @@ type :: xc_f90_lib_m_type
   integer :: XC_GGA_K_ABSR2 = 507
   integer :: XC_GGA_K_ABSR2 = 507
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type xc_f90_lib_m_type

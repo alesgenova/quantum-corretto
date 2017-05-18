@@ -1,20 +1,23 @@
+alloc_args = {}
+init_args = {"upf": {"type": "type(pseudo_upf)", "dimension": ":"}, "nh": {"type": "integer", "dimension": ":"}, "nhm": {"type": "integer", "dimension": null}, "nbetam": {"type": "integer", "dimension": null}, "iver": {"type": "integer", "dimension": ":,:"}, "lmaxkb": {"type": "integer", "dimension": null}, "lmaxq": {"type": "integer", "dimension": null}, "newpseudo": {"type": "logical", "dimension": ":"}, "oldvan": {"type": "logical", "dimension": ":"}, "nvb": {"type": "integer", "dimension": null}, "ish": {"type": "integer", "dimension": ":"}}
 type :: uspp_param_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
-  type(pseudo_upf), allocatable, dimension(:) :: upf
-  integer, dimension(npsx) :: nh
+  type(pseudo_upf), allocatable, dimension(:) :: upf ! dimensions = [:]
+  integer, allocatable, dimension(:) :: nh ! dimensions = [:]
   integer :: nhm
   integer :: nbetam
-  integer, dimension(3,npsx) :: iver
+  integer, allocatable, dimension(:,:) :: iver ! dimensions = [:,:]
   integer :: lmaxkb
   integer :: lmaxq
-  logical, dimension(npsx) :: newpseudo
-  logical, dimension(npsx) :: oldvan
+  logical, allocatable, dimension(:) :: newpseudo ! dimensions = [:]
+  logical, allocatable, dimension(:) :: oldvan ! dimensions = [:]
   integer :: nvb
-  integer, dimension(npsx) :: ish
-  integer, dimension(npsx) :: ish
+  integer, allocatable, dimension(:) :: ish ! dimensions = [:]
+  integer, allocatable, dimension(:) :: ish ! dimensions = [:]
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: update
   procedure, pass :: dealloc
 end type uspp_param_type

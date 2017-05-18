@@ -1,3 +1,4 @@
+init_args = {"nimage": {"type": "integer", "dimension": null}, "nproc_image": {"type": "integer", "dimension": null}, "me_image": {"type": "integer", "dimension": null}, "root_image": {"type": "integer", "dimension": null}, "my_image_id": {"type": "integer", "dimension": null}, "inter_image_comm": {"type": "integer", "dimension": null}, "intra_image_comm": {"type": "integer", "dimension": null}}
 type :: mp_images_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -10,7 +11,6 @@ type :: mp_images_type
   integer :: intra_image_comm = 0
   integer :: intra_image_comm = 0
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type mp_images_type

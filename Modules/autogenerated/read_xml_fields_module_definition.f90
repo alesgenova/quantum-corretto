@@ -1,3 +1,4 @@
+init_args = {"exchange": {"type": "character(len = 5)", "dimension": null}, "exchange_grad_corr": {"type": "character(len = 5)", "dimension": null}, "correlation": {"type": "character(len = 5)", "dimension": null}, "correlation_grad_corr": {"type": "character(len = 5)", "dimension": null}, "xc_specials": {"type": "character(len = 5)", "dimension": null}}
 type :: read_xml_fields_module_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -8,7 +9,6 @@ type :: read_xml_fields_module_type
   character(len = 5) :: xc_specials
   character(len = 5) :: xc_specials
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type read_xml_fields_module_type

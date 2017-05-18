@@ -1,3 +1,4 @@
+init_args = {"ntypx": {"type": "integer", "dimension": null}, "npsx": {"type": "integer", "dimension": null}, "nsx": {"type": "integer", "dimension": null}, "npk": {"type": "integer", "dimension": null}, "lmaxx": {"type": "integer", "dimension": null}, "lqmax": {"type": "integer", "dimension": null}}
 type :: parameters_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -9,7 +10,6 @@ type :: parameters_type
   integer :: lqmax = 2*lmaxx+1
   integer :: lqmax = 2*lmaxx+1
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type parameters_type

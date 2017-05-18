@@ -1,3 +1,4 @@
+init_args = {"routine": {"type": "character(80)", "dimension": null}, "errmsg": {"type": "character(256)", "dimension": null}}
 type :: bspline_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -5,7 +6,6 @@ type :: bspline_type
   character(256) :: errmsg
   character(256) :: errmsg
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type bspline_type

@@ -1,3 +1,4 @@
+init_args = {"stdin": {"type": "integer", "dimension": null}, "qestdin": {"type": "integer", "dimension": null}, "stdout": {"type": "integer", "dimension": null}, "ionode_id": {"type": "integer", "dimension": null}, "ionode": {"type": "logical", "dimension": null}, "meta_ionode_id": {"type": "integer", "dimension": null}, "meta_ionode": {"type": "logical", "dimension": null}, "xmloutputunit": {"type": "integer", "dimension": null}}
 type :: io_global_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -11,7 +12,6 @@ type :: io_global_type
   integer :: xmloutputunit = 51
   integer :: xmloutputunit = 51
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type io_global_type

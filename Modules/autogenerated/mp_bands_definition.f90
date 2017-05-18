@@ -1,3 +1,4 @@
+init_args = {"nbgrp": {"type": "integer", "dimension": null}, "nproc_bgrp": {"type": "integer", "dimension": null}, "me_bgrp": {"type": "integer", "dimension": null}, "root_bgrp": {"type": "integer", "dimension": null}, "my_bgrp_id": {"type": "integer", "dimension": null}, "root_bgrp_id": {"type": "integer", "dimension": null}, "inter_bgrp_comm": {"type": "integer", "dimension": null}, "intra_bgrp_comm": {"type": "integer", "dimension": null}, "use_bgrp_in_hpsi": {"type": "logical", "dimension": null}, "ntask_groups": {"type": "integer", "dimension": null}}
 type :: mp_bands_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -13,7 +14,6 @@ type :: mp_bands_type
   integer :: ntask_groups = 1
   integer :: ntask_groups = 1
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type mp_bands_type

@@ -1,3 +1,4 @@
+init_args = {"lxmlinput_loc": {"type": "logical", "dimension": null}, "input_file": {"type": "character(len=256)", "dimension": null}}
 type :: open_close_input_file_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -5,7 +6,6 @@ type :: open_close_input_file_type
   character(len=256) :: input_file = ' '
   character(len=256) :: input_file = ' '
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type open_close_input_file_type

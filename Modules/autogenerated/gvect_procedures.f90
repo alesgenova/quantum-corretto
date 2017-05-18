@@ -1,4 +1,4 @@
-['alloc', 'init', 'dealloc']
+['alloc', 'init', 'update', 'dealloc']
 
 subroutine alloc(this, n0)
   use memory_manager_module, only: memory_manager

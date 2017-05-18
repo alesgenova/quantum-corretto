@@ -1,3 +1,4 @@
+init_args = {"northopool": {"type": "integer", "dimension": null}, "nproc_orthopool": {"type": "integer", "dimension": null}, "me_orthopool": {"type": "integer", "dimension": null}, "root_orthopool": {"type": "integer", "dimension": null}, "my_orthopool_id": {"type": "integer", "dimension": null}, "inter_orthopool_comm": {"type": "integer", "dimension": null}, "intra_orthopool_comm": {"type": "integer", "dimension": null}, "init_orthopools": {"type": "logical", "dimension": null}}
 type :: mp_orthopools_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -11,7 +12,6 @@ type :: mp_orthopools_type
   logical :: init_orthopools = .false.
   logical :: init_orthopools = .false.
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type mp_orthopools_type

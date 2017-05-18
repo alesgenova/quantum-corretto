@@ -1,3 +1,4 @@
+init_args = {"lfcpopt": {"type": "logical", "dimension": null}, "lfcpdyn": {"type": "logical", "dimension": null}, "fcp_mu": {"type": "real(dp)", "dimension": null}, "fcp_mass": {"type": "real(dp)", "dimension": null}, "fcp_temperature": {"type": "real(dp)", "dimension": null}, "fcp_relax_step": {"type": "real(dp)", "dimension": null}, "fcp_relax_crit": {"type": "real(dp)", "dimension": null}, "fcp_tot_charge_first": {"type": "real(dp)", "dimension": null}, "fcp_tot_charge_last": {"type": "real(dp)", "dimension": null}}
 type :: fcp_variables_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -12,7 +13,6 @@ type :: fcp_variables_type
   real(dp) :: fcp_tot_charge_last = 0.0_dp
   real(dp) :: fcp_tot_charge_last = 0.0_dp
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type fcp_variables_type

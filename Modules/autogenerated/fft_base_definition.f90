@@ -1,3 +1,4 @@
+init_args = {"dfftp": {"type": "type(fft_type_descriptor)", "dimension": null}, "dffts": {"type": "type(fft_type_descriptor)", "dimension": null}, "dfftb": {"type": "type(fft_box_descriptor)", "dimension": null}, "dfft3d": {"type": "type(fft_type_descriptor)", "dimension": null}, "dtgs": {"type": "type(task_groups_descriptor)", "dimension": null}, "smap": {"type": "type(sticks_map)", "dimension": null}}
 type :: fft_base_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -9,7 +10,6 @@ type :: fft_base_type
   type(sticks_map) :: smap
   type(sticks_map) :: smap
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type fft_base_type

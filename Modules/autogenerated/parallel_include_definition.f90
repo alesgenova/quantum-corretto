@@ -1,3 +1,4 @@
+init_args = {"MPI_COMM_WORLD": {"type": "integer", "dimension": null}, "MPI_COMM_NULL": {"type": "integer", "dimension": null}, "MPI_COMM_SELF": {"type": "integer", "dimension": null}}
 type :: parallel_include_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -6,7 +7,6 @@ type :: parallel_include_type
   integer :: MPI_COMM_SELF = -2
   integer :: MPI_COMM_SELF = -2
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type parallel_include_type

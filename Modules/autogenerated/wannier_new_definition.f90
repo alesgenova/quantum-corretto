@@ -1,3 +1,5 @@
+alloc_args = {}
+init_args = {"ningx": {"type": "integer", "dimension": null}, "use_wannier": {"type": "logical", "dimension": null}, "rkmesh": {"type": "logical", "dimension": null}, "plot_wannier": {"type": "logical", "dimension": null}, "use_energy_int": {"type": "logical", "dimension": null}, "print_wannier_coeff": {"type": "logical", "dimension": null}, "nwan": {"type": "integer", "dimension": null}, "plot_wan_num": {"type": "integer", "dimension": null}, "plot_wan_spin": {"type": "integer", "dimension": null}, "wan_pot": {"type": "real(kind=dp)", "dimension": ":,:"}, "wannier_energy": {"type": "real(kind=dp)", "dimension": ":,:"}, "wannier_occ": {"type": "real(kind=dp)", "dimension": ":,:,:"}, "pp": {"type": "complex(kind=dp)", "dimension": ":,:"}, "coef": {"type": "complex(kind=dp)", "dimension": ":,:,:"}, "wan_in": {"type": "type(wannier_data)", "dimension": ":,:"}}
 type :: wannier_new_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -10,15 +12,16 @@ type :: wannier_new_type
   integer :: nwan
   integer :: plot_wan_num
   integer :: plot_wan_spin
-  real(kind=dp), allocatable, dimension(:,:) :: wan_pot
-  real(kind=dp), allocatable, dimension(:,:) :: wannier_energy
-  real(kind=dp), allocatable, dimension(:,:,:) :: wannier_occ
-  complex(kind=dp), allocatable, dimension(:,:) :: pp
-  complex(kind=dp), allocatable, dimension(:,:,:) :: coef
-  type(wannier_data), allocatable, dimension(:,:) :: wan_in
-  type(wannier_data), allocatable, dimension(:,:) :: wan_in
+  real(kind=dp), allocatable, dimension(:,:) :: wan_pot ! dimensions = [:,:]
+  real(kind=dp), allocatable, dimension(:,:) :: wannier_energy ! dimensions = [:,:]
+  real(kind=dp), allocatable, dimension(:,:,:) :: wannier_occ ! dimensions = [:,:,:]
+  complex(kind=dp), allocatable, dimension(:,:) :: pp ! dimensions = [:,:]
+  complex(kind=dp), allocatable, dimension(:,:,:) :: coef ! dimensions = [:,:,:]
+  type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [:,:]
+  type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [:,:]
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: update
   procedure, pass :: dealloc
 end type wannier_new_type
