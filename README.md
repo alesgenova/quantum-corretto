@@ -13,6 +13,11 @@ I a providing two detailed examples:
 - what to do for a standard module that can be objectified semi-automatically (e.g. `gvect`).
 - what to do with a problematic module that requires more manual input (e.g. `scf`)
 
+## Nomenclature definitions
+
+- A module `module` will be converted to `module_type` data type and be stored in `module_type_module` module
+- It is possible that `module` already contains `data` data type. In that case, `data` will be located in `data_type_module` and will be declared as `data_type` in `module` after a `USE data_type_module` statement
+
 # STEP 0
 
 ## Teach by Example: from module `gvect` to type `gvect_type`)
