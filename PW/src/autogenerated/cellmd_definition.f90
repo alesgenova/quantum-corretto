@@ -14,6 +14,6 @@ type :: cellmd_type
   character(len=2) :: calc = '  '
   character(len=2) :: calc = '  '
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => cellmd_type_init
+  procedure, pass :: update => cellmd_type_update
 end type cellmd_type

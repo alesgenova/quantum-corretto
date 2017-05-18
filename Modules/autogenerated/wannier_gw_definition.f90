@@ -12,17 +12,17 @@ type :: wannier_gw_type
   integer :: second_grid_i
   logical :: l_scissor
   real(kind=dp), dimension(2) :: scissor
-  real(kind=dp), allocatable, dimension(:,:,:) :: wannier_centers ! dimensions = [:,:,:]
-  real(kind=dp), allocatable, dimension(:,:) :: wannier_radii ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:,:) :: w_centers ! dimensions = [:,:,:]
-  integer, allocatable, dimension(:,:) :: w_radii ! dimensions = [:,:]
-  complex(kind=dp), allocatable, dimension(:,:,:) :: u_trans ! dimensions = [:,:,:]
+  real(kind=dp), allocatable, dimension(:,:,:) :: wannier_centers ! dimensions = [":", ":", ":"]
+  real(kind=dp), allocatable, dimension(:,:) :: wannier_radii ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:,:) :: w_centers ! dimensions = [":", ":", ":"]
+  integer, allocatable, dimension(:,:) :: w_radii ! dimensions = [":", ":"]
+  complex(kind=dp), allocatable, dimension(:,:,:) :: u_trans ! dimensions = [":", ":", ":"]
   integer :: numw_prod
   integer, dimension(2) :: num_nbndv
   integer :: num_nbnds
-  real(kind=dp), allocatable, dimension(:,:,:) :: becp_gw ! dimensions = [:,:,:]
-  real(kind=dp), allocatable, dimension(:,:,:) :: becp_gw_c ! dimensions = [:,:,:]
-  complex(kind=dp), allocatable, dimension(:,:,:,:) :: expgsave ! dimensions = [:,:,:,:]
+  real(kind=dp), allocatable, dimension(:,:,:) :: becp_gw ! dimensions = [":", ":", ":"]
+  real(kind=dp), allocatable, dimension(:,:,:) :: becp_gw_c ! dimensions = [":", ":", ":"]
+  complex(kind=dp), allocatable, dimension(:,:,:,:) :: expgsave ! dimensions = [":", ":", ":", ":"]
   integer :: nset
   logical :: l_truncated_coulomb
   real(kind=dp) :: truncation_radius
@@ -74,7 +74,7 @@ type :: wannier_gw_type
   real(kind=dp) :: v_cutoff
   logical :: l_iter_algorithm
   real(kind=dp) :: dual_pb
-  real(kind=dp), allocatable, dimension(:) :: vg_q ! dimensions = [:]
+  real(kind=dp), allocatable, dimension(:) :: vg_q ! dimensions = [":"]
   logical :: l_t_wannier
   real(kind=dp) :: dual_vt
   real(kind=dp) :: dual_vs
@@ -83,7 +83,7 @@ type :: wannier_gw_type
   integer :: s_first_state
   integer :: s_last_state
   logical :: l_selfconsistent
-  real(kind=dp), allocatable, dimension(:,:) :: ene_gw ! dimensions = [:,:]
+  real(kind=dp), allocatable, dimension(:,:) :: ene_gw ! dimensions = [":", ":"]
   integer :: n_gw_states
   real(kind=dp) :: delta_self
   logical :: l_whole_s
@@ -105,15 +105,15 @@ type :: wannier_gw_type
   logical :: l_simple
   logical :: l_list
   integer, dimension(2) :: n_list
-  integer, allocatable, dimension(:,:) :: i_list ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: i_list ! dimensions = [":", ":"]
   logical :: l_full
   integer, dimension(2) :: n_full
   integer :: len_head_block_freq
   integer :: len_head_block_wfc
   integer :: len_head_block_wfc
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => wannier_gw_type_alloc
+  procedure, pass :: init => wannier_gw_type_init
+  procedure, pass :: update => wannier_gw_type_update
+  procedure, pass :: dealloc => wannier_gw_type_dealloc
 end type wannier_gw_type

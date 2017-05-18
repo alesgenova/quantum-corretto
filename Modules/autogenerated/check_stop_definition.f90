@@ -8,6 +8,6 @@ type :: check_stop_type
   logical :: tinit = .false.
   logical :: tinit = .false.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => check_stop_type_init
+  procedure, pass :: update => check_stop_type_update
 end type check_stop_type

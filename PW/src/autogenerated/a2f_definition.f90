@@ -5,6 +5,6 @@ type :: a2f_type
   logical :: la2F = .false.
   logical :: la2F = .false.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => a2f_type_init
+  procedure, pass :: update => a2f_type_update
 end type a2f_type

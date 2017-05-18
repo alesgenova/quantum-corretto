@@ -9,15 +9,15 @@ type :: esm_type
   real(kind=dp) :: esm_w
   real(kind=dp) :: esm_a
   character(len=3) :: esm_bc
-  integer, allocatable, dimension(:,:) :: mill_2d ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: imill_2d ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: mill_2d ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: imill_2d ! dimensions = [":", ":"]
   integer :: ngm_2d = 0
   real(dp) :: qe_erf
   real(dp) :: qe_erfc
   real(dp) :: qe_erfc
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => esm_type_alloc
+  procedure, pass :: init => esm_type_init
+  procedure, pass :: update => esm_type_update
+  procedure, pass :: dealloc => esm_type_dealloc
 end type esm_type

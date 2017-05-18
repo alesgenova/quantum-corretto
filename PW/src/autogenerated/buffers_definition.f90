@@ -5,6 +5,6 @@ type :: buffers_type
   integer :: nunits = 0
   integer :: nunits = 0
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => buffers_type_init
+  procedure, pass :: update => buffers_type_update
 end type buffers_type

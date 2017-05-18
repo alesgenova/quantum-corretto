@@ -7,12 +7,12 @@ type :: spin_orb_type
   logical :: lforcet
   logical :: starting_spin_angle
   logical :: domag
-  complex(dp), allocatable, dimension(:,:,:,:) :: rot_ylm ! dimensions = [:,:,:,:]
-  complex(dp), allocatable, dimension(:,:,:,:,:) :: fcoef ! dimensions = [:,:,:,:,:]
-  complex(dp), allocatable, dimension(:,:,:,:,:) :: fcoef ! dimensions = [:,:,:,:,:]
+  complex(dp), allocatable, dimension(:,:,:,:) :: rot_ylm ! dimensions = [":", ":", ":", ":"]
+  complex(dp), allocatable, dimension(:,:,:,:,:) :: fcoef ! dimensions = [":", ":", ":", ":", ":"]
+  complex(dp), allocatable, dimension(:,:,:,:,:) :: fcoef ! dimensions = [":", ":", ":", ":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => spin_orb_type_alloc
+  procedure, pass :: init => spin_orb_type_init
+  procedure, pass :: update => spin_orb_type_update
+  procedure, pass :: dealloc => spin_orb_type_dealloc
 end type spin_orb_type

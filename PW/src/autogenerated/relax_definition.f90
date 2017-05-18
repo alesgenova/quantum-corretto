@@ -8,6 +8,6 @@ type :: relax_type
   real(dp) :: starting_scf_threshold
   real(dp) :: starting_scf_threshold
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => relax_type_init
+  procedure, pass :: update => relax_type_update
 end type relax_type

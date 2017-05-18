@@ -10,37 +10,37 @@ type :: autopilot_type
   integer :: event_index = 0
   integer :: max_rules = 320
   integer :: n_rules
-  integer, allocatable, dimension(:,:,:) :: event_step ! dimensions = [:,:,:]
+  integer, allocatable, dimension(:,:,:) :: event_step ! dimensions = [":", ":", ":"]
   integer :: current_nfi
   logical :: pilot_p = .false.
   logical :: restart_p = .false.
   logical :: pause_p = .false.
   integer :: pilot_unit = 42
   character(len=256) :: pilot_type
-  integer, allocatable, dimension(:,:,:) :: rule_isave ! dimensions = [:,:,:]
-  integer, allocatable, dimension(:,:,:) :: rule_iprint ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: rule_dt ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: rule_emass ! dimensions = [:,:,:]
-  character(len=80), allocatable, dimension(:,:,:) :: rule_electron_dynamics ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: rule_electron_damping ! dimensions = [:,:,:]
-  character(len=80), allocatable, dimension(:,:,:) :: rule_ion_dynamics ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: rule_ion_damping ! dimensions = [:,:,:]
-  character(len=80), allocatable, dimension(:,:,:) :: rule_ion_temperature ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: rule_tempw ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_isave ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_iprint ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_dt ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_emass ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_electron_dynamics ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_electron_damping ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_ion_dynamics ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_ion_damping ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_ion_temperature ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_tempw ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:,:) :: event_tempw ! dimensions = [:,:,:]
+  integer, allocatable, dimension(:,:,:) :: rule_isave ! dimensions = [":", ":", ":"]
+  integer, allocatable, dimension(:,:,:) :: rule_iprint ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: rule_dt ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: rule_emass ! dimensions = [":", ":", ":"]
+  character(len=80), allocatable, dimension(:,:,:) :: rule_electron_dynamics ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: rule_electron_damping ! dimensions = [":", ":", ":"]
+  character(len=80), allocatable, dimension(:,:,:) :: rule_ion_dynamics ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: rule_ion_damping ! dimensions = [":", ":", ":"]
+  character(len=80), allocatable, dimension(:,:,:) :: rule_ion_temperature ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: rule_tempw ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_isave ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_iprint ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_dt ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_emass ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_electron_dynamics ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_electron_damping ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_ion_dynamics ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_ion_damping ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_ion_temperature ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_tempw ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:,:) :: event_tempw ! dimensions = [":", ":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => autopilot_type_alloc
+  procedure, pass :: init => autopilot_type_init
+  procedure, pass :: update => autopilot_type_update
+  procedure, pass :: dealloc => autopilot_type_dealloc
 end type autopilot_type

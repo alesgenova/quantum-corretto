@@ -7,6 +7,6 @@ type :: qes_libs_module_type
   character(32) :: fmtstr
   character(32) :: fmtstr
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => qes_libs_module_type_init
+  procedure, pass :: update => qes_libs_module_type_update
 end type qes_libs_module_type

@@ -19,7 +19,7 @@ type :: symm_base_type
   real(dp) :: accep = 1.0d-5
   character(len=45), dimension(48) :: sname
   integer, dimension(48) :: t_rev = 0
-  integer, allocatable, dimension(:,:) :: irt ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: irt ! dimensions = [":", ":"]
   logical :: time_reversal = .true.
   logical :: invsym
   logical :: nofrac = .false.
@@ -32,8 +32,8 @@ type :: symm_base_type
   real(dp), dimension(7,7,48) :: d3
   real(dp), dimension(7,7,48) :: d3
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => symm_base_type_alloc
+  procedure, pass :: init => symm_base_type_init
+  procedure, pass :: update => symm_base_type_update
+  procedure, pass :: dealloc => symm_base_type_dealloc
 end type symm_base_type

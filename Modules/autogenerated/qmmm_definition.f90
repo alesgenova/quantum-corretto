@@ -18,19 +18,19 @@ type :: qmmm_type
   integer :: QMMM_TAG_TYPE = 8
   integer :: QMMM_TAG_MASS = 9
   real(dp) :: QMMM_FORCE_CONV = 592.91102087727177_dp
-  real(dp), allocatable, dimension(:,:) :: tmp_buf ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: tmp_buf ! dimensions = [":", ":"]
   real(dp), dimension(3) :: r0 = (/ 0.0_dp
   logical :: do_init_r0 = .true.
-  real(dp), allocatable, dimension(:) :: charge ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: aradii ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: tau_mm ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: force_mm ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: force_qm ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: tau_mask ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: rc_mm ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: charge_mm ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: mass ! dimensions = [:]
-  integer, allocatable, dimension(:) :: types ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: charge ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: aradii ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: tau_mm ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: force_mm ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: force_qm ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: tau_mask ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: rc_mm ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: charge_mm ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: mass ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: types ! dimensions = [":"]
   real(dp), dimension(9) :: cell_data
   real(dp), dimension(9) :: cell_mm
   integer :: nat_mm
@@ -39,8 +39,8 @@ type :: qmmm_type
   integer :: ntypes
   integer :: ntypes
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => qmmm_type_alloc
+  procedure, pass :: init => qmmm_type_init
+  procedure, pass :: update => qmmm_type_update
+  procedure, pass :: dealloc => qmmm_type_dealloc
 end type qmmm_type

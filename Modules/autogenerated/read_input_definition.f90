@@ -5,6 +5,6 @@ type :: read_input_type
   logical :: has_been_read = .false.
   logical :: has_been_read = .false.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => read_input_type_init
+  procedure, pass :: update => read_input_type_update
 end type read_input_type

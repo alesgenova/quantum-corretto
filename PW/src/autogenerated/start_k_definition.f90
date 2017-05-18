@@ -10,12 +10,12 @@ type :: start_k_type
   integer :: k2
   integer :: k3
   integer :: nks_start = 0
-  real(dp), allocatable, dimension(:) :: wk_start ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: xk_start ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: xk_start ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:) :: wk_start ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: xk_start ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: xk_start ! dimensions = [":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => start_k_type_alloc
+  procedure, pass :: init => start_k_type_init
+  procedure, pass :: update => start_k_type_update
+  procedure, pass :: dealloc => start_k_type_dealloc
 end type start_k_type

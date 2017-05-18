@@ -9,6 +9,6 @@ type :: extrapolation_type
   integer :: wfc_order = 0
   integer :: wfc_order = 0
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => extrapolation_type_init
+  procedure, pass :: update => extrapolation_type_update
 end type extrapolation_type

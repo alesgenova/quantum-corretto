@@ -12,6 +12,6 @@ type :: mp_orthopools_type
   logical :: init_orthopools = .false.
   logical :: init_orthopools = .false.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => mp_orthopools_type_init
+  procedure, pass :: update => mp_orthopools_type_update
 end type mp_orthopools_type

@@ -5,6 +5,6 @@ type :: m_gth_type
   type(gth_parameters), dimension(:), pointer :: gth_p
   type(gth_parameters), dimension(:), pointer :: gth_p
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => m_gth_type_init
+  procedure, pass :: update => m_gth_type_update
 end type m_gth_type

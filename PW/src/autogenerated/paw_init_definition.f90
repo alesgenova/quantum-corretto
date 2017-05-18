@@ -5,6 +5,6 @@ type :: paw_init_type
   logical :: TIMING = .false.
   logical :: TIMING = .false.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => paw_init_type_init
+  procedure, pass :: update => paw_init_type_update
 end type paw_init_type

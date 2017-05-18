@@ -9,9 +9,9 @@ type :: kernel_table_type
   real(dp) :: q_cut
   real(dp) :: q_min
   real(dp) :: dk
-  real(dp), allocatable, dimension(:) :: q_mesh ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:,:) :: kernel ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: d2phi_dk2 ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:) :: q_mesh ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:,:) :: kernel ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: d2phi_dk2 ! dimensions = [":", ":", ":"]
   character(len=256) :: vdw_table_name = ' '
   character(len=1000) :: kernel_file_name
   character(len=30) :: double_format = "(1p4e23.14)"
@@ -19,8 +19,8 @@ type :: kernel_table_type
   integer :: find_free_unit
   integer :: find_free_unit
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => kernel_table_type_alloc
+  procedure, pass :: init => kernel_table_type_init
+  procedure, pass :: update => kernel_table_type_update
+  procedure, pass :: dealloc => kernel_table_type_dealloc
 end type kernel_table_type

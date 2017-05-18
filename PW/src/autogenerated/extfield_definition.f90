@@ -21,12 +21,12 @@ type :: extfield_type
   real(dp) :: block_2
   real(dp) :: block_height
   real(dp) :: etotmonofield
-  real(dp), allocatable, dimension(:,:) :: forcefield ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: forcemono ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: forcemono ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: forcefield ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: forcemono ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: forcemono ! dimensions = [":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => extfield_type_alloc
+  procedure, pass :: init => extfield_type_init
+  procedure, pass :: update => extfield_type_update
+  procedure, pass :: dealloc => extfield_type_dealloc
 end type extfield_type

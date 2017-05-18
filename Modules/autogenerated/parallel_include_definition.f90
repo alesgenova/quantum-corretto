@@ -7,6 +7,6 @@ type :: parallel_include_type
   integer :: MPI_COMM_SELF = -2
   integer :: MPI_COMM_SELF = -2
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => parallel_include_type_init
+  procedure, pass :: update => parallel_include_type_update
 end type parallel_include_type

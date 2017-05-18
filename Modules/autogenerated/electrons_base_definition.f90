@@ -21,16 +21,16 @@ type :: electrons_base_type
   integer, dimension(2) :: i2gupdwn_bgrp = 0
   logical :: telectrons_base_initval = .false.
   logical :: keep_occ = .false.
-  real(dp), allocatable, dimension(:) :: f ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: f ! dimensions = [":"]
   real(dp) :: qbac = 0.0_dp
-  integer, allocatable, dimension(:) :: ispin ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: f_bgrp ! dimensions = [:]
-  integer, allocatable, dimension(:) :: ispin_bgrp ! dimensions = [:]
-  integer, allocatable, dimension(:) :: ibgrp_g2l ! dimensions = [:]
-  integer, allocatable, dimension(:) :: ibgrp_g2l ! dimensions = [:]
+  integer, allocatable, dimension(:) :: ispin ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: f_bgrp ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: ispin_bgrp ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: ibgrp_g2l ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: ibgrp_g2l ! dimensions = [":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => electrons_base_type_alloc
+  procedure, pass :: init => electrons_base_type_init
+  procedure, pass :: update => electrons_base_type_update
+  procedure, pass :: dealloc => electrons_base_type_dealloc
 end type electrons_base_type

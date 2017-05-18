@@ -5,15 +5,15 @@ type :: symme_type
   logical :: is_init = .false.
   logical :: no_rho_sym = .true.
   integer :: ngs
-  type(shell_type), allocatable, dimension(:) :: shell ! dimensions = [:]
-  integer, allocatable, dimension(:) :: sendcnt ! dimensions = [:]
-  integer, allocatable, dimension(:) :: recvcnt ! dimensions = [:]
-  integer, allocatable, dimension(:) :: sdispls ! dimensions = [:]
-  integer, allocatable, dimension(:) :: rdispls ! dimensions = [:]
-  integer, allocatable, dimension(:) :: rdispls ! dimensions = [:]
+  type(shell_type), allocatable, dimension(:) :: shell ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: sendcnt ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: recvcnt ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: sdispls ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: rdispls ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: rdispls ! dimensions = [":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => symme_type_alloc
+  procedure, pass :: init => symme_type_init
+  procedure, pass :: update => symme_type_update
+  procedure, pass :: dealloc => symme_type_dealloc
 end type symme_type

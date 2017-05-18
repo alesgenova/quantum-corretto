@@ -42,8 +42,8 @@ type :: control_flags_type
   real(dp) :: dt_old = -1.0_dp
   logical :: trane = .false.
   real(dp) :: ampre = 0.0_dp
-  logical, allocatable, dimension(:) :: tranp ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: amprp ! dimensions = [:]
+  logical, allocatable, dimension(:) :: tranp ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: amprp ! dimensions = [":"]
   logical :: tbeg = .false.
   logical :: tnosee = .false.
   logical :: tnoseh = .false.
@@ -107,8 +107,8 @@ type :: control_flags_type
   logical :: textfor = .false.
   logical :: textfor = .false.
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => control_flags_type_alloc
+  procedure, pass :: init => control_flags_type_init
+  procedure, pass :: update => control_flags_type_update
+  procedure, pass :: dealloc => control_flags_type_dealloc
 end type control_flags_type

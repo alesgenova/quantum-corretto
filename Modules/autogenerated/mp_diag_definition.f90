@@ -18,6 +18,6 @@ type :: mp_diag_type
   integer :: ortho_cntx = -1
   integer :: ortho_cntx = -1
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => mp_diag_type_init
+  procedure, pass :: update => mp_diag_type_update
 end type mp_diag_type

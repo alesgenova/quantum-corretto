@@ -60,6 +60,6 @@ type :: constants_type
   real(dp) :: AVOGADRO = 6.02214129d+23
   real(dp) :: AVOGADRO = 6.02214129d+23
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => constants_type_init
+  procedure, pass :: update => constants_type_update
 end type constants_type

@@ -4,35 +4,35 @@ type :: xdm_module_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   integer :: nenv
-  real(dp), allocatable, dimension(:,:) :: xenv ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: ienv ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: lvec ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: xenv ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: ienv ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: lvec ! dimensions = [":", ":"]
   integer :: nvec
-  real(dp), allocatable, dimension(:) :: alpha ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: ml ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:,:) :: cx ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:) :: rvdw ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:) :: alpha ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: ml ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: cx ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:) :: rvdw ! dimensions = [":", ":"]
   real(dp) :: maxc6
   real(dp) :: esave = 0._dp
   real(dp) :: esaveold = 0._dp
-  real(dp), allocatable, dimension(:,:) :: fsave ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: ssave ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: fsave ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: ssave ! dimensions = [":", ":"]
   logical :: saved = .false.
   real(dp) :: a1i = 0.6836_dp
   real(dp) :: a2i = 1.5045_dp
-  real(dp), allocatable, dimension(:,:) :: rfree ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: w2free ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: rmaxg2 ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: rcore ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: w2core ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: rmaxcore2 ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: afree ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: alpha_free ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: fact ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: fact ! dimensions = [:]
+  real(dp), allocatable, dimension(:,:) :: rfree ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: w2free ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: rmaxg2 ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: rcore ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: w2core ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: rmaxcore2 ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: afree ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: alpha_free ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: fact ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: fact ! dimensions = [":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => xdm_module_type_alloc
+  procedure, pass :: init => xdm_module_type_init
+  procedure, pass :: update => xdm_module_type_update
+  procedure, pass :: dealloc => xdm_module_type_dealloc
 end type xdm_module_type

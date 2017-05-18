@@ -8,14 +8,14 @@ type :: wvfct_type
   integer :: nbnd
   integer :: npw
   integer :: current_k
-  real(dp), allocatable, dimension(:,:) :: et ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: wg ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: btype ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: btype ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: et ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: wg ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: btype ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: btype ! dimensions = [":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => wvfct_type_alloc
+  procedure, pass :: init => wvfct_type_init
+  procedure, pass :: update => wvfct_type_update
+  procedure, pass :: dealloc => wvfct_type_dealloc
 end type wvfct_type

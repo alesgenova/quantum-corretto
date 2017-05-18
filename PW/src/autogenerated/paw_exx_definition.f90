@@ -3,12 +3,12 @@ init_args = {"ke": {"type": "type(paw_fockrnl_type)", "dimension": ":"}, "paw_ha
 type :: paw_exx_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
-  type(paw_fockrnl_type), allocatable, dimension(:) :: ke ! dimensions = [:]
+  type(paw_fockrnl_type), allocatable, dimension(:) :: ke ! dimensions = [":"]
   logical :: paw_has_init_paw_fockrnl = .false.
   logical :: paw_has_init_paw_fockrnl = .false.
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => paw_exx_type_alloc
+  procedure, pass :: init => paw_exx_type_init
+  procedure, pass :: update => paw_exx_type_update
+  procedure, pass :: dealloc => paw_exx_type_dealloc
 end type paw_exx_type

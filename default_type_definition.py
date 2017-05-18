@@ -1,9 +1,9 @@
 from collections import OrderedDict
 import json
 
-from f90_regex import dimensions_rgx
+from f90_regex import dimensions_rgx, alloc_dimensions_rgx
 
-def write_definition(original_module, file_obj, procedures=None):
+def write_definition(original_module, file_obj, type_name=None, procedures=None):
     f = file_obj
     allocatable_vars = []
     for key, var in original_module.declares.items():
@@ -20,10 +20,19 @@ def write_definition(original_module, file_obj, procedures=None):
                         pass
                 if len(dims) != len(dims_int):
                     var['allocatable'] = True
+                    #var['rank'] = len(dims)
                     var['dimension'] = ",".join([":"]*len(dims))
                     allocatable_vars.append(var)
             else:
+                print(var['dimension'])
+                dims = alloc_dimensions_rgx.findall(var['dimension'])
+                #var['allocatable'] = True
+                var['rank'] = len(dims)
+                var['dimension'] = ",".join([":"]*len(dims))
                 allocatable_vars.append(var)
+
+    if type_name is None:
+        type_name = original_module.name+"_type"
 
     do_alloc = len(allocatable_vars) > 0
     if procedures is None:
@@ -48,7 +57,7 @@ def write_definition(original_module, file_obj, procedures=None):
     # write all the init_args
     f.write("init_args = {}\n".format(json.dumps(init_args,indent=None)))
 
-    f.write("type :: {}_type".format(original_module.name)+"\n")
+    f.write("type :: {}".format(type_name)+"\n")
     f.write("  logical :: is_alloc = .false.\n")
     f.write("  logical :: is_init = .false.\n")
     string = ""
@@ -61,11 +70,11 @@ def write_definition(original_module, file_obj, procedures=None):
         string += " :: "
         string += var['name']
         if var['default'] is not None and var['allocatable'] is None: string += " = {}".format(var['default'])
-        if var['allocatable']: string += " ! dimensions = [{}]".format(var['dimension']) 
+        if var['allocatable']: string += ' ! dimensions = [{}]'.format(', '.join(['":"']*var['rank']))
         f.write(string+"\n")
     f.write(string+"\ncontains\n")
     for procedure in procedures:
-        f.write("  procedure, pass :: {}\n".format(procedure))
-    f.write("end type {}_type".format(original_module.name)+"\n")
+        f.write("  procedure, pass :: {} => {}_{}\n".format(procedure,type_name,procedure))
+    f.write("end type {}".format(type_name)+"\n")
 
     return procedures

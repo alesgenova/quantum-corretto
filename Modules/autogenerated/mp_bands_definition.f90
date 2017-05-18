@@ -14,6 +14,6 @@ type :: mp_bands_type
   integer :: ntask_groups = 1
   integer :: ntask_groups = 1
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => mp_bands_type_init
+  procedure, pass :: update => mp_bands_type_update
 end type mp_bands_type

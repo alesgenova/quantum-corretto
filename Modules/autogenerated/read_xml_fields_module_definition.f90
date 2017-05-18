@@ -9,6 +9,6 @@ type :: read_xml_fields_module_type
   character(len = 5) :: xc_specials
   character(len = 5) :: xc_specials
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => read_xml_fields_module_type_init
+  procedure, pass :: update => read_xml_fields_module_type_update
 end type read_xml_fields_module_type

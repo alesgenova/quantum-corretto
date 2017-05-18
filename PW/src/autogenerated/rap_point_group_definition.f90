@@ -15,6 +15,6 @@ type :: rap_point_group_type
   character(len=55), dimension(8,12) :: elem_name = ' '
   character(len=55), dimension(8,12) :: elem_name = ' '
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => rap_point_group_type_init
+  procedure, pass :: update => rap_point_group_type_update
 end type rap_point_group_type

@@ -13,6 +13,6 @@ type :: fcp_variables_type
   real(dp) :: fcp_tot_charge_last = 0.0_dp
   real(dp) :: fcp_tot_charge_last = 0.0_dp
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => fcp_variables_type_init
+  procedure, pass :: update => fcp_variables_type_update
 end type fcp_variables_type

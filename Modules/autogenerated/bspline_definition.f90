@@ -6,6 +6,6 @@ type :: bspline_type
   character(256) :: errmsg
   character(256) :: errmsg
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => bspline_type_init
+  procedure, pass :: update => bspline_type_update
 end type bspline_type

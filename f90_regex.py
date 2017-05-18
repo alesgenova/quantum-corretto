@@ -24,3 +24,4 @@ options_rgx = re.compile(r'^\s*(?:(?P<option>\w+)\s*(?:\((?P<slice>.*)?\))?\s*,?
 vars_rgx = re.compile(r'^(?P<subtract>,?\s*(?P<variable>\w+)\s*(?:\((?P<slice>.*?)?\))?\s*(?:=\s*(?P<assign>(reshape[\(].*[\)]|.*?)))?)(,\s*\D\w.*)?$',re.IGNORECASE)
 
 dimensions_rgx = re.compile(r"([-+a-zA-Z0-9]+(?:\s*%\s*[a-zA-Z0-9]+)?(?::[-+a-zA-Z0-9]+(?:\s*%\s*[a-zA-Z0-9]+)?)?)\s*,?", re.IGNORECASE)
+alloc_dimensions_rgx = re.compile(r'\s*(:)\s*', re.IGNORECASE)

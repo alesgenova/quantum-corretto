@@ -11,6 +11,6 @@ type :: rap_point_group_is_type
   character(len=11) :: gname_is
   character(len=11) :: gname_is
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => rap_point_group_is_type_init
+  procedure, pass :: update => rap_point_group_is_type_update
 end type rap_point_group_is_type

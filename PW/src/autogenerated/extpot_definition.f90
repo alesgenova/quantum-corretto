@@ -5,11 +5,11 @@ type :: extpot_type
   logical :: is_init = .false.
   logical :: textpot = .false.
   character(256) :: external_potential
-  real(dp), allocatable, dimension(:) :: ext_pot ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: ext_pot ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: ext_pot ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: ext_pot ! dimensions = [":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => extpot_type_alloc
+  procedure, pass :: init => extpot_type_init
+  procedure, pass :: update => extpot_type_update
+  procedure, pass :: dealloc => extpot_type_dealloc
 end type extpot_type

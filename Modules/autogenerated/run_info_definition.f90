@@ -5,6 +5,6 @@ type :: run_info_type
   character(len=75) :: title = ' '
   character(len=75) :: title = ' '
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => run_info_type_init
+  procedure, pass :: update => run_info_type_update
 end type run_info_type

@@ -5,6 +5,6 @@ type :: environment_type
   character(len=75) :: title
   character(len=75) :: title
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => environment_type_init
+  procedure, pass :: update => environment_type_update
 end type environment_type

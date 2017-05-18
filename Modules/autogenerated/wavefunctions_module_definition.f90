@@ -3,17 +3,17 @@ init_args = {"evc": {"type": "complex(dp)", "dimension": ":,:"}, "psic": {"type"
 type :: wavefunctions_module_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
-  complex(dp), allocatable, dimension(:,:) :: evc ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:) :: psic ! dimensions = [:]
-  complex(dp), allocatable, dimension(:,:) :: psic_nc ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: c0_bgrp ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: cm_bgrp ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: phi_bgrp ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: cv0 ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: cv0 ! dimensions = [:,:]
+  complex(dp), allocatable, dimension(:,:) :: evc ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:) :: psic ! dimensions = [":"]
+  complex(dp), allocatable, dimension(:,:) :: psic_nc ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: c0_bgrp ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: cm_bgrp ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: phi_bgrp ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: cv0 ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: cv0 ! dimensions = [":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => wavefunctions_module_type_alloc
+  procedure, pass :: init => wavefunctions_module_type_init
+  procedure, pass :: update => wavefunctions_module_type_update
+  procedure, pass :: dealloc => wavefunctions_module_type_dealloc
 end type wavefunctions_module_type

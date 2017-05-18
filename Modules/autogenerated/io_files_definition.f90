@@ -9,7 +9,7 @@ type :: io_files_type
   character(len=6) :: nd_nmbr = '000000'
   character(len=256) :: pseudo_dir = './'
   character(len=256) :: pseudo_dir_cur = ' '
-  character(len=256), allocatable, dimension(:) :: psfile ! dimensions = [:]
+  character(len=256), allocatable, dimension(:) :: psfile ! dimensions = [":"]
   character(len=256) :: qexml_version = ' '
   logical :: qexml_version_init = .false.
   character(len=256) :: qexsd_fmt = ' '
@@ -49,8 +49,8 @@ type :: io_files_type
   integer :: nwordwf = 2
   integer :: nwordwf = 2
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => io_files_type_alloc
+  procedure, pass :: init => io_files_type_init
+  procedure, pass :: update => io_files_type_update
+  procedure, pass :: dealloc => io_files_type_dealloc
 end type io_files_type

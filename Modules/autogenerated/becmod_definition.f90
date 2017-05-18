@@ -5,6 +5,6 @@ type :: becmod_type
   type(bec_type) :: becp
   type(bec_type) :: becp
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => becmod_type_init
+  procedure, pass :: update => becmod_type_update
 end type becmod_type

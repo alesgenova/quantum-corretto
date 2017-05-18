@@ -11,13 +11,13 @@ type :: paw_variables_type
   integer :: lm_fact_x = 3
   integer :: xlm = 2
   integer :: radial_grad_style = 0
-  type(paw_radial_integrator), allocatable, dimension(:) :: rad ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:,:) :: ddd_paw ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: vs_rad ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: vs_rad ! dimensions = [:,:,:]
+  type(paw_radial_integrator), allocatable, dimension(:) :: rad ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:,:) :: ddd_paw ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: vs_rad ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: vs_rad ! dimensions = [":", ":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => paw_variables_type_alloc
+  procedure, pass :: init => paw_variables_type_init
+  procedure, pass :: update => paw_variables_type_update
+  procedure, pass :: dealloc => paw_variables_type_dealloc
 end type paw_variables_type

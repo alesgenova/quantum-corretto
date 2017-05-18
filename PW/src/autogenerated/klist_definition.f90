@@ -4,8 +4,8 @@ type :: klist_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   character(len=32) :: smearing
-  real(dp), allocatable, dimension(:,:) :: xk ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: wk ! dimensions = [:]
+  real(dp), allocatable, dimension(:,:) :: xk ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: wk ! dimensions = [":"]
   real(dp), dimension(3) :: xqq
   real(dp) :: degauss
   real(dp) :: nelec
@@ -14,8 +14,8 @@ type :: klist_type
   real(dp) :: tot_magnetization
   real(dp) :: tot_charge
   real(dp) :: qnorm = 0.0_dp
-  integer, allocatable, dimension(:,:) :: igk_k ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: ngk ! dimensions = [:]
+  integer, allocatable, dimension(:,:) :: igk_k ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: ngk ! dimensions = [":"]
   integer :: nks
   integer :: nkstot
   integer :: ngauss
@@ -25,8 +25,8 @@ type :: klist_type
   logical :: two_fermi_energies
   logical :: two_fermi_energies
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => klist_type_alloc
+  procedure, pass :: init => klist_type_init
+  procedure, pass :: update => klist_type_update
+  procedure, pass :: dealloc => klist_type_dealloc
 end type klist_type

@@ -5,6 +5,6 @@ type :: radial_grids_type
   integer :: ndmx = 20000
   integer :: ndmx = 20000
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => radial_grids_type_init
+  procedure, pass :: update => radial_grids_type_update
 end type radial_grids_type

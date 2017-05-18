@@ -6,6 +6,6 @@ type :: acfdt_ener_type
   real(dp) :: acfdt_eband
   real(dp) :: acfdt_eband
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => acfdt_ener_type_init
+  procedure, pass :: update => acfdt_ener_type_update
 end type acfdt_ener_type

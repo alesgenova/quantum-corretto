@@ -6,15 +6,15 @@ type :: us_type
   integer :: nqxq
   integer :: nqx
   real(dp) :: dq = 0.01d0
-  real(dp), allocatable, dimension(:,:,:,:) :: qrad ! dimensions = [:,:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: tab ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: tab_at ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:,:,:,:) :: qrad ! dimensions = [":", ":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: tab ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: tab_at ! dimensions = [":", ":", ":"]
   logical :: spline_ps = .false.
-  real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [":", ":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => us_type_alloc
+  procedure, pass :: init => us_type_init
+  procedure, pass :: update => us_type_update
+  procedure, pass :: dealloc => us_type_dealloc
 end type us_type

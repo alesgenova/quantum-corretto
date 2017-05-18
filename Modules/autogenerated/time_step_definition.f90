@@ -11,6 +11,6 @@ type :: time_step_type
   real(dp) :: tps
   real(dp) :: tps
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => time_step_type_init
+  procedure, pass :: update => time_step_type_update
 end type time_step_type

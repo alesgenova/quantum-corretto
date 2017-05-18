@@ -6,6 +6,6 @@ type :: error_handler_type
   integer :: error_code
   integer :: error_code
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => error_handler_type_init
+  procedure, pass :: update => error_handler_type_update
 end type error_handler_type

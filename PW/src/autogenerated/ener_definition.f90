@@ -20,6 +20,6 @@ type :: ener_type
   real(dp) :: ef_dw
   real(dp) :: ef_dw
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => ener_type_init
+  procedure, pass :: update => ener_type_update
 end type ener_type

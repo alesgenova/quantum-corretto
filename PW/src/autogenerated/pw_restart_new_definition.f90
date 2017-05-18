@@ -5,6 +5,6 @@ type :: pw_restart_new_type
   character(len=6) :: int_to_char
   character(len=6) :: int_to_char
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => pw_restart_new_type_init
+  procedure, pass :: update => pw_restart_new_type_update
 end type pw_restart_new_type

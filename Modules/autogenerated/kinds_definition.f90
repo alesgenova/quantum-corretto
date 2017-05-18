@@ -7,6 +7,6 @@ type :: kinds_type
   integer :: i4b = selected_int_kind(9)
   integer :: i4b = selected_int_kind(9)
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => kinds_type_init
+  procedure, pass :: update => kinds_type_update
 end type kinds_type

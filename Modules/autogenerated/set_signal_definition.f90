@@ -6,6 +6,6 @@ type :: set_signal_type
   integer(kind=c_int) :: SIGINT = 2_c_int
   integer(kind=c_int) :: SIGINT = 2_c_int
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => set_signal_type_init
+  procedure, pass :: update => set_signal_type_update
 end type set_signal_type

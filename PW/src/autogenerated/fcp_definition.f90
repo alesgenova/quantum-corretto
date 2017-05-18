@@ -10,6 +10,6 @@ type :: fcp_type
   real(dp) :: acc
   real(dp) :: acc
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => fcp_type_init
+  procedure, pass :: update => fcp_type_update
 end type fcp_type

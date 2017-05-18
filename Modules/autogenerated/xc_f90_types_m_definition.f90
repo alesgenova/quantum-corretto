@@ -5,6 +5,6 @@ type :: xc_f90_types_m_type
   integer :: xc_f90_kind = selected_real_kind(14)
   integer :: xc_f90_kind = selected_real_kind(14)
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => xc_f90_types_m_type_init
+  procedure, pass :: update => xc_f90_types_m_type_update
 end type xc_f90_types_m_type

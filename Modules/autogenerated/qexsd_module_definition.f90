@@ -19,14 +19,14 @@ type :: qexsd_module_type
   type(parallel_info_type) :: parallel_info
   type(berryphaseoutput_type) :: qexsd_bp_obj
   type(dipoleoutput_type) :: qexsd_dipol_obj
-  type(step_type), allocatable, dimension(:) :: steps ! dimensions = [:]
+  type(step_type), allocatable, dimension(:) :: steps ! dimensions = [":"]
   type(status_type) :: exit_status
   type(closed_type) :: qexsd_closed_element
   integer :: step_counter
   integer :: step_counter
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => qexsd_module_type_alloc
+  procedure, pass :: init => qexsd_module_type_init
+  procedure, pass :: update => qexsd_module_type_update
+  procedure, pass :: dealloc => qexsd_module_type_dealloc
 end type qexsd_module_type

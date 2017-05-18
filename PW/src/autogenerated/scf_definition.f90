@@ -7,11 +7,11 @@ type :: scf_type
   type(scf_type) :: v
   type(scf_type) :: vnew
   real(dp) :: v_of_0
-  real(dp), allocatable, dimension(:) :: vltot ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: vrs ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: rho_core ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: kedtau ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:) :: rhog_core ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: vltot ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: vrs ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: rho_core ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: kedtau ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:) :: rhog_core ! dimensions = [":"]
   integer :: record_length
   integer :: rlen_rho = 0
   integer :: rlen_kin = 0
@@ -25,11 +25,11 @@ type :: scf_type
   integer :: start_dipole = 0
   logical :: lda_plus_u_co
   logical :: lda_plus_u_nc
-  complex(dp), allocatable, dimension(:) :: io_buffer ! dimensions = [:]
-  complex(dp), allocatable, dimension(:) :: io_buffer ! dimensions = [:]
+  complex(dp), allocatable, dimension(:) :: io_buffer ! dimensions = [":"]
+  complex(dp), allocatable, dimension(:) :: io_buffer ! dimensions = [":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => scf_type_alloc
+  procedure, pass :: init => scf_type_init
+  procedure, pass :: update => scf_type_update
+  procedure, pass :: dealloc => scf_type_dealloc
 end type scf_type

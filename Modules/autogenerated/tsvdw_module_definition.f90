@@ -6,10 +6,10 @@ type :: tsvdw_module_type
   logical :: vdw_isolated
   real(dp) :: vdw_econv_thr
   real(dp) :: EtsvdW
-  real(dp), allocatable, dimension(:) :: UtsvdW ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: FtsvdW ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: HtsvdW ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: VefftsvdW ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: UtsvdW ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: FtsvdW ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: HtsvdW ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: VefftsvdW ! dimensions = [":"]
   integer :: NgpA = 1000
   integer :: bsint = bit_size(ngpa)
   integer :: me
@@ -23,49 +23,49 @@ type :: tsvdw_module_type
   real(dp) :: ddamp
   real(dp) :: sR
   real(dp) :: spcutAmax
-  integer, allocatable, dimension(:) :: nstates ! dimensions = [:]
-  integer, allocatable, dimension(:) :: sdispls ! dimensions = [:]
-  integer, allocatable, dimension(:) :: rdispls ! dimensions = [:]
-  integer, allocatable, dimension(:) :: sendcount ! dimensions = [:]
-  integer, allocatable, dimension(:) :: recvcount ! dimensions = [:]
-  integer, allocatable, dimension(:) :: istatus ! dimensions = [:]
-  integer, allocatable, dimension(:) :: NsomegaA ! dimensions = [:]
-  integer, allocatable, dimension(:) :: NsomegaAr ! dimensions = [:]
-  integer, allocatable, dimension(:) :: npair ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: pair ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: gomegar ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:,:) :: somegaA ! dimensions = [:,:,:]
-  integer, allocatable, dimension(:,:,:) :: somegaAr ! dimensions = [:,:,:]
-  integer, allocatable, dimension(:,:,:) :: gomegaAr ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:) :: predveffAdn ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: vfree ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: dpfree ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: R0free ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: C6AAfree ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: veff ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: dpeff ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: R0eff ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: C6AAeff ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: rhosad ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: rhotot ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: dveffAdn ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: spgrd ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: sprho ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: spdrho ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: spdata ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: LIA ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: LIB ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: dLIA ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: dLIB ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: atxyz ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: C6ABfree ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: C6ABeff ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:,:) :: dveffdR ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: dveffdh ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: dveffdh ! dimensions = [:,:,:]
+  integer, allocatable, dimension(:) :: nstates ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: sdispls ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: rdispls ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: sendcount ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: recvcount ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: istatus ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: NsomegaA ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: NsomegaAr ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: npair ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: pair ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: gomegar ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:,:) :: somegaA ! dimensions = [":", ":", ":"]
+  integer, allocatable, dimension(:,:,:) :: somegaAr ! dimensions = [":", ":", ":"]
+  integer, allocatable, dimension(:,:,:) :: gomegaAr ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:) :: predveffAdn ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: vfree ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: dpfree ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: R0free ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: C6AAfree ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: veff ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: dpeff ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: R0eff ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: C6AAeff ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: rhosad ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: rhotot ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: dveffAdn ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: spgrd ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: sprho ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: spdrho ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: spdata ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: LIA ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: LIB ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: dLIA ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: dLIB ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: atxyz ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: C6ABfree ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: C6ABeff ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: dveffdR ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: dveffdh ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: dveffdh ! dimensions = [":", ":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => tsvdw_module_type_alloc
+  procedure, pass :: init => tsvdw_module_type_init
+  procedure, pass :: update => tsvdw_module_type_update
+  procedure, pass :: dealloc => tsvdw_module_type_dealloc
 end type tsvdw_module_type

@@ -6,6 +6,6 @@ type :: vdw_df_type
   integer :: vdw_type = 1
   integer :: vdw_type = 1
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => vdw_df_type_init
+  procedure, pass :: update => vdw_df_type_update
 end type vdw_df_type

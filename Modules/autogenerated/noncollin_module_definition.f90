@@ -9,25 +9,25 @@ type :: noncollin_module_type
   integer :: nspin_mag = 1
   integer :: nspin_gga = 1
   integer :: i_cons = 0
-  integer, allocatable, dimension(:) :: pointlist ! dimensions = [:]
+  integer, allocatable, dimension(:) :: pointlist ! dimensions = [":"]
   logical :: noncolin
   logical :: lsign = .false.
-  real(dp), allocatable, dimension(:) :: angle1 ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: angle2 ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: mcons ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:) :: angle1 ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: angle2 ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: mcons ! dimensions = [":", ":"]
   real(dp), dimension(3) :: magtot_nc
   real(dp), dimension(3) :: bfield = 0.d0
   real(dp) :: vtcon
-  real(dp), allocatable, dimension(:) :: r_m ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: r_m ! dimensions = [":"]
   real(dp) :: lambda
-  real(dp), allocatable, dimension(:) :: factlist ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: r_loc ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: m_loc ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:) :: factlist ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: r_loc ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: m_loc ! dimensions = [":", ":"]
   real(dp), dimension(3) :: ux
   real(dp), dimension(3) :: ux
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => noncollin_module_type_alloc
+  procedure, pass :: init => noncollin_module_type_init
+  procedure, pass :: update => noncollin_module_type_update
+  procedure, pass :: dealloc => noncollin_module_type_dealloc
 end type noncollin_module_type

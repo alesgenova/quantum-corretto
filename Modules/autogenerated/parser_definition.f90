@@ -5,6 +5,6 @@ type :: parser_type
   integer :: parse_unit = 5
   integer :: parse_unit = 5
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => parser_type_init
+  procedure, pass :: update => parser_type_update
 end type parser_type

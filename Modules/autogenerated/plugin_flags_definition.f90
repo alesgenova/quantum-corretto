@@ -8,6 +8,6 @@ type :: plugin_flags_type
   logical :: use_environ
   logical :: use_environ
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => plugin_flags_type_init
+  procedure, pass :: update => plugin_flags_type_update
 end type plugin_flags_type

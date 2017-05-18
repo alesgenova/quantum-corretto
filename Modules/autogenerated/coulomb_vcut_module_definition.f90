@@ -10,6 +10,6 @@ type :: coulomb_vcut_module_type
   real(dp) :: eps6 = 1.0e-6_dp
   real(dp) :: eps6 = 1.0e-6_dp
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => coulomb_vcut_module_type_init
+  procedure, pass :: update => coulomb_vcut_module_type_update
 end type coulomb_vcut_module_type

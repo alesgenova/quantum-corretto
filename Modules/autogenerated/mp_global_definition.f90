@@ -10,6 +10,6 @@ type :: mp_global_type
   integer :: ntask_groups_file = 1
   integer :: ntask_groups_file = 1
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => mp_global_type_init
+  procedure, pass :: update => mp_global_type_update
 end type mp_global_type

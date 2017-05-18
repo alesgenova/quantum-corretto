@@ -10,6 +10,6 @@ type :: fft_base_type
   type(sticks_map) :: smap
   type(sticks_map) :: smap
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => fft_base_type_init
+  procedure, pass :: update => fft_base_type_update
 end type fft_base_type

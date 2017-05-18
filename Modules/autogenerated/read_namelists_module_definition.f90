@@ -5,6 +5,6 @@ type :: read_namelists_module_type
   real(dp) :: sm_not_set = -20.0_dp
   real(dp) :: sm_not_set = -20.0_dp
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => read_namelists_module_type_init
+  procedure, pass :: update => read_namelists_module_type_update
 end type read_namelists_module_type

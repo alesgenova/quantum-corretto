@@ -9,6 +9,6 @@ type :: mp_world_type
   logical :: library_mode = .false.
   logical :: library_mode = .false.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => mp_world_type_init
+  procedure, pass :: update => mp_world_type_update
 end type mp_world_type

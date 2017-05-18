@@ -8,14 +8,14 @@ type :: esm_cft_type
   integer :: lwork
   real(dp), dimension(:, :) :: work
   integer :: ltabl = 2 * nfftx + 64
-  real(dp), allocatable, dimension(:) :: fw_tablez ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: bw_tablez ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: tablez ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: fw_tablez ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: bw_tablez ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: tablez ! dimensions = [":"]
   integer :: isys = 1
   integer :: isys = 1
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => esm_cft_type_alloc
+  procedure, pass :: init => esm_cft_type_init
+  procedure, pass :: update => esm_cft_type_update
+  procedure, pass :: dealloc => esm_cft_type_dealloc
 end type esm_cft_type

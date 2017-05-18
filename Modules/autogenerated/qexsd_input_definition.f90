@@ -5,6 +5,6 @@ type :: qexsd_input_type
   type(input_type) :: input
   type(input_type) :: input
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => qexsd_input_type_init
+  procedure, pass :: update => qexsd_input_type_update
 end type qexsd_input_type

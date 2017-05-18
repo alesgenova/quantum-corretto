@@ -12,16 +12,16 @@ type :: wannier_new_type
   integer :: nwan
   integer :: plot_wan_num
   integer :: plot_wan_spin
-  real(kind=dp), allocatable, dimension(:,:) :: wan_pot ! dimensions = [:,:]
-  real(kind=dp), allocatable, dimension(:,:) :: wannier_energy ! dimensions = [:,:]
-  real(kind=dp), allocatable, dimension(:,:,:) :: wannier_occ ! dimensions = [:,:,:]
-  complex(kind=dp), allocatable, dimension(:,:) :: pp ! dimensions = [:,:]
-  complex(kind=dp), allocatable, dimension(:,:,:) :: coef ! dimensions = [:,:,:]
-  type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [:,:]
-  type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [:,:]
+  real(kind=dp), allocatable, dimension(:,:) :: wan_pot ! dimensions = [":", ":"]
+  real(kind=dp), allocatable, dimension(:,:) :: wannier_energy ! dimensions = [":", ":"]
+  real(kind=dp), allocatable, dimension(:,:,:) :: wannier_occ ! dimensions = [":", ":", ":"]
+  complex(kind=dp), allocatable, dimension(:,:) :: pp ! dimensions = [":", ":"]
+  complex(kind=dp), allocatable, dimension(:,:,:) :: coef ! dimensions = [":", ":", ":"]
+  type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [":", ":"]
+  type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => wannier_new_type_alloc
+  procedure, pass :: init => wannier_new_type_init
+  procedure, pass :: update => wannier_new_type_update
+  procedure, pass :: dealloc => wannier_new_type_dealloc
 end type wannier_new_type

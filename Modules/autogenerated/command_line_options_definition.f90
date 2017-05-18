@@ -13,6 +13,6 @@ type :: command_line_options_type
   character(len=512) :: command_line = ' '
   character(len=512) :: command_line = ' '
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => command_line_options_type_init
+  procedure, pass :: update => command_line_options_type_update
 end type command_line_options_type

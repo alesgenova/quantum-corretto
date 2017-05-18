@@ -10,6 +10,6 @@ type :: parameters_type
   integer :: lqmax = 2*lmaxx+1
   integer :: lqmax = 2*lmaxx+1
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => parameters_type_init
+  procedure, pass :: update => parameters_type_update
 end type parameters_type

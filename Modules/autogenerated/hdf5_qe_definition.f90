@@ -5,6 +5,6 @@ type :: hdf5_qe_type
   integer :: pippo
   integer :: pippo
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => hdf5_qe_type_init
+  procedure, pass :: update => hdf5_qe_type_update
 end type hdf5_qe_type

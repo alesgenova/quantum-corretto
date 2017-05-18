@@ -12,6 +12,6 @@ type :: mp_pools_type
   integer :: kunit = 1
   integer :: kunit = 1
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => mp_pools_type_init
+  procedure, pass :: update => mp_pools_type_update
 end type mp_pools_type

@@ -3,10 +3,10 @@ init_args = {"psi_exx": {"type": "complex(dp)", "dimension": ":,:"}, "hpsi_exx":
 type :: exx_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
-  complex(dp), allocatable, dimension(:,:) :: psi_exx ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: hpsi_exx ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: evc_exx ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:) :: psic_exx ! dimensions = [:]
+  complex(dp), allocatable, dimension(:,:) :: psi_exx ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: hpsi_exx ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: evc_exx ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:) :: psic_exx ! dimensions = [":"]
   integer :: lda_original
   integer :: n_original
   real(dp) :: exxalfa = 0._dp
@@ -15,21 +15,21 @@ type :: exx_type
   integer :: nq3 = 1
   integer :: nqs = 1
   integer :: nkqs
-  real(dp), allocatable, dimension(:,:) :: xkq_collect ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: x_occupation ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: xkq_collect ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: x_occupation ! dimensions = [":", ":"]
   integer :: x_nbnd_occ
   integer :: ibnd_start = 0
   integer :: ibnd_end = 0
-  complex(dp), allocatable, dimension(:,:,:) :: exxbuff ! dimensions = [:,:,:]
+  complex(dp), allocatable, dimension(:,:,:) :: exxbuff ! dimensions = [":", ":", ":"]
   logical :: use_ace = .true.
-  complex(dp), allocatable, dimension(:,:,:) :: xi ! dimensions = [:,:,:]
+  complex(dp), allocatable, dimension(:,:,:) :: xi ! dimensions = [":", ":", ":"]
   integer :: nbndproj
   logical :: domat
-  integer, allocatable, dimension(:,:) :: index_xkq ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: index_xk ! dimensions = [:]
-  integer, allocatable, dimension(:) :: index_sym ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: rir ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: working_pool ! dimensions = [:]
+  integer, allocatable, dimension(:,:) :: index_xkq ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: index_xk ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: index_sym ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: rir ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: working_pool ! dimensions = [":"]
   logical :: exx_grid_initialized = .false.
   real(dp) :: eps = 1.d-6
   real(dp) :: eps_qdiv = 1.d-8
@@ -53,15 +53,15 @@ type :: exx_type
   real(dp) :: fock2 = 0.0_dp
   real(dp) :: dexx = 0.0_dp
   real(dp) :: ecutfock
-  type(comm_packet), allocatable, dimension(:,:) :: comm_recv ! dimensions = [:,:]
-  type(comm_packet), allocatable, dimension(:,:) :: comm_send ! dimensions = [:,:]
-  type(comm_packet), allocatable, dimension(:,:) :: comm_recv_reverse ! dimensions = [:,:]
-  type(comm_packet), allocatable, dimension(:,:,:) :: comm_send_reverse ! dimensions = [:,:,:]
-  integer, allocatable, dimension(:,:) :: lda_local ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: lda_exx ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: ngk_local ! dimensions = [:]
-  integer, allocatable, dimension(:) :: ngk_exx ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: igk_exx ! dimensions = [:,:]
+  type(comm_packet), allocatable, dimension(:,:) :: comm_recv ! dimensions = [":", ":"]
+  type(comm_packet), allocatable, dimension(:,:) :: comm_send ! dimensions = [":", ":"]
+  type(comm_packet), allocatable, dimension(:,:) :: comm_recv_reverse ! dimensions = [":", ":"]
+  type(comm_packet), allocatable, dimension(:,:,:) :: comm_send_reverse ! dimensions = [":", ":", ":"]
+  integer, allocatable, dimension(:,:) :: lda_local ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: lda_exx ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: ngk_local ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: ngk_exx ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: igk_exx ! dimensions = [":", ":"]
   integer :: npwx_local = 0
   integer :: npwx_exx = 0
   integer :: npw_local = 0
@@ -72,31 +72,31 @@ type :: exx_type
   integer :: ngm_loc
   integer :: ngm_g_loc
   integer :: gstart_loc
-  integer, allocatable, dimension(:) :: ig_l2g_loc ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: g_loc ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: gg_loc ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: mill_loc ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: nl_loc ! dimensions = [:]
+  integer, allocatable, dimension(:) :: ig_l2g_loc ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: g_loc ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: gg_loc ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: mill_loc ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: nl_loc ! dimensions = [":"]
   integer :: ngms_loc
   integer :: ngms_g_loc
-  integer, allocatable, dimension(:) :: nls_loc ! dimensions = [:]
-  integer, allocatable, dimension(:) :: nlm_loc ! dimensions = [:]
-  integer, allocatable, dimension(:) :: nlsm_loc ! dimensions = [:]
+  integer, allocatable, dimension(:) :: nls_loc ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: nlm_loc ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: nlsm_loc ! dimensions = [":"]
   integer :: ngm_exx
   integer :: ngm_g_exx
   integer :: gstart_exx
-  integer, allocatable, dimension(:) :: ig_l2g_exx ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: g_exx ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: gg_exx ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: mill_exx ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: nl_exx ! dimensions = [:]
+  integer, allocatable, dimension(:) :: ig_l2g_exx ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: g_exx ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: gg_exx ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: mill_exx ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: nl_exx ! dimensions = [":"]
   integer :: ngms_exx
   integer :: ngms_g_exx
-  integer, allocatable, dimension(:) :: nls_exx ! dimensions = [:]
-  integer, allocatable, dimension(:) :: nlm_exx ! dimensions = [:]
-  integer, allocatable, dimension(:) :: nlsm_exx ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:,:) :: coulomb_fac ! dimensions = [:,:,:]
-  logical, allocatable, dimension(:,:) :: coulomb_done ! dimensions = [:,:]
+  integer, allocatable, dimension(:) :: nls_exx ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: nlm_exx ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: nlsm_exx ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:,:) :: coulomb_fac ! dimensions = [":", ":", ":"]
+  logical, allocatable, dimension(:,:) :: coulomb_done ! dimensions = [":", ":"]
   type(fft_type_descriptor) :: dfftp_loc
   type(fft_type_descriptor) :: dffts_loc
   type(fft_type_descriptor) :: dfftp_exx
@@ -108,8 +108,8 @@ type :: exx_type
   integer :: ngs_exx
   integer :: ngs_exx
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => exx_type_alloc
+  procedure, pass :: init => exx_type_init
+  procedure, pass :: update => exx_type_update
+  procedure, pass :: dealloc => exx_type_dealloc
 end type exx_type

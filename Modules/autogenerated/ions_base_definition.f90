@@ -4,40 +4,40 @@ type :: ions_base_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   integer :: nsp = 0
-  integer, allocatable, dimension(:) :: na ! dimensions = [:]
+  integer, allocatable, dimension(:) :: na ! dimensions = [":"]
   integer :: nax = 0
   integer :: nat = 0
-  real(dp), allocatable, dimension(:) :: zv ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: amass ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: rcmax ! dimensions = [:]
-  integer, allocatable, dimension(:) :: ityp ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: tau ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: vel ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: tau_srt ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: vel_srt ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: ind_srt ! dimensions = [:]
-  integer, allocatable, dimension(:) :: ind_bck ! dimensions = [:]
-  character(len=3), allocatable, dimension(:) :: atm ! dimensions = [:]
-  character(len=3), allocatable, dimension(:) :: label_srt ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: zv ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: amass ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: rcmax ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: ityp ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: tau ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: vel ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: tau_srt ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: vel_srt ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: ind_srt ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: ind_bck ! dimensions = [":"]
+  character(len=3), allocatable, dimension(:) :: atm ! dimensions = [":"]
+  character(len=3), allocatable, dimension(:) :: label_srt ! dimensions = [":"]
   character(len=80) :: tau_format
-  integer, allocatable, dimension(:,:) :: if_pos ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: iforce ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: if_pos ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: iforce ! dimensions = [":", ":"]
   integer :: fixatom = 0
   integer :: ndofp = -1
   integer :: ndfrz = 0
   real(dp) :: fricp
   real(dp) :: greasp
-  real(dp), allocatable, dimension(:,:) :: taui ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: taui ! dimensions = [":", ":"]
   real(dp), dimension(3) :: cdmi
   real(dp), dimension(3) :: cdm
   real(dp), dimension(3) :: cdms
-  real(dp), allocatable, dimension(:,:) :: extfor ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: extfor ! dimensions = [":", ":"]
   logical :: tions_base_init = .false.
   logical :: tdebug = .false.
   logical :: tdebug = .false.
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => ions_base_type_alloc
+  procedure, pass :: init => ions_base_type_init
+  procedure, pass :: update => ions_base_type_update
+  procedure, pass :: dealloc => ions_base_type_dealloc
 end type ions_base_type

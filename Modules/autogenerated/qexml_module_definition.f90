@@ -15,6 +15,6 @@ type :: qexml_module_type
   character(iotk_attlenx) :: attr
   character(iotk_attlenx) :: attr
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => qexml_module_type_init
+  procedure, pass :: update => qexml_module_type_update
 end type qexml_module_type

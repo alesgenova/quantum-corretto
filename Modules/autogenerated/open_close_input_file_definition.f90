@@ -6,6 +6,6 @@ type :: open_close_input_file_type
   character(len=256) :: input_file = ' '
   character(len=256) :: input_file = ' '
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => open_close_input_file_type_init
+  procedure, pass :: update => open_close_input_file_type_update
 end type open_close_input_file_type

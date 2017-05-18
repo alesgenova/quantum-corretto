@@ -13,11 +13,11 @@ type :: gvecw_type
   real(dp) :: q2sigma = 0.0_dp
   real(dp) :: ekcut = 0.0_dp
   real(dp) :: gkcut = 0.0_dp
-  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => gvecw_type_alloc
+  procedure, pass :: init => gvecw_type_init
+  procedure, pass :: update => gvecw_type_update
+  procedure, pass :: dealloc => gvecw_type_dealloc
 end type gvecw_type

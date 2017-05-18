@@ -8,6 +8,6 @@ type :: rvv10_type
   real(dp) :: C_value = 0.0093
   real(dp) :: C_value = 0.0093
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => rvv10_type_init
+  procedure, pass :: update => rvv10_type_update
 end type rvv10_type

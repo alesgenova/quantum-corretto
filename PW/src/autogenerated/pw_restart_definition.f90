@@ -18,6 +18,6 @@ type :: pw_restart_type
   logical :: lsymm_read = .false.
   logical :: lsymm_read = .false.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => pw_restart_type_init
+  procedure, pass :: update => pw_restart_type_update
 end type pw_restart_type

@@ -6,6 +6,6 @@ type :: xml_io_base_type
   logical :: rho_binary = .true.
   logical :: rho_binary = .true.
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => xml_io_base_type_init
+  procedure, pass :: update => xml_io_base_type_update
 end type xml_io_base_type

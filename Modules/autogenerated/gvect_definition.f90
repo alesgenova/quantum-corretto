@@ -9,24 +9,24 @@ type :: gvect_type
   integer :: ngmx = 0
   real(dp) :: ecutrho = 0.0_dp
   real(dp) :: gcutm = 0.0_dp
-  integer, allocatable, dimension(:) :: nl ! dimensions = [:]
-  integer, allocatable, dimension(:) :: nlm ! dimensions = [:]
+  integer, allocatable, dimension(:) :: nl ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: nlm ! dimensions = [":"]
   integer :: gstart = 2
-  real(dp), allocatable, dimension(:) :: gg ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: gg ! dimensions = [":"]
   real(dp), dimension(:), pointer :: gl
-  integer, allocatable, dimension(:) :: igtongl ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: g ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: mill ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: ig_l2g ! dimensions = [:]
-  integer, allocatable, dimension(:) :: sortedig_l2g ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: mill_g ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: eigts1 ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: eigts2 ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: eigts3 ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:) :: eigts3 ! dimensions = [:,:]
+  integer, allocatable, dimension(:) :: igtongl ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: g ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: mill ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: ig_l2g ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: sortedig_l2g ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: mill_g ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: eigts1 ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: eigts2 ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: eigts3 ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: eigts3 ! dimensions = [":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => gvect_type_alloc
+  procedure, pass :: init => gvect_type_init
+  procedure, pass :: update => gvect_type_update
+  procedure, pass :: dealloc => gvect_type_dealloc
 end type gvect_type

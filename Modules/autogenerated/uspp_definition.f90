@@ -5,33 +5,33 @@ type :: uspp_type
   logical :: is_init = .false.
   integer :: nlx = (lmaxx+1)**2
   integer :: mx = 2*lqmax-1
-  integer, allocatable, dimension(:,:) :: lpx ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:,:) :: lpl ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:,:) :: ap ! dimensions = [:,:,:,:]
+  integer, allocatable, dimension(:,:) :: lpx ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:,:) :: lpl ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:,:) :: ap ! dimensions = [":", ":", ":", ":"]
   integer :: nkb
   integer :: nkbus
-  integer, allocatable, dimension(:,:) :: indv ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: nhtol ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: nhtolm ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:,:) :: ijtoh ! dimensions = [:,:,:]
-  integer, allocatable, dimension(:) :: indv_ijkb0 ! dimensions = [:]
+  integer, allocatable, dimension(:,:) :: indv ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: nhtol ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: nhtolm ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:,:) :: ijtoh ! dimensions = [":", ":", ":"]
+  integer, allocatable, dimension(:) :: indv_ijkb0 ! dimensions = [":"]
   logical :: okvan = .false.
   logical :: nlcc_any = .false.
-  complex(dp), allocatable, dimension(:,:) :: vkb ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:,:) :: becsum ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: dvan ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:,:) :: deeq ! dimensions = [:,:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: qq ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:) :: nhtoj ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:,:,:) :: qq_so ! dimensions = [:,:,:,:]
-  complex(dp), allocatable, dimension(:,:,:,:) :: dvan_so ! dimensions = [:,:,:,:]
-  complex(dp), allocatable, dimension(:,:,:,:) :: deeq_nc ! dimensions = [:,:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: beta ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:,:,:) :: dbeta ! dimensions = [:,:,:,:,:]
-  real(dp), allocatable, dimension(:,:,:,:,:) :: dbeta ! dimensions = [:,:,:,:,:]
+  complex(dp), allocatable, dimension(:,:) :: vkb ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: becsum ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: dvan ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:,:) :: deeq ! dimensions = [":", ":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: qq ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:) :: nhtoj ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:,:,:) :: qq_so ! dimensions = [":", ":", ":", ":"]
+  complex(dp), allocatable, dimension(:,:,:,:) :: dvan_so ! dimensions = [":", ":", ":", ":"]
+  complex(dp), allocatable, dimension(:,:,:,:) :: deeq_nc ! dimensions = [":", ":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: beta ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:,:,:) :: dbeta ! dimensions = [":", ":", ":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:,:,:) :: dbeta ! dimensions = [":", ":", ":", ":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => uspp_type_alloc
+  procedure, pass :: init => uspp_type_init
+  procedure, pass :: update => uspp_type_update
+  procedure, pass :: dealloc => uspp_type_dealloc
 end type uspp_type

@@ -5,6 +5,6 @@ type :: plugin_variables_type
   real(dp) :: plugin_etot
   real(dp) :: plugin_etot
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => plugin_variables_type_init
+  procedure, pass :: update => plugin_variables_type_update
 end type plugin_variables_type

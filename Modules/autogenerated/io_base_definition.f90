@@ -5,6 +5,6 @@ type :: io_base_type
   character(iotk_attlenx) :: attr
   character(iotk_attlenx) :: attr
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => io_base_type_init
+  procedure, pass :: update => io_base_type_update
 end type io_base_type

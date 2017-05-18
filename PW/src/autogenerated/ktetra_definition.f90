@@ -6,12 +6,12 @@ type :: ktetra_type
   integer :: tetra_type = 0
   integer :: ntetra
   integer :: nntetra
-  integer, allocatable, dimension(:,:) :: tetra ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: wlsm ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: wlsm ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: tetra ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: wlsm ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: wlsm ! dimensions = [":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => ktetra_type_alloc
+  procedure, pass :: init => ktetra_type_init
+  procedure, pass :: update => ktetra_type_update
+  procedure, pass :: dealloc => ktetra_type_dealloc
 end type ktetra_type

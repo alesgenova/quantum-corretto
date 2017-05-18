@@ -6,16 +6,16 @@ type :: gvecs_type
   integer :: ngms = 0
   integer :: ngms_g = 0
   integer :: ngsx = 0
-  integer, allocatable, dimension(:) :: nls ! dimensions = [:]
-  integer, allocatable, dimension(:) :: nlsm ! dimensions = [:]
+  integer, allocatable, dimension(:) :: nls ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: nlsm ! dimensions = [":"]
   real(dp) :: ecuts = 0.0_dp
   real(dp) :: gcutms = 0.0_dp
   real(dp) :: dual = 0.0_dp
   logical :: doublegrid = .false.
   logical :: doublegrid = .false.
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => gvecs_type_alloc
+  procedure, pass :: init => gvecs_type_init
+  procedure, pass :: update => gvecs_type_update
+  procedure, pass :: dealloc => gvecs_type_dealloc
 end type gvecs_type

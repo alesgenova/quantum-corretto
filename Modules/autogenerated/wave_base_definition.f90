@@ -6,6 +6,6 @@ type :: wave_base_type
   real(dp) :: grease = 0.0_dp
   real(dp) :: grease = 0.0_dp
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => wave_base_type_init
+  procedure, pass :: update => wave_base_type_update
 end type wave_base_type

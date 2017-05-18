@@ -4,32 +4,32 @@ type :: ldau_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   integer :: nspinx = 2
-  complex(dp), allocatable, dimension(:,:) :: wfcU ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:,:) :: d_spin_ldau ! dimensions = [:,:,:]
+  complex(dp), allocatable, dimension(:,:) :: wfcU ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:,:) :: d_spin_ldau ! dimensions = [":", ":", ":"]
   real(dp) :: eth
-  real(dp), allocatable, dimension(:) :: Hubbard_U ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: Hubbard_J0 ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: Hubbard_J ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: Hubbard_alpha ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: Hubbard_beta ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:,:) :: starting_ns ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:) :: Hubbard_U ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: Hubbard_J0 ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: Hubbard_J ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: Hubbard_alpha ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: Hubbard_beta ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:,:) :: starting_ns ! dimensions = [":", ":", ":"]
   integer :: nwfcU
   integer :: niter_with_fixed_ns
   integer :: lda_plus_u_kind
-  integer, allocatable, dimension(:) :: Hubbard_l ! dimensions = [:]
+  integer, allocatable, dimension(:) :: Hubbard_l ! dimensions = [":"]
   integer :: Hubbard_lmax = 0
-  logical, allocatable, dimension(:) :: is_hubbard ! dimensions = [:]
+  logical, allocatable, dimension(:) :: is_hubbard ! dimensions = [":"]
   logical :: lda_plus_u
   logical :: conv_ns
   character(len=30) :: U_projection
-  integer, allocatable, dimension(:) :: oatwfc ! dimensions = [:]
-  integer, allocatable, dimension(:) :: offsetU ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:,:) :: q_ae ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: q_ps ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: q_ps ! dimensions = [:,:,:]
+  integer, allocatable, dimension(:) :: oatwfc ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: offsetU ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:,:) :: q_ae ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: q_ps ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: q_ps ! dimensions = [":", ":", ":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => ldau_type_alloc
+  procedure, pass :: init => ldau_type_init
+  procedure, pass :: update => ldau_type_update
+  procedure, pass :: dealloc => ldau_type_dealloc
 end type ldau_type

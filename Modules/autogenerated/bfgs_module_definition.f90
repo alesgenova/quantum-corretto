@@ -4,19 +4,19 @@ type :: bfgs_module_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   character(len=8) :: fname = "energy"
-  real(dp), allocatable, dimension(:) :: pos ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: grad ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: pos_p ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: grad_p ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: inv_hess ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: metric ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: h_block ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: hinv_block ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: step ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: step_old ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: pos_old ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: grad_old ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: pos_best ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: pos ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: grad ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: pos_p ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: grad_p ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: inv_hess ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: metric ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: h_block ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: hinv_block ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: step ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: step_old ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: pos_old ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: grad_old ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: pos_best ! dimensions = [":"]
   real(dp) :: nr_step_length
   real(dp) :: nr_step_length_old
   real(dp) :: trust_radius
@@ -35,8 +35,8 @@ type :: bfgs_module_type
   real(dp) :: w_2
   real(dp) :: w_2
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => bfgs_module_type_alloc
+  procedure, pass :: init => bfgs_module_type_init
+  procedure, pass :: update => bfgs_module_type_update
+  procedure, pass :: dealloc => bfgs_module_type_dealloc
 end type bfgs_module_type

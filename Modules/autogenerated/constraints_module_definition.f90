@@ -5,16 +5,16 @@ type :: constraints_module_type
   logical :: is_init = .false.
   integer :: nconstr = 0
   real(dp) :: constr_tol
-  integer, allocatable, dimension(:) :: constr_type ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: constr ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: constr_target ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: lagrange ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: gp ! dimensions = [:]
+  integer, allocatable, dimension(:) :: constr_type ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: constr ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: constr_target ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: lagrange ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: gp ! dimensions = [":"]
   real(dp) :: dmax
   real(dp) :: dmax
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => constraints_module_type_alloc
+  procedure, pass :: init => constraints_module_type_init
+  procedure, pass :: update => constraints_module_type_update
+  procedure, pass :: dealloc => constraints_module_type_dealloc
 end type constraints_module_type

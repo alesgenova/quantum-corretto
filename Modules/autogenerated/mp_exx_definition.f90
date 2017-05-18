@@ -13,25 +13,25 @@ type :: mp_exx_type
   integer :: ntask_groups = 1
   logical :: use_old_exx = .false.
   integer :: max_pairs
-  integer, allocatable, dimension(:,:,:) :: egrp_pairs ! dimensions = [:,:,:]
-  integer, allocatable, dimension(:) :: band_roots ! dimensions = [:]
-  logical, allocatable, dimension(:,:) :: contributed_bands ! dimensions = [:,:]
-  integer, allocatable, dimension(:) :: nibands ! dimensions = [:]
-  integer, allocatable, dimension(:,:) :: ibands ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:,:) :: egrp_pairs ! dimensions = [":", ":", ":"]
+  integer, allocatable, dimension(:) :: band_roots ! dimensions = [":"]
+  logical, allocatable, dimension(:,:) :: contributed_bands ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:) :: nibands ! dimensions = [":"]
+  integer, allocatable, dimension(:,:) :: ibands ! dimensions = [":", ":"]
   integer :: iexx_start = 0
   integer :: iexx_end = 0
-  integer, allocatable, dimension(:) :: iexx_istart ! dimensions = [:]
-  integer, allocatable, dimension(:) :: iexx_iend ! dimensions = [:]
-  integer, allocatable, dimension(:) :: all_start ! dimensions = [:]
-  integer, allocatable, dimension(:) :: all_end ! dimensions = [:]
+  integer, allocatable, dimension(:) :: iexx_istart ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: iexx_iend ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: all_start ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: all_end ! dimensions = [":"]
   integer :: max_contributors
   integer :: exx_mode = 0
   integer :: max_ibands
   integer :: jblock
   integer :: jblock
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => mp_exx_type_alloc
+  procedure, pass :: init => mp_exx_type_init
+  procedure, pass :: update => mp_exx_type_update
+  procedure, pass :: dealloc => mp_exx_type_dealloc
 end type mp_exx_type

@@ -14,23 +14,23 @@ type :: dynamics_module_type
   logical :: control_temp
   logical :: refold_pos
   logical :: first_iter = .true.
-  real(dp), allocatable, dimension(:,:) :: tau_smart ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: force_smart ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: tau_smart ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: force_smart ! dimensions = [":", ":"]
   real(dp) :: etot_smart
-  real(dp), allocatable, dimension(:,:) :: tau_old ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: tau_new ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: tau_ref ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: vel ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: acc ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:,:) :: chi ! dimensions = [:,:]
-  real(dp), allocatable, dimension(:) :: mass ! dimensions = [:]
-  real(dp), allocatable, dimension(:) :: diff_coeff ! dimensions = [:]
-  real(dp), allocatable, dimension(:,:) :: radial_distr ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: tau_old ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: tau_new ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: tau_ref ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: vel ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: acc ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:,:) :: chi ! dimensions = [":", ":"]
+  real(dp), allocatable, dimension(:) :: mass ! dimensions = [":"]
+  real(dp), allocatable, dimension(:) :: diff_coeff ! dimensions = [":"]
+  real(dp), allocatable, dimension(:,:) :: radial_distr ! dimensions = [":", ":"]
   integer :: hist_len = 1000
   integer :: hist_len = 1000
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => dynamics_module_type_alloc
+  procedure, pass :: init => dynamics_module_type_init
+  procedure, pass :: update => dynamics_module_type_update
+  procedure, pass :: dealloc => dynamics_module_type_dealloc
 end type dynamics_module_type

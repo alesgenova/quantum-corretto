@@ -12,6 +12,6 @@ type :: io_global_type
   integer :: xmloutputunit = 51
   integer :: xmloutputunit = 51
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => io_global_type_init
+  procedure, pass :: update => io_global_type_update
 end type io_global_type

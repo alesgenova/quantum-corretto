@@ -6,14 +6,14 @@ type :: lsda_mod_type
   logical :: lsda
   real(dp) :: magtot
   real(dp) :: absmag
-  real(dp), allocatable, dimension(:) :: starting_magnetization ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: starting_magnetization ! dimensions = [":"]
   integer :: nspin
   integer :: current_spin
-  integer, allocatable, dimension(:) :: isk ! dimensions = [:]
-  integer, allocatable, dimension(:) :: isk ! dimensions = [:]
+  integer, allocatable, dimension(:) :: isk ! dimensions = [":"]
+  integer, allocatable, dimension(:) :: isk ! dimensions = [":"]
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => lsda_mod_type_alloc
+  procedure, pass :: init => lsda_mod_type_init
+  procedure, pass :: update => lsda_mod_type_update
+  procedure, pass :: dealloc => lsda_mod_type_dealloc
 end type lsda_mod_type

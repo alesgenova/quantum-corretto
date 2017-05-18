@@ -322,6 +322,6 @@ type :: libxc_funcs_m_type
   integer :: XC_HYB_MGGA_XC_REVTPSSH = 458
   integer :: XC_HYB_MGGA_XC_REVTPSSH = 458
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => libxc_funcs_m_type_init
+  procedure, pass :: update => libxc_funcs_m_type_update
 end type libxc_funcs_m_type

@@ -13,13 +13,13 @@ type :: bp_type
   integer :: nppstr
   integer :: nberrycyc
   real(dp) :: efield
-  complex(dp), allocatable, dimension(:,:) :: evcel ! dimensions = [:,:]
-  complex(dp), allocatable, dimension(:,:,:) :: evcelm ! dimensions = [:,:,:]
-  complex(dp), allocatable, dimension(:,:,:) :: evcelp ! dimensions = [:,:,:]
-  complex(dp), allocatable, dimension(:,:) :: fact_hepsi ! dimensions = [:,:]
+  complex(dp), allocatable, dimension(:,:) :: evcel ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:,:) :: evcelm ! dimensions = [":", ":", ":"]
+  complex(dp), allocatable, dimension(:,:,:) :: evcelp ! dimensions = [":", ":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: fact_hepsi ! dimensions = [":", ":"]
   type(bec_type) :: bec_evcel
-  integer, allocatable, dimension(:,:) :: mapgp_global ! dimensions = [:,:]
-  integer, allocatable, dimension(:,:) :: mapgm_global ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: mapgp_global ! dimensions = [":", ":"]
+  integer, allocatable, dimension(:,:) :: mapgm_global ! dimensions = [":", ":"]
   real(dp), dimension(3) :: ion_pol
   real(dp), dimension(3) :: el_pol
   real(dp), dimension(3) :: fc_pol
@@ -27,18 +27,18 @@ type :: bp_type
   real(dp), dimension(3) :: el_pol_old
   real(dp), dimension(3) :: el_pol_acc
   integer, dimension(3) :: nppstr_3d
-  integer, allocatable, dimension(:,:) :: nx_el ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: nx_el ! dimensions = [":", ":"]
   logical :: l3dstring
   real(dp), dimension(3) :: efield_cart
   real(dp), dimension(3) :: efield_cry
   real(dp), dimension(3,3) :: transform_el
-  integer, allocatable, dimension(:,:) :: mapg_owner ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: mapg_owner ! dimensions = [":", ":"]
   real(dp) :: pdl_tot
   integer :: phase_control
   integer :: phase_control
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => bp_type_alloc
+  procedure, pass :: init => bp_type_init
+  procedure, pass :: update => bp_type_update
+  procedure, pass :: dealloc => bp_type_dealloc
 end type bp_type

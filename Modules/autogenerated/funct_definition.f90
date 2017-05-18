@@ -40,6 +40,6 @@ type :: funct_type
   integer :: libxc_micro = 0
   integer :: libxc_micro = 0
 contains
-  procedure, pass :: init
-  procedure, pass :: update
+  procedure, pass :: init => funct_type_init
+  procedure, pass :: update => funct_type_update
 end type funct_type

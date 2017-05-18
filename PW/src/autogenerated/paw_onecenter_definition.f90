@@ -9,16 +9,16 @@ type :: paw_onecenter_type
   integer :: nx_loc
   integer :: ix_s
   integer :: ix_e
-  real(dp), allocatable, dimension(:,:,:) :: msmall_lm ! dimensions = [:,:,:]
-  real(dp), allocatable, dimension(:,:,:) :: g_lm ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:,:,:) :: msmall_lm ! dimensions = [":", ":", ":"]
+  real(dp), allocatable, dimension(:,:,:) :: g_lm ! dimensions = [":", ":", ":"]
   logical :: with_small_so = .false.
   logical :: TIMING = .false.
   integer :: ldim_block
   integer :: gind_block
   integer :: gind_block
 contains
-  procedure, pass :: alloc
-  procedure, pass :: init
-  procedure, pass :: update
-  procedure, pass :: dealloc
+  procedure, pass :: alloc => paw_onecenter_type_alloc
+  procedure, pass :: init => paw_onecenter_type_init
+  procedure, pass :: update => paw_onecenter_type_update
+  procedure, pass :: dealloc => paw_onecenter_type_dealloc
 end type paw_onecenter_type
