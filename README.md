@@ -121,7 +121,7 @@ end subroutine alloc
 #### Init bound procedure
 
 ```fortran
-subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart)
+subroutine init(this,ngm,ngm_g,ngl,ngmx,gstart,...,nl,...)
   implicit none
   
   type(gvect_type), intent(inout) :: this
