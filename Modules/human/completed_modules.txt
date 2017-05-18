@@ -1,2 +1,4 @@
 autopilot
+bspline
+gvect
 
