@@ -1,3 +1,4 @@
+init_args = {"vel_defined": {"type": "logical", "dimension": null}, "tau": {"type": "real(dp)", "dimension": null}, "tau_old": {"type": "real(dp)", "dimension": null}, "tau_new": {"type": "real(dp)", "dimension": null}, "vel": {"type": "real(dp)", "dimension": null}, "acc": {"type": "real(dp)", "dimension": null}}
 type :: fcp_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -9,7 +10,6 @@ type :: fcp_type
   real(dp) :: acc
   real(dp) :: acc
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type fcp_type

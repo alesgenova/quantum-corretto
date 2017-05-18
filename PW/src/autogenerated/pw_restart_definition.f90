@@ -1,3 +1,4 @@
+init_args = {"trimcheck": {"type": "character(len=256)", "dimension": null}, "iunout": {"type": "integer", "dimension": null}, "lcell_read": {"type": "logical", "dimension": null}, "lpw_read": {"type": "logical", "dimension": null}, "lions_read": {"type": "logical", "dimension": null}, "lspin_read": {"type": "logical", "dimension": null}, "lstarting_mag_read": {"type": "logical", "dimension": null}, "lxc_read": {"type": "logical", "dimension": null}, "locc_read": {"type": "logical", "dimension": null}, "lbz_read": {"type": "logical", "dimension": null}, "lbs_read": {"type": "logical", "dimension": null}, "lefield_read": {"type": "logical", "dimension": null}, "lwfc_read": {"type": "logical", "dimension": null}, "lsymm_read": {"type": "logical", "dimension": null}}
 type :: pw_restart_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -17,7 +18,6 @@ type :: pw_restart_type
   logical :: lsymm_read = .false.
   logical :: lsymm_read = .false.
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type pw_restart_type

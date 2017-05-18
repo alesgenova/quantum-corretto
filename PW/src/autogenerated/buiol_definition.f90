@@ -1,3 +1,4 @@
+init_args = {"nrec0": {"type": "integer", "dimension": null}, "fact0": {"type": "real(dp)", "dimension": null}, "fact1": {"type": "real(dp)", "dimension": null}, "size0": {"type": "integer", "dimension": null}, "ENTRY": {"type": "type(index_of_list)", "dimension": null}, "is_init_buiol": {"type": "logical", "dimension": null}}
 type :: buiol_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -9,7 +10,6 @@ type :: buiol_type
   logical :: is_init_buiol = .false.
   logical :: is_init_buiol = .false.
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type buiol_type

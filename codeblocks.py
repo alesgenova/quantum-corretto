@@ -287,15 +287,16 @@ class Module(Codeblock):
             # the datatype definition
             procedures = write_definition(self,f)
 
-        with open(procedures_file,"w") as f:
-            # the default procedure list
-            f.write(str(procedures)+"\n\n")
-            # the alloc blueprint
-            write_alloc(self,f)
-            # the init blueprint
-            write_init(self,f)
-            # the dealloc blueprint
-            write_dealloc(self,f)
+        if False:
+            with open(procedures_file,"w") as f:
+                # the default procedure list
+                f.write(str(procedures)+"\n\n")
+                # the alloc blueprint
+                write_alloc(self,f)
+                # the init blueprint
+                write_init(self,f)
+                # the dealloc blueprint
+                write_dealloc(self,f)
 
 
     def locate(self, name, location_=[]):
@@ -313,7 +314,10 @@ class Datatype(Codeblock):
     def __init__(self,name,parent):
         super().__init__(name)
         self.parent = parent
-        self.tree_level = parent.tree_level + 1
+        if parent is None:
+            self.tree_level = 1
+        else:
+            self.tree_level = parent.tree_level + 1
         self.typ = 'Datatype'
 
 def parse_declaration(context,mo):

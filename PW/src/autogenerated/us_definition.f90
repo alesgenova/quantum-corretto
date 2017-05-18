@@ -1,17 +1,20 @@
+alloc_args = {}
+init_args = {"nqxq": {"type": "integer", "dimension": null}, "nqx": {"type": "integer", "dimension": null}, "dq": {"type": "real(dp)", "dimension": null}, "qrad": {"type": "real(dp)", "dimension": ":,:,:,:"}, "tab": {"type": "real(dp)", "dimension": ":,:,:"}, "tab_at": {"type": "real(dp)", "dimension": ":,:,:"}, "spline_ps": {"type": "logical", "dimension": null}, "tab_d2y": {"type": "real(dp)", "dimension": ":,:,:"}}
 type :: us_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   integer :: nqxq
   integer :: nqx
   real(dp) :: dq = 0.01d0
-  real(dp), allocatable, dimension(:,:,:,:) :: qrad
-  real(dp), allocatable, dimension(:,:,:) :: tab
-  real(dp), allocatable, dimension(:,:,:) :: tab_at
+  real(dp), allocatable, dimension(:,:,:,:) :: qrad ! dimensions = [:,:,:,:]
+  real(dp), allocatable, dimension(:,:,:) :: tab ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:,:,:) :: tab_at ! dimensions = [:,:,:]
   logical :: spline_ps = .false.
-  real(dp), allocatable, dimension(:,:,:) :: tab_d2y
-  real(dp), allocatable, dimension(:,:,:) :: tab_d2y
+  real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [:,:,:]
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: update
   procedure, pass :: dealloc
 end type us_type

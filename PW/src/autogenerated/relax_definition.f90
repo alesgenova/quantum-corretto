@@ -1,3 +1,4 @@
+init_args = {"epse": {"type": "real(dp)", "dimension": null}, "epsf": {"type": "real(dp)", "dimension": null}, "epsp": {"type": "real(dp)", "dimension": null}, "starting_scf_threshold": {"type": "real(dp)", "dimension": null}}
 type :: relax_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -7,7 +8,6 @@ type :: relax_type
   real(dp) :: starting_scf_threshold
   real(dp) :: starting_scf_threshold
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type relax_type

@@ -1,3 +1,4 @@
+init_args = {"alpha0": {"type": "real(dp)", "dimension": null}, "beta0": {"type": "real(dp)", "dimension": null}, "history": {"type": "integer", "dimension": null}, "pot_order": {"type": "integer", "dimension": null}, "wfc_order": {"type": "integer", "dimension": null}}
 type :: extrapolation_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
@@ -8,7 +9,6 @@ type :: extrapolation_type
   integer :: wfc_order = 0
   integer :: wfc_order = 0
 contains
-  procedure, pass :: alloc
   procedure, pass :: init
-  procedure, pass :: dealloc
+  procedure, pass :: update
 end type extrapolation_type

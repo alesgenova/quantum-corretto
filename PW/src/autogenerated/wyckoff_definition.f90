@@ -1,14 +1,17 @@
+alloc_args = {}
+init_args = {"nattot": {"type": "integer", "dimension": null}, "tautot": {"type": "real(dp)", "dimension": ":,:"}, "extfortot": {"type": "real(dp)", "dimension": ":,:"}, "ityptot": {"type": "integer", "dimension": ":"}, "if_postot": {"type": "integer", "dimension": ":,:"}}
 type :: wyckoff_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   integer :: nattot
-  real(dp), allocatable, dimension(:,:) :: tautot
-  real(dp), allocatable, dimension(:,:) :: extfortot
-  integer, allocatable, dimension(:) :: ityptot
-  integer, allocatable, dimension(:,:) :: if_postot
-  integer, allocatable, dimension(:,:) :: if_postot
+  real(dp), allocatable, dimension(:,:) :: tautot ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: extfortot ! dimensions = [:,:]
+  integer, allocatable, dimension(:) :: ityptot ! dimensions = [:]
+  integer, allocatable, dimension(:,:) :: if_postot ! dimensions = [:,:]
+  integer, allocatable, dimension(:,:) :: if_postot ! dimensions = [:,:]
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: update
   procedure, pass :: dealloc
 end type wyckoff_type

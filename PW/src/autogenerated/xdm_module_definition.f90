@@ -1,42 +1,38 @@
+alloc_args = {}
+init_args = {"nenv": {"type": "integer", "dimension": null}, "xenv": {"type": "real(dp)", "dimension": ":,:"}, "ienv": {"type": "integer", "dimension": ":"}, "lvec": {"type": "integer", "dimension": ":,:"}, "nvec": {"type": "integer", "dimension": null}, "alpha": {"type": "real(dp)", "dimension": ":"}, "ml": {"type": "real(dp)", "dimension": ":,:"}, "cx": {"type": "real(dp)", "dimension": ":,:,:"}, "rvdw": {"type": "real(dp)", "dimension": ":,:"}, "maxc6": {"type": "real(dp)", "dimension": null}, "esave": {"type": "real(dp)", "dimension": null}, "esaveold": {"type": "real(dp)", "dimension": null}, "fsave": {"type": "real(dp)", "dimension": ":,:"}, "ssave": {"type": "real(dp)", "dimension": ":,:"}, "saved": {"type": "logical", "dimension": null}, "a1i": {"type": "real(dp)", "dimension": null}, "a2i": {"type": "real(dp)", "dimension": null}, "rfree": {"type": "real(dp)", "dimension": ":,:"}, "w2free": {"type": "real(dp)", "dimension": ":,:"}, "rmaxg2": {"type": "real(dp)", "dimension": ":"}, "rcore": {"type": "real(dp)", "dimension": ":,:"}, "w2core": {"type": "real(dp)", "dimension": ":,:"}, "rmaxcore2": {"type": "real(dp)", "dimension": ":"}, "afree": {"type": "real(dp)", "dimension": ":"}, "alpha_free": {"type": "real(dp)", "dimension": ":"}, "fact": {"type": "real(dp)", "dimension": ":"}}
 type :: xdm_module_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   integer :: nenv
-  real(dp), allocatable, dimension(:,:) :: xenv
-  integer, allocatable, dimension(:) :: ienv
-  integer, allocatable, dimension(:,:) :: lvec
+  real(dp), allocatable, dimension(:,:) :: xenv ! dimensions = [:,:]
+  integer, allocatable, dimension(:) :: ienv ! dimensions = [:]
+  integer, allocatable, dimension(:,:) :: lvec ! dimensions = [:,:]
   integer :: nvec
-  real(dp), allocatable, dimension(:) :: alpha
-  real(dp), allocatable, dimension(:,:) :: ml
-  real(dp), allocatable, dimension(:,:,:) :: cx
-  real(dp), allocatable, dimension(:,:) :: rvdw
+  real(dp), allocatable, dimension(:) :: alpha ! dimensions = [:]
+  real(dp), allocatable, dimension(:,:) :: ml ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:,:) :: cx ! dimensions = [:,:,:]
+  real(dp), allocatable, dimension(:,:) :: rvdw ! dimensions = [:,:]
   real(dp) :: maxc6
   real(dp) :: esave = 0._dp
   real(dp) :: esaveold = 0._dp
-  real(dp), allocatable, dimension(:,:) :: fsave
-  real(dp), allocatable, dimension(:,:) :: ssave
+  real(dp), allocatable, dimension(:,:) :: fsave ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: ssave ! dimensions = [:,:]
   logical :: saved = .false.
   real(dp) :: a1i = 0.6836_dp
   real(dp) :: a2i = 1.5045_dp
-  real(dp), allocatable, dimension(:,:) :: rfree
-  real(dp), allocatable, dimension(:,:) :: w2free
-  real(dp), allocatable, dimension(:) :: rmaxg2
-  real(dp), allocatable, dimension(:,:) :: rcore
-  real(dp), allocatable, dimension(:,:) :: w2core
-  real(dp), allocatable, dimension(:) :: rmaxcore2
-  real(dp), allocatable, dimension(:) :: afree
-  real(dp), dimension(1:102) :: alpha_free = (/0.6668_dp
-  real(dp), dimension(0:8) :: fact = real((/1
-  real(dp) :: 1
-  real(dp) :: 2
-  real(dp) :: 6
-  real(dp) :: 24
-  real(dp) :: 120
-  real(dp) :: 720
-  real(dp) :: 5040
-  real(dp) :: 5040
+  real(dp), allocatable, dimension(:,:) :: rfree ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: w2free ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:) :: rmaxg2 ! dimensions = [:]
+  real(dp), allocatable, dimension(:,:) :: rcore ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:,:) :: w2core ! dimensions = [:,:]
+  real(dp), allocatable, dimension(:) :: rmaxcore2 ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: afree ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: alpha_free ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: fact ! dimensions = [:]
+  real(dp), allocatable, dimension(:) :: fact ! dimensions = [:]
 contains
   procedure, pass :: alloc
   procedure, pass :: init
+  procedure, pass :: update
   procedure, pass :: dealloc
 end type xdm_module_type
