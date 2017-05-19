@@ -27,7 +27,7 @@ type :: dynamics_module_type
   real(dp), allocatable, dimension(:) :: diff_coeff ! dimensions = [":"]
   real(dp), allocatable, dimension(:,:) :: radial_distr ! dimensions = [":", ":"]
   integer :: hist_len = 1000
-  integer :: hist_len = 1000
+
 contains
   procedure, pass :: alloc => dynamics_module_type_alloc
   procedure, pass :: init => dynamics_module_type_init

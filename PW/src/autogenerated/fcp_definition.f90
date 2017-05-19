@@ -8,7 +8,7 @@ type :: fcp_type
   real(dp) :: tau_new
   real(dp) :: vel
   real(dp) :: acc
-  real(dp) :: acc
+
 contains
   procedure, pass :: init => fcp_type_init
   procedure, pass :: update => fcp_type_update

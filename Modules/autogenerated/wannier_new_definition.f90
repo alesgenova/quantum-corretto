@@ -18,7 +18,7 @@ type :: wannier_new_type
   complex(kind=dp), allocatable, dimension(:,:) :: pp ! dimensions = [":", ":"]
   complex(kind=dp), allocatable, dimension(:,:,:) :: coef ! dimensions = [":", ":", ":"]
   type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [":", ":"]
-  type(wannier_data), allocatable, dimension(:,:) :: wan_in ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => wannier_new_type_alloc
   procedure, pass :: init => wannier_new_type_init

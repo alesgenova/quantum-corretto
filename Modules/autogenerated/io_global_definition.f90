@@ -10,7 +10,7 @@ type :: io_global_type
   integer :: meta_ionode_id = 0
   logical :: meta_ionode = .true.
   integer :: xmloutputunit = 51
-  integer :: xmloutputunit = 51
+
 contains
   procedure, pass :: init => io_global_type_init
   procedure, pass :: update => io_global_type_update

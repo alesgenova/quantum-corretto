@@ -10,7 +10,7 @@ type :: lsda_mod_type
   integer :: nspin
   integer :: current_spin
   integer, allocatable, dimension(:) :: isk ! dimensions = [":"]
-  integer, allocatable, dimension(:) :: isk ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => lsda_mod_type_alloc
   procedure, pass :: init => lsda_mod_type_init

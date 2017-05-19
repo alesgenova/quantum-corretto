@@ -8,7 +8,7 @@ type :: coulomb_vcut_module_type
   real(dp) :: FPI = 4.0_dp * pi
   real(dp) :: e2 = 2.0_dp
   real(dp) :: eps6 = 1.0e-6_dp
-  real(dp) :: eps6 = 1.0e-6_dp
+
 contains
   procedure, pass :: init => coulomb_vcut_module_type_init
   procedure, pass :: update => coulomb_vcut_module_type_update

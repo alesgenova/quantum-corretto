@@ -47,7 +47,7 @@ type :: io_files_type
   integer :: iunwf = 114
   integer :: nwordwpp = 2
   integer :: nwordwf = 2
-  integer :: nwordwf = 2
+
 contains
   procedure, pass :: alloc => io_files_type_alloc
   procedure, pass :: init => io_files_type_init

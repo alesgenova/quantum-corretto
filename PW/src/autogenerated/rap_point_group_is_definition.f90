@@ -9,7 +9,7 @@ type :: rap_point_group_is_type
   complex(dp), dimension(2,2,48) :: d_spin_is
   character(len=45), dimension(48) :: sname_is
   character(len=11) :: gname_is
-  character(len=11) :: gname_is
+
 contains
   procedure, pass :: init => rap_point_group_is_type_init
   procedure, pass :: update => rap_point_group_is_type_update

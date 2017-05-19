@@ -8,7 +8,7 @@ type :: wyckoff_type
   real(dp), allocatable, dimension(:,:) :: extfortot ! dimensions = [":", ":"]
   integer, allocatable, dimension(:) :: ityptot ! dimensions = [":"]
   integer, allocatable, dimension(:,:) :: if_postot ! dimensions = [":", ":"]
-  integer, allocatable, dimension(:,:) :: if_postot ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => wyckoff_type_alloc
   procedure, pass :: init => wyckoff_type_init

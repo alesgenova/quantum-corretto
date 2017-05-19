@@ -5,7 +5,7 @@ type :: vlocal_type
   logical :: is_init = .false.
   complex(dp), allocatable, dimension(:,:) :: strf ! dimensions = [":", ":"]
   real(dp), allocatable, dimension(:,:) :: vloc ! dimensions = [":", ":"]
-  real(dp), allocatable, dimension(:,:) :: vloc ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => vlocal_type_alloc
   procedure, pass :: init => vlocal_type_init

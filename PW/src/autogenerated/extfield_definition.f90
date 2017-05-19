@@ -23,7 +23,7 @@ type :: extfield_type
   real(dp) :: etotmonofield
   real(dp), allocatable, dimension(:,:) :: forcefield ! dimensions = [":", ":"]
   real(dp), allocatable, dimension(:,:) :: forcemono ! dimensions = [":", ":"]
-  real(dp), allocatable, dimension(:,:) :: forcemono ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => extfield_type_alloc
   procedure, pass :: init => extfield_type_init

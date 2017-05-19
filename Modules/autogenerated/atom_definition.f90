@@ -5,7 +5,7 @@ type :: atom_type
   logical :: is_init = .false.
   type(radial_grid_type), allocatable, dimension(:) :: rgrid ! dimensions = [":"]
   integer, allocatable, dimension(:) :: msh ! dimensions = [":"]
-  integer, allocatable, dimension(:) :: msh ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => atom_type_alloc
   procedure, pass :: init => atom_type_init

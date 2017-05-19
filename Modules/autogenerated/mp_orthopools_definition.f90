@@ -10,7 +10,7 @@ type :: mp_orthopools_type
   integer :: inter_orthopool_comm = 0
   integer :: intra_orthopool_comm = 0
   logical :: init_orthopools = .false.
-  logical :: init_orthopools = .false.
+
 contains
   procedure, pass :: init => mp_orthopools_type_init
   procedure, pass :: update => mp_orthopools_type_update

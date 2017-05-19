@@ -12,7 +12,7 @@ type :: gvecs_type
   real(dp) :: gcutms = 0.0_dp
   real(dp) :: dual = 0.0_dp
   logical :: doublegrid = .false.
-  logical :: doublegrid = .false.
+
 contains
   procedure, pass :: alloc => gvecs_type_alloc
   procedure, pass :: init => gvecs_type_init

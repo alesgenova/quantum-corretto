@@ -11,7 +11,7 @@ type :: fcp_variables_type
   real(dp) :: fcp_relax_crit = 0.001_dp
   real(dp) :: fcp_tot_charge_first = 0.0_dp
   real(dp) :: fcp_tot_charge_last = 0.0_dp
-  real(dp) :: fcp_tot_charge_last = 0.0_dp
+
 contains
   procedure, pass :: init => fcp_variables_type_init
   procedure, pass :: update => fcp_variables_type_update

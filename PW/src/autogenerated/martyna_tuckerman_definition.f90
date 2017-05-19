@@ -11,7 +11,7 @@ type :: martyna_tuckerman_type
   logical :: do_comp_mt = .false.
   logical :: gamma_only = .false.
   integer :: gstart = 1
-  integer :: gstart = 1
+
 contains
   procedure, pass :: alloc => martyna_tuckerman_type_alloc
   procedure, pass :: init => martyna_tuckerman_type_init

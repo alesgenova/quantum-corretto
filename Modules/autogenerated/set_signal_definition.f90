@@ -4,7 +4,7 @@ type :: set_signal_type
   logical :: is_init = .false.
   logical :: signal_trapped
   integer(kind=c_int) :: SIGINT = 2_c_int
-  integer(kind=c_int) :: SIGINT = 2_c_int
+
 contains
   procedure, pass :: init => set_signal_type_init
   procedure, pass :: update => set_signal_type_update

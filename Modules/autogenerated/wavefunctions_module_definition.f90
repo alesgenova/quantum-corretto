@@ -10,7 +10,7 @@ type :: wavefunctions_module_type
   complex(dp), allocatable, dimension(:,:) :: cm_bgrp ! dimensions = [":", ":"]
   complex(dp), allocatable, dimension(:,:) :: phi_bgrp ! dimensions = [":", ":"]
   complex(dp), allocatable, dimension(:,:) :: cv0 ! dimensions = [":", ":"]
-  complex(dp), allocatable, dimension(:,:) :: cv0 ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => wavefunctions_module_type_alloc
   procedure, pass :: init => wavefunctions_module_type_init

@@ -9,7 +9,7 @@ type :: time_step_type
   real(dp) :: dt2by2
   real(dp) :: delt
   real(dp) :: tps
-  real(dp) :: tps
+
 contains
   procedure, pass :: init => time_step_type_init
   procedure, pass :: update => time_step_type_update

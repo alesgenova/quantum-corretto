@@ -5,7 +5,7 @@ type :: parallel_include_type
   integer :: MPI_COMM_WORLD = 0
   integer :: MPI_COMM_NULL = -1
   integer :: MPI_COMM_SELF = -2
-  integer :: MPI_COMM_SELF = -2
+
 contains
   procedure, pass :: init => parallel_include_type_init
   procedure, pass :: update => parallel_include_type_update

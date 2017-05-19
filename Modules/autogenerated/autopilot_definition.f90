@@ -37,7 +37,7 @@ type :: autopilot_type
   logical, allocatable, dimension(:,:,:) :: event_ion_damping ! dimensions = [":", ":", ":"]
   logical, allocatable, dimension(:,:,:) :: event_ion_temperature ! dimensions = [":", ":", ":"]
   logical, allocatable, dimension(:,:,:) :: event_tempw ! dimensions = [":", ":", ":"]
-  logical, allocatable, dimension(:,:,:) :: event_tempw ! dimensions = [":", ":", ":"]
+
 contains
   procedure, pass :: alloc => autopilot_type_alloc
   procedure, pass :: init => autopilot_type_init

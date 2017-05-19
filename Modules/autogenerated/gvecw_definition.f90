@@ -14,7 +14,7 @@ type :: gvecw_type
   real(dp) :: ekcut = 0.0_dp
   real(dp) :: gkcut = 0.0_dp
   real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [":"]
-  real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => gvecw_type_alloc
   procedure, pass :: init => gvecw_type_init

@@ -8,7 +8,7 @@ type :: buiol_type
   integer :: size0 = dp
   type(index_of_list), pointer :: ENTRY = > null()
   logical :: is_init_buiol = .false.
-  logical :: is_init_buiol = .false.
+
 contains
   procedure, pass :: init => buiol_type_init
   procedure, pass :: update => buiol_type_update

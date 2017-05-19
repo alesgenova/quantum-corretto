@@ -16,7 +16,7 @@ type :: mp_diag_type
   integer :: np_blacs = 1
   integer :: world_cntx = -1
   integer :: ortho_cntx = -1
-  integer :: ortho_cntx = -1
+
 contains
   procedure, pass :: init => mp_diag_type_init
   procedure, pass :: update => mp_diag_type_update

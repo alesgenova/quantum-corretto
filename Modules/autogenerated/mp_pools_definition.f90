@@ -10,7 +10,7 @@ type :: mp_pools_type
   integer :: inter_pool_comm = 0
   integer :: intra_pool_comm = 0
   integer :: kunit = 1
-  integer :: kunit = 1
+
 contains
   procedure, pass :: init => mp_pools_type_init
   procedure, pass :: update => mp_pools_type_update

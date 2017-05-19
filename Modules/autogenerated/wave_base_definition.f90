@@ -4,7 +4,7 @@ type :: wave_base_type
   logical :: is_init = .false.
   real(dp) :: frice = 0.0_dp
   real(dp) :: grease = 0.0_dp
-  real(dp) :: grease = 0.0_dp
+
 contains
   procedure, pass :: init => wave_base_type_init
   procedure, pass :: update => wave_base_type_update

@@ -13,7 +13,7 @@ type :: qexml_module_type
   logical :: qexml_current_version_init = .false.
   logical :: qexml_version_before_1_4_0 = .false.
   character(iotk_attlenx) :: attr
-  character(iotk_attlenx) :: attr
+
 contains
   procedure, pass :: init => qexml_module_type_init
   procedure, pass :: update => qexml_module_type_update

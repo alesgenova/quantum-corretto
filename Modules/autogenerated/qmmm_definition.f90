@@ -37,7 +37,7 @@ type :: qmmm_type
   integer :: nat_qm
   integer :: nat_all
   integer :: ntypes
-  integer :: ntypes
+
 contains
   procedure, pass :: alloc => qmmm_type_alloc
   procedure, pass :: init => qmmm_type_init

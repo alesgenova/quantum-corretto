@@ -24,7 +24,7 @@ type :: noncollin_module_type
   real(dp), allocatable, dimension(:) :: r_loc ! dimensions = [":"]
   real(dp), allocatable, dimension(:,:) :: m_loc ! dimensions = [":", ":"]
   real(dp), dimension(3) :: ux
-  real(dp), dimension(3) :: ux
+
 contains
   procedure, pass :: alloc => noncollin_module_type_alloc
   procedure, pass :: init => noncollin_module_type_init

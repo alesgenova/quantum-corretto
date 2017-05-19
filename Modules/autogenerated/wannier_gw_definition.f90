@@ -110,7 +110,7 @@ type :: wannier_gw_type
   integer, dimension(2) :: n_full
   integer :: len_head_block_freq
   integer :: len_head_block_wfc
-  integer :: len_head_block_wfc
+
 contains
   procedure, pass :: alloc => wannier_gw_type_alloc
   procedure, pass :: init => wannier_gw_type_init

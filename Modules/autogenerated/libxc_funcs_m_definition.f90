@@ -320,7 +320,7 @@ type :: libxc_funcs_m_type
   integer :: XC_HYB_MGGA_XC_PWB6K = 452
   integer :: XC_HYB_MGGA_XC_TPSSH = 457
   integer :: XC_HYB_MGGA_XC_REVTPSSH = 458
-  integer :: XC_HYB_MGGA_XC_REVTPSSH = 458
+
 contains
   procedure, pass :: init => libxc_funcs_m_type_init
   procedure, pass :: update => libxc_funcs_m_type_update

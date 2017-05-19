@@ -9,7 +9,7 @@ type :: mp_images_type
   integer :: my_image_id = 0
   integer :: inter_image_comm = 0
   integer :: intra_image_comm = 0
-  integer :: intra_image_comm = 0
+
 contains
   procedure, pass :: init => mp_images_type_init
   procedure, pass :: update => mp_images_type_update

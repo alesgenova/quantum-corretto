@@ -6,7 +6,7 @@ type :: us_exx_type
   type(bec_type), allocatable, dimension(:) :: becxx ! dimensions = [":"]
   type(bec_type), allocatable, dimension(:) :: becxx0 ! dimensions = [":"]
   complex(dp), allocatable, dimension(:,:) :: qgm ! dimensions = [":", ":"]
-  complex(dp), allocatable, dimension(:,:) :: qgm ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => us_exx_type_alloc
   procedure, pass :: init => us_exx_type_init

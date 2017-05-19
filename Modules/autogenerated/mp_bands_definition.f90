@@ -12,7 +12,7 @@ type :: mp_bands_type
   integer :: intra_bgrp_comm = 0
   logical :: use_bgrp_in_hpsi = .false.
   integer :: ntask_groups = 1
-  integer :: ntask_groups = 1
+
 contains
   procedure, pass :: init => mp_bands_type_init
   procedure, pass :: update => mp_bands_type_update

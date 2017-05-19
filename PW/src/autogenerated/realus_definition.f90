@@ -25,7 +25,7 @@ type :: realus_type
   complex(dp), allocatable, dimension(:) :: tg_psic_box_temp ! dimensions = [":"]
   type(realsp_augmentation), dimension(:), pointer :: tabp = > null()
   type(realsp_augmentation), dimension(:), pointer :: tabxx = > null()
-  type(realsp_augmentation), dimension(:), pointer :: tabxx = > null()
+
 contains
   procedure, pass :: alloc => realus_type_alloc
   procedure, pass :: init => realus_type_init

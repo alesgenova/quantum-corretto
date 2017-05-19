@@ -12,7 +12,7 @@ type :: wvfct_type
   real(dp), allocatable, dimension(:,:) :: wg ! dimensions = [":", ":"]
   real(dp), allocatable, dimension(:) :: g2kin ! dimensions = [":"]
   integer, allocatable, dimension(:,:) :: btype ! dimensions = [":", ":"]
-  integer, allocatable, dimension(:,:) :: btype ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => wvfct_type_alloc
   procedure, pass :: init => wvfct_type_init

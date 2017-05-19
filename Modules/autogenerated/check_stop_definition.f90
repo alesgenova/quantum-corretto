@@ -6,7 +6,7 @@ type :: check_stop_type
   real(dp) :: init_second
   logical :: stopped_by_user = .false.
   logical :: tinit = .false.
-  logical :: tinit = .false.
+
 contains
   procedure, pass :: init => check_stop_type_init
   procedure, pass :: update => check_stop_type_update

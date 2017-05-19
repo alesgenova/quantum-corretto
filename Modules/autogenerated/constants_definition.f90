@@ -58,7 +58,7 @@ type :: constants_type
   real(dp) :: RY_TO_GHZ = ry_to_thz*1000.0_dp
   real(dp) :: RY_TO_CMM1 = 1.e+10_dp * ry_to_thz / c_si
   real(dp) :: AVOGADRO = 6.02214129d+23
-  real(dp) :: AVOGADRO = 6.02214129d+23
+
 contains
   procedure, pass :: init => constants_type_init
   procedure, pass :: update => constants_type_update

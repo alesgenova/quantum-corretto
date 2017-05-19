@@ -6,7 +6,7 @@ type :: fixed_occ_type
   real(dp), allocatable, dimension(:,:) :: f_inp ! dimensions = [":", ":"]
   logical :: tfixed_occ
   logical :: one_atom_occupations
-  logical :: one_atom_occupations
+
 contains
   procedure, pass :: alloc => fixed_occ_type_alloc
   procedure, pass :: init => fixed_occ_type_init

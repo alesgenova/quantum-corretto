@@ -7,7 +7,7 @@ type :: read_xml_fields_module_type
   character(len = 5) :: correlation
   character(len = 5) :: correlation_grad_corr
   character(len = 5) :: xc_specials
-  character(len = 5) :: xc_specials
+
 contains
   procedure, pass :: init => read_xml_fields_module_type_init
   procedure, pass :: update => read_xml_fields_module_type_update

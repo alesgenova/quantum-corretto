@@ -23,7 +23,7 @@ type :: pw2blip_type
   real(dp), dimension(3) :: rnr2
   real(dp), dimension(3,3) :: bg
   real(dp), dimension(6) :: lvp
-  real(dp), dimension(6) :: lvp
+
 contains
   procedure, pass :: alloc => pw2blip_type_alloc
   procedure, pass :: init => pw2blip_type_init

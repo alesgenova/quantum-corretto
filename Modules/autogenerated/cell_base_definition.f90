@@ -36,7 +36,7 @@ type :: cell_base_type
   real(dp) :: frich = 0.0_dp
   real(dp) :: greash = 1.0_dp
   logical :: tcell_base_init = .false.
-  logical :: tcell_base_init = .false.
+
 contains
   procedure, pass :: init => cell_base_type_init
   procedure, pass :: update => cell_base_type_update

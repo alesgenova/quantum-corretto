@@ -105,7 +105,7 @@ type :: control_flags_type
   logical :: tq_smoothing = .false.
   logical :: tbeta_smoothing = .false.
   logical :: textfor = .false.
-  logical :: textfor = .false.
+
 contains
   procedure, pass :: alloc => control_flags_type_alloc
   procedure, pass :: init => control_flags_type_init

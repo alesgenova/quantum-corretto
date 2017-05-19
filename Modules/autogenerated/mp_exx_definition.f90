@@ -28,7 +28,7 @@ type :: mp_exx_type
   integer :: exx_mode = 0
   integer :: max_ibands
   integer :: jblock
-  integer :: jblock
+
 contains
   procedure, pass :: alloc => mp_exx_type_alloc
   procedure, pass :: init => mp_exx_type_init

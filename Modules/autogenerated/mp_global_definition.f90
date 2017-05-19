@@ -8,7 +8,7 @@ type :: mp_global_type
   integer :: nproc_ortho_file = 1
   integer :: nproc_bgrp_file = 1
   integer :: ntask_groups_file = 1
-  integer :: ntask_groups_file = 1
+
 contains
   procedure, pass :: init => mp_global_type_init
   procedure, pass :: update => mp_global_type_update

@@ -28,7 +28,7 @@ type :: uspp_type
   complex(dp), allocatable, dimension(:,:,:,:) :: deeq_nc ! dimensions = [":", ":", ":", ":"]
   real(dp), allocatable, dimension(:,:,:) :: beta ! dimensions = [":", ":", ":"]
   real(dp), allocatable, dimension(:,:,:,:,:) :: dbeta ! dimensions = [":", ":", ":", ":", ":"]
-  real(dp), allocatable, dimension(:,:,:,:,:) :: dbeta ! dimensions = [":", ":", ":", ":", ":"]
+
 contains
   procedure, pass :: alloc => uspp_type_alloc
   procedure, pass :: init => uspp_type_init

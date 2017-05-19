@@ -11,7 +11,7 @@ type :: constraints_module_type
   real(dp), allocatable, dimension(:) :: lagrange ! dimensions = [":"]
   real(dp), allocatable, dimension(:) :: gp ! dimensions = [":"]
   real(dp) :: dmax
-  real(dp) :: dmax
+
 contains
   procedure, pass :: alloc => constraints_module_type_alloc
   procedure, pass :: init => constraints_module_type_init

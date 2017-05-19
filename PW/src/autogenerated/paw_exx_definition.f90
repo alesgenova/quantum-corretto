@@ -5,7 +5,7 @@ type :: paw_exx_type
   logical :: is_init = .false.
   type(paw_fockrnl_type), allocatable, dimension(:) :: ke ! dimensions = [":"]
   logical :: paw_has_init_paw_fockrnl = .false.
-  logical :: paw_has_init_paw_fockrnl = .false.
+
 contains
   procedure, pass :: alloc => paw_exx_type_alloc
   procedure, pass :: init => paw_exx_type_init

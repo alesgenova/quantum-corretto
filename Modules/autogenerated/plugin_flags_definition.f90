@@ -6,7 +6,7 @@ type :: plugin_flags_type
   logical :: use_plumed
   logical :: use_pw2casino
   logical :: use_environ
-  logical :: use_environ
+
 contains
   procedure, pass :: init => plugin_flags_type_init
   procedure, pass :: update => plugin_flags_type_update

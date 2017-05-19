@@ -8,7 +8,7 @@ type :: ktetra_type
   integer :: nntetra
   integer, allocatable, dimension(:,:) :: tetra ! dimensions = [":", ":"]
   real(dp), allocatable, dimension(:,:) :: wlsm ! dimensions = [":", ":"]
-  real(dp), allocatable, dimension(:,:) :: wlsm ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => ktetra_type_alloc
   procedure, pass :: init => ktetra_type_init

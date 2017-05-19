@@ -32,7 +32,7 @@ type :: xc_f90_lib_m_type
   integer :: XC_GGA_XC_LB = 160
   integer :: XC_GGA_K_ABSR1 = 506
   integer :: XC_GGA_K_ABSR2 = 507
-  integer :: XC_GGA_K_ABSR2 = 507
+
 contains
   procedure, pass :: init => xc_f90_lib_m_type_init
   procedure, pass :: update => xc_f90_lib_m_type_update

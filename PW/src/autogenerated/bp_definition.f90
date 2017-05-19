@@ -35,7 +35,7 @@ type :: bp_type
   integer, allocatable, dimension(:,:) :: mapg_owner ! dimensions = [":", ":"]
   real(dp) :: pdl_tot
   integer :: phase_control
-  integer :: phase_control
+
 contains
   procedure, pass :: alloc => bp_type_alloc
   procedure, pass :: init => bp_type_init

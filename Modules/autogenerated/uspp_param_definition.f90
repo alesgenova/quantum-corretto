@@ -14,7 +14,7 @@ type :: uspp_param_type
   logical, allocatable, dimension(:) :: oldvan ! dimensions = [":"]
   integer :: nvb
   integer, allocatable, dimension(:) :: ish ! dimensions = [":"]
-  integer, allocatable, dimension(:) :: ish ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => uspp_param_type_alloc
   procedure, pass :: init => uspp_param_type_init

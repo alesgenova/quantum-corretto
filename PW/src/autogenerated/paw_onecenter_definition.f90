@@ -15,7 +15,7 @@ type :: paw_onecenter_type
   logical :: TIMING = .false.
   integer :: ldim_block
   integer :: gind_block
-  integer :: gind_block
+
 contains
   procedure, pass :: alloc => paw_onecenter_type_alloc
   procedure, pass :: init => paw_onecenter_type_init

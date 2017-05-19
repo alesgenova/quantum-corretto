@@ -33,7 +33,7 @@ type :: bfgs_module_type
   real(dp) :: trust_radius_max
   real(dp) :: w_1
   real(dp) :: w_2
-  real(dp) :: w_2
+
 contains
   procedure, pass :: alloc => bfgs_module_type_alloc
   procedure, pass :: init => bfgs_module_type_init

@@ -38,7 +38,7 @@ type :: funct_type
   integer :: libxc_major = 0
   integer :: libxc_minor = 0
   integer :: libxc_micro = 0
-  integer :: libxc_micro = 0
+
 contains
   procedure, pass :: init => funct_type_init
   procedure, pass :: update => funct_type_update

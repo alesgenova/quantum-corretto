@@ -11,7 +11,7 @@ type :: us_type
   real(dp), allocatable, dimension(:,:,:) :: tab_at ! dimensions = [":", ":", ":"]
   logical :: spline_ps = .false.
   real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [":", ":", ":"]
-  real(dp), allocatable, dimension(:,:,:) :: tab_d2y ! dimensions = [":", ":", ":"]
+
 contains
   procedure, pass :: alloc => us_type_alloc
   procedure, pass :: init => us_type_init

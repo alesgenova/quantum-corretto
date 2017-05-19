@@ -6,7 +6,7 @@ type :: extpot_type
   logical :: textpot = .false.
   character(256) :: external_potential
   real(dp), allocatable, dimension(:) :: ext_pot ! dimensions = [":"]
-  real(dp), allocatable, dimension(:) :: ext_pot ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => extpot_type_alloc
   procedure, pass :: init => extpot_type_init

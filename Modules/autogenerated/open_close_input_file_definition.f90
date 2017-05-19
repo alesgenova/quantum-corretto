@@ -4,7 +4,7 @@ type :: open_close_input_file_type
   logical :: is_init = .false.
   logical :: lxmlinput_loc = .false.
   character(len=256) :: input_file = ' '
-  character(len=256) :: input_file = ' '
+
 contains
   procedure, pass :: init => open_close_input_file_type_init
   procedure, pass :: update => open_close_input_file_type_update

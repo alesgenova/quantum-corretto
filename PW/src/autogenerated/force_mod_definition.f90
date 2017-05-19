@@ -8,7 +8,7 @@ type :: force_mod_type
   real(dp), dimension(3,3) :: sigma
   logical :: lforce
   logical :: lstres
-  logical :: lstres
+
 contains
   procedure, pass :: alloc => force_mod_type_alloc
   procedure, pass :: init => force_mod_type_init

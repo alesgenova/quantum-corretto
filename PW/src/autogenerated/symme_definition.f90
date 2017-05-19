@@ -10,7 +10,7 @@ type :: symme_type
   integer, allocatable, dimension(:) :: recvcnt ! dimensions = [":"]
   integer, allocatable, dimension(:) :: sdispls ! dimensions = [":"]
   integer, allocatable, dimension(:) :: rdispls ! dimensions = [":"]
-  integer, allocatable, dimension(:) :: rdispls ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => symme_type_alloc
   procedure, pass :: init => symme_type_init

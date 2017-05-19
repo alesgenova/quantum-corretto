@@ -29,7 +29,7 @@ type :: xdm_module_type
   real(dp), allocatable, dimension(:) :: afree ! dimensions = [":"]
   real(dp), allocatable, dimension(:) :: alpha_free ! dimensions = [":"]
   real(dp), allocatable, dimension(:) :: fact ! dimensions = [":"]
-  real(dp), allocatable, dimension(:) :: fact ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => xdm_module_type_alloc
   procedure, pass :: init => xdm_module_type_init

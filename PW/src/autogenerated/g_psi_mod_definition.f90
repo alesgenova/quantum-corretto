@@ -5,7 +5,7 @@ type :: g_psi_mod_type
   logical :: is_init = .false.
   real(dp), allocatable, dimension(:,:) :: h_diag ! dimensions = [":", ":"]
   real(dp), allocatable, dimension(:,:) :: s_diag ! dimensions = [":", ":"]
-  real(dp), allocatable, dimension(:,:) :: s_diag ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => g_psi_mod_type_alloc
   procedure, pass :: init => g_psi_mod_type_init

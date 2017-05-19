@@ -106,7 +106,7 @@ type :: exx_type
   integer :: ngs_loc
   integer :: ngw_exx
   integer :: ngs_exx
-  integer :: ngs_exx
+
 contains
   procedure, pass :: alloc => exx_type_alloc
   procedure, pass :: init => exx_type_init

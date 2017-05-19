@@ -6,7 +6,7 @@ type :: relax_type
   real(dp) :: epsf
   real(dp) :: epsp
   real(dp) :: starting_scf_threshold
-  real(dp) :: starting_scf_threshold
+
 contains
   procedure, pass :: init => relax_type_init
   procedure, pass :: update => relax_type_update

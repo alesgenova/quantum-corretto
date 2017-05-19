@@ -8,7 +8,7 @@ type :: basis_type
   character(len=30) :: starting_wfc
   character(len=30) :: starting_pot
   character(len=30) :: startingconfig
-  character(len=30) :: startingconfig
+
 contains
   procedure, pass :: alloc => basis_type_alloc
   procedure, pass :: init => basis_type_init

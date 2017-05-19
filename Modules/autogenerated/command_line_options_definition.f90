@@ -11,7 +11,7 @@ type :: command_line_options_type
   logical :: library_init = .false.
   character(len=256) :: input_file_ = ' '
   character(len=512) :: command_line = ' '
-  character(len=512) :: command_line = ' '
+
 contains
   procedure, pass :: init => command_line_options_type_init
   procedure, pass :: update => command_line_options_type_update

@@ -3,7 +3,7 @@ type :: io_base_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
   character(iotk_attlenx) :: attr
-  character(iotk_attlenx) :: attr
+
 contains
   procedure, pass :: init => io_base_type_init
   procedure, pass :: update => io_base_type_update

@@ -14,7 +14,7 @@ type :: esm_type
   integer :: ngm_2d = 0
   real(dp) :: qe_erf
   real(dp) :: qe_erfc
-  real(dp) :: qe_erfc
+
 contains
   procedure, pass :: alloc => esm_type_alloc
   procedure, pass :: init => esm_type_init

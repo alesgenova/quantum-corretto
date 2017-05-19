@@ -23,7 +23,7 @@ type :: gvect_type
   complex(dp), allocatable, dimension(:,:) :: eigts1 ! dimensions = [":", ":"]
   complex(dp), allocatable, dimension(:,:) :: eigts2 ! dimensions = [":", ":"]
   complex(dp), allocatable, dimension(:,:) :: eigts3 ! dimensions = [":", ":"]
-  complex(dp), allocatable, dimension(:,:) :: eigts3 ! dimensions = [":", ":"]
+
 contains
   procedure, pass :: alloc => gvect_type_alloc
   procedure, pass :: init => gvect_type_init

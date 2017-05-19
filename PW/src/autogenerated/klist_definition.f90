@@ -23,7 +23,7 @@ type :: klist_type
   logical :: ltetra
   logical :: lxkcry = .false.
   logical :: two_fermi_energies
-  logical :: two_fermi_energies
+
 contains
   procedure, pass :: alloc => klist_type_alloc
   procedure, pass :: init => klist_type_init

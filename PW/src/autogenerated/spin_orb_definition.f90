@@ -9,7 +9,7 @@ type :: spin_orb_type
   logical :: domag
   complex(dp), allocatable, dimension(:,:,:,:) :: rot_ylm ! dimensions = [":", ":", ":", ":"]
   complex(dp), allocatable, dimension(:,:,:,:,:) :: fcoef ! dimensions = [":", ":", ":", ":", ":"]
-  complex(dp), allocatable, dimension(:,:,:,:,:) :: fcoef ! dimensions = [":", ":", ":", ":", ":"]
+
 contains
   procedure, pass :: alloc => spin_orb_type_alloc
   procedure, pass :: init => spin_orb_type_init

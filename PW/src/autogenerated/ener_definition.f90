@@ -18,7 +18,7 @@ type :: ener_type
   real(dp) :: ef
   real(dp) :: ef_up
   real(dp) :: ef_dw
-  real(dp) :: ef_dw
+
 contains
   procedure, pass :: init => ener_type_init
   procedure, pass :: update => ener_type_update

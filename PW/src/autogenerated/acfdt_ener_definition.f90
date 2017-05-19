@@ -4,7 +4,7 @@ type :: acfdt_ener_type
   logical :: is_init = .false.
   logical :: acfdt_in_pw = .false.
   real(dp) :: acfdt_eband
-  real(dp) :: acfdt_eband
+
 contains
   procedure, pass :: init => acfdt_ener_type_init
   procedure, pass :: update => acfdt_ener_type_update

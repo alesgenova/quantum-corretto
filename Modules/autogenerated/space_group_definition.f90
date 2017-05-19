@@ -6,7 +6,7 @@ type :: space_group_type
   real(dp) :: duterz = (2.0_dp)/(3.0_dp)
   real(dp) :: unsest = (1.0_dp)/(6.0_dp)
   real(dp) :: cisest = (5.0_dp)/(6.0_dp)
-  real(dp) :: cisest = (5.0_dp)/(6.0_dp)
+
 contains
   procedure, pass :: init => space_group_type_init
   procedure, pass :: update => space_group_type_update

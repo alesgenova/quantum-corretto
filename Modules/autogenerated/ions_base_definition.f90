@@ -34,7 +34,7 @@ type :: ions_base_type
   real(dp), allocatable, dimension(:,:) :: extfor ! dimensions = [":", ":"]
   logical :: tions_base_init = .false.
   logical :: tdebug = .false.
-  logical :: tdebug = .false.
+
 contains
   procedure, pass :: alloc => ions_base_type_alloc
   procedure, pass :: init => ions_base_type_init

@@ -14,7 +14,7 @@ type :: mytime_type
   integer :: nclock = 0
   logical :: no
   integer :: trace_depth = 0
-  integer :: trace_depth = 0
+
 contains
   procedure, pass :: alloc => mytime_type_alloc
   procedure, pass :: init => mytime_type_init

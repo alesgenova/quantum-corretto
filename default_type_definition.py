@@ -20,7 +20,7 @@ def write_definition(original_module, file_obj, type_name=None, procedures=None)
                         pass
                 if len(dims) != len(dims_int):
                     var['allocatable'] = True
-                    #var['rank'] = len(dims)
+                    var['rank'] = len(dims)
                     var['dimension'] = ",".join([":"]*len(dims))
                     allocatable_vars.append(var)
             else:
@@ -62,6 +62,7 @@ def write_definition(original_module, file_obj, type_name=None, procedures=None)
     f.write("  logical :: is_init = .false.\n")
     string = ""
     for key, var in original_module.declares.items():
+        print(key)
         string = "  "+var['type_base']
         if var['type_extra'] is not None: string += "({})".format(var['type_extra'])
         if var['allocatable']: string += ", allocatable"
@@ -72,7 +73,7 @@ def write_definition(original_module, file_obj, type_name=None, procedures=None)
         if var['default'] is not None and var['allocatable'] is None: string += " = {}".format(var['default'])
         if var['allocatable']: string += ' ! dimensions = [{}]'.format(', '.join(['":"']*var['rank']))
         f.write(string+"\n")
-    f.write(string+"\ncontains\n")
+    f.write("\ncontains\n")
     for procedure in procedures:
         f.write("  procedure, pass :: {} => {}_{}\n".format(procedure,type_name,procedure))
     f.write("end type {}".format(type_name)+"\n")

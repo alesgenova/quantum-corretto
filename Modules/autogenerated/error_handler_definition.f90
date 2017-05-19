@@ -4,7 +4,7 @@ type :: error_handler_type
   logical :: is_init = .false.
   type(chain), pointer :: routine_chain
   integer :: error_code
-  integer :: error_code
+
 contains
   procedure, pass :: init => error_handler_type_init
   procedure, pass :: update => error_handler_type_update

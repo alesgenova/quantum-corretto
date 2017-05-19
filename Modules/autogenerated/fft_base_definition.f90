@@ -8,7 +8,7 @@ type :: fft_base_type
   type(fft_type_descriptor) :: dfft3d
   type(task_groups_descriptor) :: dtgs
   type(sticks_map) :: smap
-  type(sticks_map) :: smap
+
 contains
   procedure, pass :: init => fft_base_type_init
   procedure, pass :: update => fft_base_type_update

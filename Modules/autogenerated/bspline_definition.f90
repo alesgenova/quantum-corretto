@@ -4,7 +4,7 @@ type :: bspline_type
   logical :: is_init = .false.
   character(80) :: routine
   character(256) :: errmsg
-  character(256) :: errmsg
+
 contains
   procedure, pass :: init => bspline_type_init
   procedure, pass :: update => bspline_type_update

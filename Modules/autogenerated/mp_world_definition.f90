@@ -7,7 +7,7 @@ type :: mp_world_type
   integer :: root = 0
   integer :: world_comm = 0
   logical :: library_mode = .false.
-  logical :: library_mode = .false.
+
 contains
   procedure, pass :: init => mp_world_type_init
   procedure, pass :: update => mp_world_type_update

@@ -17,7 +17,7 @@ type :: kernel_table_type
   character(len=30) :: double_format = "(1p4e23.14)"
   character(len=32) :: vdw_kernel_md5_cksum = 'not set'
   integer :: find_free_unit
-  integer :: find_free_unit
+
 contains
   procedure, pass :: alloc => kernel_table_type_alloc
   procedure, pass :: init => kernel_table_type_init

@@ -8,7 +8,7 @@ type :: parameters_type
   integer :: npk = 40000
   integer :: lmaxx = 3
   integer :: lqmax = 2*lmaxx+1
-  integer :: lqmax = 2*lmaxx+1
+
 contains
   procedure, pass :: init => parameters_type_init
   procedure, pass :: update => parameters_type_update

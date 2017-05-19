@@ -430,7 +430,7 @@ type :: input_parameters_type
   integer, allocatable, dimension(:,:) :: wannier_index ! dimensions = [":", ":"]
   type(wannier_data), allocatable, dimension(:,:) :: wan_data ! dimensions = [":", ":"]
   logical :: xmloutput = .false.
-  logical :: xmloutput = .false.
+
 contains
   procedure, pass :: alloc => input_parameters_type_alloc
   procedure, pass :: init => input_parameters_type_init

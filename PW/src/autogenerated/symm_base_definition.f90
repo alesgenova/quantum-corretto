@@ -30,7 +30,7 @@ type :: symm_base_type
   real(dp), dimension(3,3,48) :: d1
   real(dp), dimension(5,5,48) :: d2
   real(dp), dimension(7,7,48) :: d3
-  real(dp), dimension(7,7,48) :: d3
+
 contains
   procedure, pass :: alloc => symm_base_type_alloc
   procedure, pass :: init => symm_base_type_init

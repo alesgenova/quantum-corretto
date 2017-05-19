@@ -27,7 +27,7 @@ type :: electrons_base_type
   real(dp), allocatable, dimension(:) :: f_bgrp ! dimensions = [":"]
   integer, allocatable, dimension(:) :: ispin_bgrp ! dimensions = [":"]
   integer, allocatable, dimension(:) :: ibgrp_g2l ! dimensions = [":"]
-  integer, allocatable, dimension(:) :: ibgrp_g2l ! dimensions = [":"]
+
 contains
   procedure, pass :: alloc => electrons_base_type_alloc
   procedure, pass :: init => electrons_base_type_init

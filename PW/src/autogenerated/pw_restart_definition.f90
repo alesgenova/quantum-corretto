@@ -16,7 +16,7 @@ type :: pw_restart_type
   logical :: lefield_read = .false.
   logical :: lwfc_read = .false.
   logical :: lsymm_read = .false.
-  logical :: lsymm_read = .false.
+
 contains
   procedure, pass :: init => pw_restart_type_init
   procedure, pass :: update => pw_restart_type_update

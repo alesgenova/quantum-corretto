@@ -16,7 +16,7 @@ type :: london_module_type
   integer :: mxr
   real(dp) :: r_cut
   real(dp) :: beta = 20.0_dp
-  real(dp) :: beta = 20.0_dp
+
 contains
   procedure, pass :: alloc => london_module_type_alloc
   procedure, pass :: init => london_module_type_init

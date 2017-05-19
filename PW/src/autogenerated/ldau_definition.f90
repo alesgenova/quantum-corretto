@@ -26,7 +26,7 @@ type :: ldau_type
   integer, allocatable, dimension(:) :: offsetU ! dimensions = [":"]
   real(dp), allocatable, dimension(:,:,:) :: q_ae ! dimensions = [":", ":", ":"]
   real(dp), allocatable, dimension(:,:,:) :: q_ps ! dimensions = [":", ":", ":"]
-  real(dp), allocatable, dimension(:,:,:) :: q_ps ! dimensions = [":", ":", ":"]
+
 contains
   procedure, pass :: alloc => ldau_type_alloc
   procedure, pass :: init => ldau_type_init

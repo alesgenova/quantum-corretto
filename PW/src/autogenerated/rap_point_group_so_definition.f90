@@ -13,7 +13,7 @@ type :: rap_point_group_so_type
   character(len=5), dimension(24) :: name_class_so
   character(len=5), dimension(24) :: name_class_so1
   character(len=55), dimension(12,24) :: elem_name_so = ' '
-  character(len=55), dimension(12,24) :: elem_name_so = ' '
+
 contains
   procedure, pass :: init => rap_point_group_so_type_init
   procedure, pass :: update => rap_point_group_so_type_update

@@ -62,7 +62,7 @@ type :: tsvdw_module_type
   real(dp), allocatable, dimension(:,:) :: C6ABeff ! dimensions = [":", ":"]
   real(dp), allocatable, dimension(:,:,:) :: dveffdR ! dimensions = [":", ":", ":"]
   real(dp), allocatable, dimension(:,:,:) :: dveffdh ! dimensions = [":", ":", ":"]
-  real(dp), allocatable, dimension(:,:,:) :: dveffdh ! dimensions = [":", ":", ":"]
+
 contains
   procedure, pass :: alloc => tsvdw_module_type_alloc
   procedure, pass :: init => tsvdw_module_type_init

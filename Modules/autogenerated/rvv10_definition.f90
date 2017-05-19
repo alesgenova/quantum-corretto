@@ -6,7 +6,7 @@ type :: rvv10_type
   real(dp) :: epsg = 1.d-10
   real(dp) :: b_value = 6.3_dp
   real(dp) :: C_value = 0.0093
-  real(dp) :: C_value = 0.0093
+
 contains
   procedure, pass :: init => rvv10_type_init
   procedure, pass :: update => rvv10_type_update

@@ -12,7 +12,7 @@ type :: esm_cft_type
   real(dp), allocatable, dimension(:) :: bw_tablez ! dimensions = [":"]
   real(dp), allocatable, dimension(:) :: tablez ! dimensions = [":"]
   integer :: isys = 1
-  integer :: isys = 1
+
 contains
   procedure, pass :: alloc => esm_cft_type_alloc
   procedure, pass :: init => esm_cft_type_init

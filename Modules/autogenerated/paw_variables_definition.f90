@@ -14,7 +14,7 @@ type :: paw_variables_type
   type(paw_radial_integrator), allocatable, dimension(:) :: rad ! dimensions = [":"]
   real(dp), allocatable, dimension(:,:,:) :: ddd_paw ! dimensions = [":", ":", ":"]
   real(dp), allocatable, dimension(:,:,:) :: vs_rad ! dimensions = [":", ":", ":"]
-  real(dp), allocatable, dimension(:,:,:) :: vs_rad ! dimensions = [":", ":", ":"]
+
 contains
   procedure, pass :: alloc => paw_variables_type_alloc
   procedure, pass :: init => paw_variables_type_init
