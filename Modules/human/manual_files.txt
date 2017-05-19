@@ -19,3 +19,14 @@ mp_diag.f90
 mp_exx.f90
 mp_images.f90
 mp_pools.f90
+noncol.f90
+paw_variables.f90
+qmmm.f90
+recvec.f90
+tsvdw.f90
+uspp.f90
+wannier_gw.f90
+wannier_new.f90
+wave_base.f90
+wavefunctions.f90
+wyckoff.f90
