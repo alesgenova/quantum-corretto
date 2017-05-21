@@ -27,6 +27,11 @@ type :: scf_type
   logical :: lda_plus_u_nc
   complex(dp), allocatable, dimension(:) :: io_buffer ! dimensions = [":"]
 
+#ifdef __std_f95 
+
+#else 
+#endif 
+
 contains
   procedure, pass :: alloc => scf_type_alloc
   procedure, pass :: init => scf_type_init

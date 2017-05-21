@@ -3,7 +3,7 @@ init_args = {"maxclock": {"type": "integer", "dimension": null}, "notrunning": {
 type :: mytime_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
-  integer :: maxclock = 101
+  integer :: maxclock = 100
   real(dp) :: notrunning = - 1.0_dp
   real(dp), allocatable, dimension(:) :: cputime ! dimensions = [":"]
   real(dp), allocatable, dimension(:) :: t0cpu ! dimensions = [":"]

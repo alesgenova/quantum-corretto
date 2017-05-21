@@ -51,16 +51,20 @@ def write_definition(original_module, file_obj, type_name=None, procedures=None)
         init_args[var['name']]['type'] = type_string
         init_args[var['name']]['dimension'] = dimension_string
 
-    # write the alloc_args dict
-    if do_alloc:
-        f.write("alloc_args = {}\n")
-    # write all the init_args
-    f.write("init_args = {}\n".format(json.dumps(init_args,indent=None)))
+    if original_module.typ in ["Module", "Preprocess"]:
+        # write the alloc_args dict
+        if do_alloc:
+            f.write("alloc_args = {}\n")
+        # write all the init_args
+        if len(init_args) is not 0:
+            f.write("init_args = {}\n".format(json.dumps(init_args,indent=None)))
 
-    f.write("type :: {}".format(type_name)+"\n")
-    f.write("  logical :: is_alloc = .false.\n")
-    f.write("  logical :: is_init = .false.\n")
+    if original_module.typ in ["Module"]:
+        f.write("type :: {}".format(type_name)+"\n")
+        f.write("  logical :: is_alloc = .false.\n")
+        f.write("  logical :: is_init = .false.\n")
     string = ""
+    
     for key, var in original_module.declares.items():
         print(key)
         string = "  "+var['type_base']
@@ -73,9 +77,14 @@ def write_definition(original_module, file_obj, type_name=None, procedures=None)
         if var['default'] is not None and var['allocatable'] is None: string += " = {}".format(var['default'])
         if var['allocatable']: string += ' ! dimensions = [{}]'.format(', '.join(['":"']*var['rank']))
         f.write(string+"\n")
-    f.write("\ncontains\n")
-    for procedure in procedures:
-        f.write("  procedure, pass :: {} => {}_{}\n".format(procedure,type_name,procedure))
-    f.write("end type {}".format(type_name)+"\n")
+
+    for name, preprocess in original_module.preprocesses.items():
+        preprocess.write_preprocess(file_obj)
+
+    if original_module.typ in ["Module"]:
+        f.write("\ncontains\n")
+        for procedure in procedures:
+            f.write("  procedure, pass :: {} => {}_{}\n".format(procedure,type_name,procedure))
+        f.write("end type {}".format(type_name)+"\n")
 
     return procedures

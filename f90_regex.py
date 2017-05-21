@@ -2,6 +2,12 @@
 
 import re
 
+# preprocess statements
+ppsl_rgx    = re.compile(r'^\s*#(include|define)(.*)',re.IGNORECASE)
+ppif_rgx    = re.compile(r'^\s*#(if)(.*)',re.IGNORECASE)
+ppelse_rgx  = re.compile(r'^\s*#(el)(.*)',re.IGNORECASE)
+ppendif_rgx = re.compile(r'^\s*#(end\s*if)(.*)',re.IGNORECASE)
+
 use_rgx = re.compile(r'^\s*USE\s+(\w+)\s*(?:,\s*ONLY\s*:\s*)?(.*)?',re.IGNORECASE)
 #useonly_rgx = re.compile(r'USE\s+(\w+)(\s*,\s*ONLY\s*:\s*)+',re.IGNORECASE)
 args_rgx = re.compile(r'(\w+)',re.IGNORECASE)

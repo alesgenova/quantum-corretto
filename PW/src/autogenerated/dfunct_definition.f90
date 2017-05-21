@@ -1,4 +1,3 @@
-init_args = {}
 type :: dfunct_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.

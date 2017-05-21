@@ -1,11 +1,12 @@
 alloc_args = {}
-init_args = {"becxx": {"type": "type(bec_type)", "dimension": ":"}, "becxx0": {"type": "type(bec_type)", "dimension": ":"}, "qgm": {"type": "complex(dp)", "dimension": ":,:"}}
+init_args = {"dovanxx": {"type": "logical", "dimension": null}, "becxx": {"type": "type(bec_type)", "dimension": ":"}, "becxx_gamma": {"type": "complex(dp)", "dimension": ":,:"}, "eps_occ": {"type": "real(dp)", "dimension": null}}
 type :: us_exx_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.
+  logical :: dovanxx = .true.
   type(bec_type), allocatable, dimension(:) :: becxx ! dimensions = [":"]
-  type(bec_type), allocatable, dimension(:) :: becxx0 ! dimensions = [":"]
-  complex(dp), allocatable, dimension(:,:) :: qgm ! dimensions = [":", ":"]
+  complex(dp), allocatable, dimension(:,:) :: becxx_gamma ! dimensions = [":", ":"]
+  real(dp) :: eps_occ = 1.d-8
 
 contains
   procedure, pass :: alloc => us_exx_type_alloc

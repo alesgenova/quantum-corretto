@@ -1,4 +1,3 @@
-init_args = {}
 type :: mp_wave_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.

@@ -1,4 +1,3 @@
-init_args = {}
 type :: read_cards_module_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.

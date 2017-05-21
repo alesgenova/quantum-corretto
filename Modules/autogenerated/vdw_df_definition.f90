@@ -5,6 +5,11 @@ type :: vdw_df_type
   real(dp) :: epsr = 1.d-12
   integer :: vdw_type = 1
 
+#ifdef fftgradient 
+
+#else 
+#endif 
+
 contains
   procedure, pass :: init => vdw_df_type_init
   procedure, pass :: update => vdw_df_type_update

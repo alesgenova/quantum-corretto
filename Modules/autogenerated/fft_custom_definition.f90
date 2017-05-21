@@ -1,4 +1,3 @@
-init_args = {}
 type :: fft_custom_type
   logical :: is_alloc = .false.
   logical :: is_init = .false.

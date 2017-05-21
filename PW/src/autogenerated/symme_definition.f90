@@ -11,6 +11,9 @@ type :: symme_type
   integer, allocatable, dimension(:) :: sdispls ! dimensions = [":"]
   integer, allocatable, dimension(:) :: rdispls ! dimensions = [":"]
 
+#ifdef __mpi 
+#endif 
+
 contains
   procedure, pass :: alloc => symme_type_alloc
   procedure, pass :: init => symme_type_init
