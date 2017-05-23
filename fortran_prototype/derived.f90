@@ -54,16 +54,16 @@ module procedures
   implicit none
 
 contains
-  subroutine sub0(object0, object1)
+    subroutine sub0(types, object1)
     implicit none
-    type(custom0) :: object0
+    type(custom0) :: types
     type(custom1) :: object1
 
     !integer, dimension(2) :: a
 
     fQE: associate( &
-      a => object0%a, &
-      b => object0%b, &
+            a => types%a, &
+            b => types%b, &
       c => object1%c, &
       d => object1%d, &
       e => object1%e &

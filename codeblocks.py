@@ -6,6 +6,28 @@ from default_type_definition import write_definition
 from default_type_procedures import write_alloc, write_init, write_dealloc
 tree_root = 1
 
+class Use(object):
+
+    def __init__(self, module, quantities):
+        self.module = module
+        self.quantities = quantities
+
+
+class Variable(object):
+
+    def __init__(self, name, type_base,
+                 type_extra=None, allocatable=None, dimension=None,
+                 intent=None, pointer=None, target=None, default=None):
+        self.name = name
+        self.type_base = type_base
+        self.type_extra = type_extra
+        self.allocatable = allocatable
+        self.dimension = dimension
+        self.intent = intent
+        self.pointer = pointer
+        self.target = target
+        self.default = default
+
 class Line(object):
 
     def __init__(self, input_string, fileobj_in):
@@ -122,6 +144,7 @@ class Codeblock(object):
         self.uses = OrderedDict()
         self.declares = OrderedDict()
         self.datatypes = OrderedDict()
+        self.lines = []
         self.patched_name = ''
         self.typ = ''
         self.location = {"project":None,
@@ -188,7 +211,7 @@ class Preprocess(Codeblock):
 
     def set_startstatement(self, string):
         self.startstatement = string
-        
+
     def set_endstatement(self, string):
         self.endstatement = string
 
@@ -211,7 +234,6 @@ class Sourcefile(Codeblock):
         self.typ = 'Sourcefile'
         self.shortdir = shortdir
         self.name = name
-        self.lines = []
 
     def __str__(self):
         return 'FILE '+self.name
@@ -225,12 +247,13 @@ class Sourcefile(Codeblock):
             print(self.name)
             for line in src:
 
-                self.lines.append(Line(line,src))
+                line = Line(line,src)
+                #self.lines.append(Line(line,src))
 
                 # Parse line to update context
                 # (i.e. are we entering a new module/routine/function?)
-                if len(self.lines[-1].bare) > 0 :
-                    output = line_to_context(self.lines[-1].bare, context, location)
+                if len(line.bare.strip()) > 0 :
+                    output = line_to_context(line, context, location)
                     #if isinstance(context[-1], Module):
                     #    location['module'] = context[-1]
                     #elif isinstance(context[-1], Procedure):
@@ -356,7 +379,7 @@ class Datatype(Codeblock):
         self.typ = 'Datatype'
 
 def parse_declaration(context,mo):
-    if context.typ not in ["Module", "Datatype", "Preprocess"]: return
+    #if context.typ not in ["Module", "Datatype", "Preprocess"]: return
 
     type_base = mo.group('type_base').strip() if mo.group('type_base') else ""
     type_base = type_base.lower() if len(type_base.strip()) > 0 else None
@@ -375,10 +398,11 @@ def parse_declaration(context,mo):
     var_list = _parse_declaration_variables(variables, type_base, type_extra, attributes)
 
     for var in var_list:
-        var_name = var['name']
+        var_name = var.name
         if var_name in context.declares:
             print("WARNING, variable {} in module {} is being declared twice.".format(var_name,context.name))
         context.declares[var_name] = var
+        context.lines.append(var)
     #context.declares.extend(var_list)
     return
 
@@ -408,19 +432,31 @@ def _parse_declaration_variables(variables, type_base, type_extra, attributes):
         leftover = variables
         mo = vars_rgx.match(variables)
         while mo is not None:
-            var_dict = OrderedDict()
-            var_dict['name'] = mo.group('variable')
-            var_dict['type_base'] = type_base
-            var_dict['type_extra'] = type_extra
-            var_dict['allocatable'] = attributes['allocatable']
-            var_dict['dimension'] = attributes['dimension']
-            var_dict['intent'] = attributes['intent']
-            var_dict['pointer'] = attributes['pointer']
-            var_dict['target'] = attributes['target']
-            var_dict['default'] = mo.group('assign').lower() if mo.group('assign') else None
+            #var_dict = OrderedDict()
+            #var_dict['name'] = mo.group('variable')
+            #var_dict['type_base'] = type_base
+            #var_dict['type_extra'] = type_extra
+            #var_dict['allocatable'] = attributes['allocatable']
+            #var_dict['dimension'] = attributes['dimension']
+            #var_dict['intent'] = attributes['intent']
+            #var_dict['pointer'] = attributes['pointer']
+            #var_dict['target'] = attributes['target']
+            #var_dict['default'] = mo.group('assign').lower() if mo.group('assign') else None
+            #if mo.group('slice') is not None:
+            #    var_dict['dimension'] = mo.group('slice').strip()
+            #var_list.append(var_dict)
+            name = mo.group('variable')
+            allocatable = attributes['allocatable']
+            dimension = attributes['dimension']
+            intent = attributes['intent']
+            pointer = attributes['pointer']
+            target = attributes['target']
+            default = mo.group('assign').lower() if mo.group('assign') else None
             if mo.group('slice') is not None:
-                var_dict['dimension'] = mo.group('slice').strip()
-            var_list.append(var_dict)
+                dimension = mo.group('slice').strip()
+            var = Variable(name=name, type_base=type_base, type_extra=type_extra, allocatable=allocatable,
+                           dimension=dimension, intent=intent, pointer=pointer, target=target, default=default)
+            var_list.append(var)
             #print(mo.group(0))
             leftover = leftover[len(mo.group('subtract')):]
             mo = vars_rgx.match(leftover)
@@ -448,9 +484,10 @@ def str_to_arg(string):
     #return args, argstring if len(args) > 0 else None, None
 
 
-def line_to_context(line, context, location):
+def line_to_context(line_obj, context, location):
 
     curr_context = context[-1]
+    line = line_obj.bare
 
     chk = 0
 
@@ -488,13 +525,17 @@ def line_to_context(line, context, location):
     if mo is not None:
         curr_context.set_endstatement(mo.group(0).lower())
         context.pop()
-    
+        return chk
+
 
     # CHECK USE STATEMENTS
     mo = use_rgx.match(line)
     if mo is not None:
         #chk += 1
+        vars_list, trash = str_to_arg(mo.group(2))
+        use = Use(mo.group(1), vars_list)
         curr_context.add_uses(mo.group(1), mo.group(2))
+        curr_context.lines.append(use)
         return chk
 
     # CHECK DECLARATION STATEMENTS
@@ -505,15 +546,16 @@ def line_to_context(line, context, location):
             pass
         else:
             parse_declaration(curr_context,mo)
-            #curr_context.add_import(mo.group(1), mo.group(2))
             return chk
 
     # CHECK NEW SUBROUTINE
     mo = subroutine_rgx.match(line)
     if mo is not None:
         chk += 1
-        context.append(Subroutine(mo.group(1).lower(), mo.group(2),curr_context))
-        curr_context.add_contains(context[-1])
+        subroutine = Subroutine(mo.group(1).lower(), mo.group(2),curr_context)
+        context.append(subroutine)
+        curr_context.add_contains(subroutine)
+        curr_context.lines.append(subroutine)
         return chk
 
 
@@ -539,8 +581,10 @@ def line_to_context(line, context, location):
     mo = function_rgx.match(line)
     if mo is not None:
         chk += 1
-        context.append(Function(mo.group(1).lower(), mo.group(2),curr_context))
-        curr_context.add_contains(context[-1])
+        function = Function(mo.group(1).lower(), mo.group(2),curr_context)
+        context.append(function)
+        curr_context.add_contains(function)
+        curr_context.lines.append(function)
         return chk
 
     # CHECK END FUNCTION
@@ -558,8 +602,10 @@ def line_to_context(line, context, location):
     if mo is not None:
         print(line)
         chk += 1
-        context.append(Datatype(mo.group("name").lower(),curr_context))
-        curr_context.add_datatype(context[-1])
+        datatype = Datatype(mo.group("name").lower(),curr_context)
+        context.append(datatype)
+        curr_context.add_datatype(datatype)
+        curr_context.lines.append(datatype)
         return chk
 
     # CHECK END TYPE
@@ -575,8 +621,10 @@ def line_to_context(line, context, location):
     mo = module_rgx.match(line)
     if mo is not None:
         chk += 1
-        context.append(Module(mo.group(1).lower(),curr_context))
-        curr_context.add_contains(context[-1])
+        module = Module(mo.group(1).lower(),curr_context)
+        context.append(module)
+        curr_context.add_contains(module)
+        curr_context.lines.append(module)
         return chk
 
     # CHECK END MODULE
@@ -587,6 +635,8 @@ def line_to_context(line, context, location):
         context.pop()
         location['module'] = None
         return chk
+
+    curr_context.lines.append(line_obj)
 
     return chk
 
