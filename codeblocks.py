@@ -494,14 +494,15 @@ def _check_proper_use(use, codeblock, project):
     if module is None:
         print("WARNING, module {} couldn't be located in the project".format(use.module))
         return
-    if q is None:
-        pass
-    else:
-        for q in use.quantities:
-            quantity, trash = module.locate(q)
-            if quantity is None:
-                print("WARNING, quantity {} couldn't be located in module {}".format(q, module.name))
-                return
+    print(use.module, use.quantities)
+    if use.quantities is None:
+        print("WARNING, using all the quantities from the module {}".format(module.name))
+        return
+    for q in use.quantities:
+        quantity, trash = module.locate(q)
+        if quantity is None:
+            print("WARNING, quantity {} couldn't be located in module {}".format(q, module.name))
+            return
             print(quantity.typ)
 
 
