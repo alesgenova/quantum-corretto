@@ -9,9 +9,22 @@ tree_root = 0
 class Use(object):
     typ = "Use"
     def __init__(self, module, quantities):
+        print(module, quantities)
         self.module = module
         self.quantities = quantities
 
+class Constant(object):
+    typ = "Constant"
+    def __init__(self, name, type_base,
+                 type_extra=None, dimension=None,
+                 pointer=None, target=None, default=None):
+        self.name = name
+        self.type_base = type_base
+        self.type_extra = type_extra
+        self.dimension = dimension
+        self.pointer = pointer
+        self.target = target
+        self.default = default
 
 class Variable(object):
     typ = "Variable"
@@ -153,9 +166,15 @@ class Codeblock(object):
                         "module":None,
                         "procedure":None}
 
-    def add_uses(self, modulename, variables):
-        self.uses[modulename], trash = str_to_arg(variables)
-        #self.imports.add_module(modulename,variables)
+    def add_uses(self, use):
+        if use.module not in self.uses:
+            if use.quantities is None:
+                self.uses[use.module] = None
+            else:
+                self.uses[use.module] = OrderedDict()
+
+        for key, quantity in use.quantities.items():
+            self.uses[use.module][key] = quantity
 
     def add_preprocess(self,obj):
         self.preprocesses[obj.name] = obj
@@ -328,13 +347,18 @@ class Module(Codeblock):
         self.typ = 'Module'
 
     def patch(self):
-        #obj = self.copy()
+        obj = Module(self.name+"_patched", self.parent)
         #obj.name = self.name+"_patched"
-        #obj.lines = []
+        obj.lines = []
+        new_args = []
         project = get_project(self)
         for line in self.lines:
             if line.typ == "Use":
-                _check_proper_use(line, self, project)
+                use2use, use2arg = _check_proper_use(line, self, project)
+                print(use2use, use2arg)
+                #if use2use is not None:
+                #    obj.lines.append(use2use)
+        return obj
                 #break
 
     def objectify(self):
@@ -420,7 +444,7 @@ def parse_declaration(context,mo):
     return
 
 def _parse_declaration_options(options):
-    attributes = {"allocatable":None, "dimension":None, "intent":None , "pointer":None, "target":None}
+    attributes = {"allocatable":None, "dimension":None, "intent":None , "pointer":None, "target":None, "parameter":None}
     if options is None: return attributes
     leftover = options
     mo = options_rgx.match(leftover)
@@ -428,7 +452,7 @@ def _parse_declaration_options(options):
         option = mo.group('option')
         sli = mo.group('slice')
         if option is not None:
-            if option.lower() in ['allocatable', 'pointer', 'target']:
+            if option.lower() in ['allocatable', 'pointer', 'target', 'parameter']:
                 attributes[option.lower()] = True
             elif option.lower() == "dimension":
                 attributes["dimension"] = sli.strip().lower()
@@ -458,17 +482,22 @@ def _parse_declaration_variables(variables, type_base, type_extra, attributes):
             #if mo.group('slice') is not None:
             #    var_dict['dimension'] = mo.group('slice').strip()
             #var_list.append(var_dict)
-            name = mo.group('variable')
+            name = mo.group('variable').lower().strip()
             allocatable = attributes['allocatable']
             dimension = attributes['dimension']
             intent = attributes['intent']
             pointer = attributes['pointer']
             target = attributes['target']
+            parameter = attributes['parameter']
             default = mo.group('assign').lower() if mo.group('assign') else None
             if mo.group('slice') is not None:
                 dimension = mo.group('slice').strip()
-            var = Variable(name=name, type_base=type_base, type_extra=type_extra, allocatable=allocatable,
-                           dimension=dimension, intent=intent, pointer=pointer, target=target, default=default)
+            if parameter:
+                var = Constant(name=name, type_base=type_base, type_extra=type_extra,
+                               dimension=dimension, pointer=pointer, target=target, default=default)
+            else:
+                var = Variable(name=name, type_base=type_base, type_extra=type_extra, allocatable=allocatable,
+                               dimension=dimension, intent=intent, pointer=pointer, target=target, default=default)
             var_list.append(var)
             #print(mo.group(0))
             leftover = leftover[len(mo.group('subtract')):]
@@ -493,35 +522,51 @@ def _check_proper_use(use, codeblock, project):
     module, trash = project.locate(use.module)
     if module is None:
         print("WARNING, module {} couldn't be located in the project".format(use.module))
-        return
+        return None, None
+    use2use = []#OrderedDict()
+    use2arg = []#OrderedDict()
     print(use.module, use.quantities)
-    if use.quantities is None:
+    if len(use.quantities) == 0:
         print("WARNING, using all the quantities from the module {}".format(module.name))
-        return
-    for q in use.quantities:
+        for key, procedure in module.contains.items():
+            if procedure.typ in ["Subroutine","Function"]:
+                use2use.append(key)
+        for key, quantity in module.declares.items():
+            use2arg.append(key)
+        return use2use, use2arg
+    print(use.quantities)
+    for q, alias in use.quantities.items():
         quantity, trash = module.locate(q)
         if quantity is None:
             print("WARNING, quantity {} couldn't be located in module {}".format(q, module.name))
-            return
-            print(quantity.typ)
+            #return None, None
+        elif quantity.typ in ["Subroutine","Function", "Datatype", "Constant"]:
+            use2use.append(quantity.name)
+        else:
+            use2arg.append(quantity.name)
+        #print(quantity.name,quantity.typ)
+    return use2use, use2arg
+
+
+def str_to_use(string):
+    if string.strip() == "": return OrderedDict()
+    args = string.split(",")
+    if len(args) == 0: return None
+    args_dict = OrderedDict()
+    for arg in args:
+        alias = None
+        if "=>" in arg:
+            alias, arg = arg.split("=>")
+            alias = alias.strip()
+        args_dict[arg.strip()] = alias
+    return args_dict
 
 
 def str_to_arg(string):
-    if string is None:
-        return None, ''
-    args = args_rgx.findall(string)
-    argstring = ''
-    nargs = len(args)
-    if nargs == 0 :
-        return None, ''
-    else :
-        for iarg, arg in enumerate(args):
-            if iarg < nargs-1:
-                argstring += arg+', '
-            else:
-                argstring += arg
-        return args, argstring
-    #return args, argstring if len(args) > 0 else None, None
+    if string is None: return None, ""
+    args = [arg.strip() for arg in string.split(",")]
+    if len(args) == 0: return None, ""
+    return args, ", ".join(args)
 
 
 def line_to_context(line_obj, context, location):
@@ -572,9 +617,9 @@ def line_to_context(line_obj, context, location):
     mo = use_rgx.match(line)
     if mo is not None:
         #chk += 1
-        vars_list, trash = str_to_arg(mo.group(2))
-        use = Use(mo.group(1), vars_list)
-        curr_context.add_uses(mo.group(1), mo.group(2))
+        use_dict = str_to_use(mo.group(2))
+        use = Use(mo.group(1), use_dict)
+        curr_context.add_uses(use)
         curr_context.lines.append(use)
         return chk
 
