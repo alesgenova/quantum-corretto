@@ -31,3 +31,6 @@ vars_rgx = re.compile(r'^(?P<subtract>,?\s*(?P<variable>\w+)\s*(?:\((?P<slice>.*
 
 dimensions_rgx = re.compile(r"([-+a-zA-Z0-9]+(?:\s*%\s*[a-zA-Z0-9]+)?(?::[-+a-zA-Z0-9]+(?:\s*%\s*[a-zA-Z0-9]+)?)?)\s*,?", re.IGNORECASE)
 alloc_dimensions_rgx = re.compile(r'\s*(:)\s*', re.IGNORECASE)
+
+interface_rgx = re.compile(r'^\s*interface\s+(?P<name>\w+)\s*$', re.IGNORECASE)
+endinterface_rgx = re.compile(r'^\s*end\s*interface(?:\s+(?P<name>\w+))?\s*$', re.IGNORECASE)

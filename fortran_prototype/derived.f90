@@ -74,8 +74,18 @@ contains
       write(*,*) c
       write(*,*) d
       write(*,*) e
+      write(*,*) funct(4.0)
+
+
 
     end associate fQE
+      contains
+
+      real function funct(x)
+        implicit none
+        real, intent(in) :: x
+        funct = x*2.0
+      end function funct
 
   end subroutine sub0
 

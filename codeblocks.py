@@ -4,13 +4,14 @@ from f90_regex import *
 from collections import OrderedDict
 from default_type_definition import write_definition
 from default_type_procedures import write_alloc, write_init, write_dealloc
+from allowed_modules import allowed_modules
 tree_root = 0
 
 class Use(object):
     typ = "Use"
     def __init__(self, module, quantities):
         print(module, quantities)
-        self.module = module
+        self.module = module.lower()
         self.quantities = quantities
 
 class Constant(object):
@@ -18,7 +19,7 @@ class Constant(object):
     def __init__(self, name, type_base,
                  type_extra=None, dimension=None,
                  pointer=None, target=None, default=None):
-        self.name = name
+        self.name = name.lower()
         self.type_base = type_base
         self.type_extra = type_extra
         self.dimension = dimension
@@ -31,7 +32,7 @@ class Variable(object):
     def __init__(self, name, type_base,
                  type_extra=None, allocatable=None, dimension=None,
                  intent=None, pointer=None, target=None, default=None):
-        self.name = name
+        self.name = name.lower()
         self.type_base = type_base
         self.type_extra = type_extra
         self.allocatable = allocatable
@@ -119,6 +120,7 @@ class Project(object):
             src.print_contains()
 
     def locate(self, name):
+        name = name.lower()
         location_ = []
         if name in self.sources:
             return self.sources[name], location_
@@ -155,7 +157,9 @@ class Codeblock(object):
         self.name = name.lower()
         self.preprocesses = OrderedDict()
         self.contains = OrderedDict()
-        self.uses = OrderedDict()
+        self.uses = [] #OrderedDict()
+        self.use2use = None
+        self.use2arg = None
         self.declares = OrderedDict()
         self.datatypes = OrderedDict()
         self.lines = []
@@ -167,9 +171,12 @@ class Codeblock(object):
                         "procedure":None}
 
     def add_uses(self, use):
+        self.uses.append(use)
+        return
         if use.module not in self.uses:
             if use.quantities is None:
                 self.uses[use.module] = None
+                return
             else:
                 self.uses[use.module] = OrderedDict()
 
@@ -197,6 +204,7 @@ class Codeblock(object):
             obj.print_contains()
 
     def locate(self, name, location_=[]):
+        name = name.lower()
         if name in self.contains:
             return self.contains[name], location_+[self.name]
         for key, src in self.contains.items():
@@ -215,6 +223,24 @@ class Codeblock(object):
             else:
                 blocks.extend(obj.get_blocktypes(typ))
         return blocks
+
+    def check_uses(self):
+        self.use2use = OrderedDict()
+        self.use2arg = OrderedDict()
+        project = get_project(self)
+        for use in self.uses:
+            use2use, use2arg = _check_proper_use(use, self, project)
+            if use.module not in self.use2use:
+                self.use2use[use.module] = OrderedDict()
+            if use.module not in self.use2arg:
+                self.use2arg[use.module] = OrderedDict()
+            for var, alias in use2use.items():
+                self.use2use[use.module][var] = alias
+            for var, alias in use2arg.items():
+                self.use2arg[use.module][var] = alias
+            #if use2use is not None:
+            #    obj.lines.append(use2use)
+        return
 
     def __str__(self):
         return "{} {}".format(self.typ, self.name)
@@ -395,6 +421,7 @@ class Module(Codeblock):
 
 
     def locate(self, name, location_=[]):
+        name = name.lower()
         block, location = super().locate(name, location_)
         if block is not None:
             return block, location
@@ -519,6 +546,8 @@ def get_project(codeblock):
 
 
 def _check_proper_use(use, codeblock, project):
+    if use.module in allowed_modules:
+        return use.quantities, OrderedDict()
     module, trash = project.locate(use.module)
     if module is None:
         print("WARNING, module {} couldn't be located in the project".format(use.module))
@@ -533,8 +562,15 @@ def _check_proper_use(use, codeblock, project):
                 #use2use.append(key)
                 use2use[key] = None
         for key, quantity in module.declares.items():
-            #use2arg.append(key)
-            use2arg[key] = None
+            if quantity.typ in ["Constant"]:
+                use2use[key] = None
+            else:
+                use2arg[key] = None
+        for key, quantity in module.datatypes.items():
+            if quantity.typ in ["Datatype"]:
+                use2use[key] = None
+            else:
+                use2arg[key] = None
         return use2use, use2arg
     #print(use.quantities)
     for q, alias in use.quantities.items():
@@ -585,6 +621,7 @@ def line_to_context(line_obj, context, location):
     # CHECK single line PREPROCESS (include|define)
     mo = ppsl_rgx.match(line)
     if mo is not None:
+        return chk
         context.append(Preprocess(mo.group(0).lower(),curr_context))
         context[-1].set_startstatement(mo.group(0).lower())
         curr_context.add_preprocess(context[-1])
@@ -594,6 +631,7 @@ def line_to_context(line_obj, context, location):
     # CHECK PREPROCESS IF
     mo = ppif_rgx.match(line)
     if mo is not None:
+        return chk
         context.append(Preprocess(mo.group(0).lower(),curr_context))
         context[-1].set_startstatement(mo.group(0).lower())
         curr_context.add_preprocess(context[-1])
@@ -602,6 +640,7 @@ def line_to_context(line_obj, context, location):
     # CHECK PREPROCESS ELSE, ELIF
     mo = ppelse_rgx.match(line)
     if mo is not None:
+        return chk
         context.pop()
         curr_context = context[-1]
         context.append(Preprocess(mo.group(0).lower(),curr_context))
@@ -612,6 +651,7 @@ def line_to_context(line_obj, context, location):
     # CHECK PREPROCESS ENDIF
     mo = ppendif_rgx.match(line)
     if mo is not None:
+        return chk
         curr_context.set_endstatement(mo.group(0).lower())
         context.pop()
         return chk
