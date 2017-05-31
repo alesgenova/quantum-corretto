@@ -523,27 +523,31 @@ def _check_proper_use(use, codeblock, project):
     if module is None:
         print("WARNING, module {} couldn't be located in the project".format(use.module))
         return None, None
-    use2use = []#OrderedDict()
-    use2arg = []#OrderedDict()
-    print(use.module, use.quantities)
+    use2use = OrderedDict()
+    use2arg = OrderedDict()
+    #print(use.module, use.quantities)
     if len(use.quantities) == 0:
         print("WARNING, using all the quantities from the module {}".format(module.name))
         for key, procedure in module.contains.items():
             if procedure.typ in ["Subroutine","Function"]:
-                use2use.append(key)
+                #use2use.append(key)
+                use2use[key] = None
         for key, quantity in module.declares.items():
-            use2arg.append(key)
+            #use2arg.append(key)
+            use2arg[key] = None
         return use2use, use2arg
-    print(use.quantities)
+    #print(use.quantities)
     for q, alias in use.quantities.items():
         quantity, trash = module.locate(q)
         if quantity is None:
             print("WARNING, quantity {} couldn't be located in module {}".format(q, module.name))
             #return None, None
         elif quantity.typ in ["Subroutine","Function", "Datatype", "Constant"]:
-            use2use.append(quantity.name)
+            #use2use.append(quantity.name)
+            use2use[quantity.name] = alias
         else:
-            use2arg.append(quantity.name)
+            #use2arg.append(quantity.name)
+            use2arg[quantity.name] = alias
         #print(quantity.name,quantity.typ)
     return use2use, use2arg
 
