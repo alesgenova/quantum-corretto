@@ -119,14 +119,18 @@ class Project(object):
             print('  |')
             src.print_contains()
 
-    def locate(self, name):
+    def locate(self, name, typ=None):
         name = name.lower()
         location_ = []
         if name in self.sources:
-            return self.sources[name], location_
+            if typ is None:
+                return self.sources[name], location_
+            else:
+                if self.sources[name].typ == typ:
+                    return self.sources[name], location_
         for key, src in self.sources.items():
             #print('Scanning', src.name)
-            block, location = src.locate(name, location_)
+            block, location = src.locate(name, location_, typ)
             if block is not None:
                 return block, location
         return None, None
@@ -134,7 +138,7 @@ class Project(object):
     def get_blocktypes(self, typ):
         blocks = []
         if typ == "Procedure":
-            typ = ["Subroutine","Function"]
+            typ = ["Subroutine","Function","Interface"]
         else:
             typ = [typ]
         for key, src in self.sources.items():
@@ -203,13 +207,17 @@ class Codeblock(object):
             #print ('---'*obj.tree_level,obj.typ,obj.name)
             obj.print_contains()
 
-    def locate(self, name, location_=[]):
+    def locate(self, name, location_=[], typ=None):
         name = name.lower()
         if name in self.contains:
-            return self.contains[name], location_+[self.name]
+            if typ is None:
+                return self.contains[name], location_+[self.name]
+            else:
+                if self.contains[name].typ == typ:
+                    return self.contains[name], location_+[self.name]
         for key, src in self.contains.items():
             location = location_+[self.name]
-            block, location = src.locate(name, location)
+            block, location = src.locate(name, location, typ)
             if block is not None:
                 return block, location
         return None, None
@@ -334,6 +342,13 @@ class Sourcefile(Codeblock):
             if not line.empty:
                 print(line.bare)
 
+class Interface(Codeblock):
+
+    def __init__(self, name, parent):
+        super().__init__(name)
+        self.parent = parent
+        self.tree_level = parent.tree_level + 1
+        self.typ = "Interface"
 
 class Procedure(Codeblock):
 
@@ -420,15 +435,17 @@ class Module(Codeblock):
                 write_dealloc(self,f)
 
 
-    def locate(self, name, location_=[]):
+    def locate(self, name, location_=[], typ=None):
         name = name.lower()
-        block, location = super().locate(name, location_)
+        block, location = super().locate(name, location_, typ)
         if block is not None:
             return block, location
-        if name in self.declares:
-            return self.declares[name], location_+[self.name]
-        if name in self.datatypes:
-            return self.datatypes[name], location_+[self.name]
+        if typ is None or typ=="Variable":
+            if name in self.declares:
+                return self.declares[name], location_+[self.name]
+        if typ is None or typ=="Datatype":
+            if name in self.datatypes:
+                return self.datatypes[name], location_+[self.name]
         return None, None
 
 
@@ -548,17 +565,22 @@ def get_project(codeblock):
 def _check_proper_use(use, codeblock, project):
     if use.module in allowed_modules:
         return use.quantities, OrderedDict()
-    module, trash = project.locate(use.module)
+    module, trash = project.locate(use.module, "Module")
+    #module = project.get_blocktypes(typ="Module")[use.module]
     if module is None:
-        print("WARNING, module {} couldn't be located in the project".format(use.module))
-        return None, None
+        print("ERROR, module {} couldn't be located in the project".format(use.module))
+        raise Exception
+        #return None, None
+    if module.typ != "Module":
+        print("ERROR, module {} couldn't be located in the project".format(use.module))
+        raise Exception
     use2use = OrderedDict()
     use2arg = OrderedDict()
     #print(use.module, use.quantities)
     if len(use.quantities) == 0:
         print("WARNING, using all the quantities from the module {}".format(module.name))
         for key, procedure in module.contains.items():
-            if procedure.typ in ["Subroutine","Function"]:
+            if procedure.typ in ["Subroutine","Function","Interface"]:
                 #use2use.append(key)
                 use2use[key] = None
         for key, quantity in module.declares.items():
@@ -578,7 +600,7 @@ def _check_proper_use(use, codeblock, project):
         if quantity is None:
             print("WARNING, quantity {} couldn't be located in module {}".format(q, module.name))
             #return None, None
-        elif quantity.typ in ["Subroutine","Function", "Datatype", "Constant"]:
+        elif quantity.typ in ["Subroutine","Function","Interface", "Datatype", "Constant"]:
             #use2use.append(quantity.name)
             use2use[quantity.name] = alias
         else:
@@ -764,6 +786,25 @@ def line_to_context(line_obj, context, location):
         context.pop()
         location['module'] = None
         return chk
+
+    # CHECK NEW Interface
+    mo = interface_rgx.match(line)
+    if mo is not None:
+        chk += 1
+        interface = Interface(mo.group("name").lower(),curr_context)
+        context.append(interface)
+        curr_context.add_contains(interface)
+        curr_context.lines.append(interface)
+        return chk
+
+    # CHECK END ITERFACE
+    mo = endinterface_rgx.match(line)
+    if mo is not None:
+        if curr_context.typ == "Interface":
+            chk -= 1
+            #print(context[-1])
+            context.pop()
+            return chk
 
     curr_context.lines.append(line_obj)
 
