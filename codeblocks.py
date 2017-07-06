@@ -232,23 +232,63 @@ class Codeblock(object):
                 blocks.extend(obj.get_blocktypes(typ))
         return blocks
 
-    def check_uses(self):
-        self.use2use = OrderedDict()
-        self.use2arg = OrderedDict()
-        project = get_project(self)
-        for use in self.uses:
-            use2use, use2arg = _check_proper_use(use, self, project)
-            if use.module not in self.use2use:
-                self.use2use[use.module] = OrderedDict()
-            if use.module not in self.use2arg:
-                self.use2arg[use.module] = OrderedDict()
-            for var, alias in use2use.items():
-                self.use2use[use.module][var] = alias
-            for var, alias in use2arg.items():
-                self.use2arg[use.module][var] = alias
-            #if use2use is not None:
-            #    obj.lines.append(use2use)
+    def check_uses(self, blacklisted=None):
+        #self.use2use, self.use2arg = self._upstream_uses()
+        #self.use2use = OrderedDict()
+        #self.use2arg = OrderedDict()
+        branch = []
+        branch = self._get_tree_branch(branch)
+        use2use = OrderedDict()
+        use2arg = OrderedDict()
+        for block in branch[::-1]:
+            use2use, use2arg = block._build_uses(blacklisted, use2use, use2arg)
+        self.use2use = use2use
+        self.use2arg = use2arg
+
+        if 1 > 0:
+            print(self)
+            print('USE: ',self.use2use)
+            print('ARG: ',self.use2arg)
         return
+
+    def _build_uses(self, blacklisted, upstream_use2use, upstream_use2arg):
+        if self.use2arg is not None and self.use2use is not None:
+            return self.use2use, self.use2arg
+
+        project = get_project(self)
+        count = 0
+        self.use2arg = upstream_use2arg.copy()
+        self.use2use = upstream_use2use.copy()
+        for use in self.uses:
+            if blacklisted is None or use.module in blacklisted:
+                count += 1
+                use2use, use2arg = _check_proper_use(use, self, project)
+                if use.module not in self.use2use:
+                    self.use2use[use.module] = OrderedDict()
+                if use.module not in self.use2arg:
+                    self.use2arg[use.module] = OrderedDict()
+                for var, alias in use2use.items():
+                    self.use2use[use.module][var] = alias
+                for var, alias in use2arg.items():
+                    self.use2arg[use.module][var] = alias
+        return self.use2use, self.use2arg
+
+    def _upstream_proper_use(self):
+        if self.typ == "Module":
+
+            return OrderedDict(), OrderedDict()
+        else:
+            return self.parent._upstream_proper_use()
+
+    def _get_tree_branch(self, branch=[]):
+        print(self)
+        branch.append(self)
+        if self.typ == "Module":
+            return branch
+        if self.parent.typ == "Sourcefile":
+            return branch
+        return self.parent._get_tree_branch(branch)
+
 
     def __str__(self):
         return "{} {}".format(self.typ, self.name)
