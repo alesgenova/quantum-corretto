@@ -271,6 +271,8 @@ class Codeblock(object):
                     self.use2use[use.module][var] = alias
                 for var, alias in use2arg.items():
                     self.use2arg[use.module][var] = alias
+            else:
+                self.use2use[use.module] = use.quantities
         return self.use2use, self.use2arg
 
     def _upstream_proper_use(self):
@@ -289,10 +291,68 @@ class Codeblock(object):
             return branch
         return self.parent._get_tree_branch(branch)
 
+    def get_patched(self):
+        print(self)
+        for mod_name, quantities in self.use2use.items():
+            print("use {}, only: ".format(mod_name))
+            for q in quantities:
+                print(q)
+        return
+
 
     def __str__(self):
         return "{} {}".format(self.typ, self.name)
 
+def _use2string(uses, args):
+    lines = []
+    for module, quantities in uses.items():
+        if len(quantities) > 0:
+            qs = []
+            for var, alias in quantities.items():
+                if alias is None:
+                    qs.append(var)
+                else:
+                    qs.append("{} => {}".format(alias, var))
+            line = "use {}, only: ".format(module)+", ".join(qs)
+            lines.append(line)
+    for module, quantities in args.items():
+        if len(quantities) > 0:
+            line = "use {}, only: {}_autotype".format(module, module)
+            lines.append(line)
+
+    return lines
+
+
+def _arg2def(args):
+    lines = []
+    for module, quantities in args.items():
+        if len(quantities) > 0:
+            line = "type({}_autotype) :: {}".format(module, module)
+            lines.append(line)
+    return lines
+
+
+def _arg2associate(args):
+    lines = ['associate(']
+    spaces = ' '*9
+    for module, quantities in args.items():
+        if len(quantities) > 0:
+            for var, alias in quantities.items():
+                if alias is None:
+                    line = '{} {} => {}%{}'.format(spaces, var, module, var)
+                    lines.append(line)
+                else:
+                    line = '{} {} => {}%{}'.format(spaces, alias, module, var)
+                    lines.append(line)
+    lines.append('{})'.format(spaces))
+    return lines
+
+def _extendargs(original_args, args):
+    new_args = original_args.copy()
+    for module, quantities in args.items():
+        if len(quantities) > 0:
+            new_args.append(module)
+    return new_args
 
 class Preprocess(Codeblock):
 
@@ -406,17 +466,25 @@ class Subroutine(Procedure):
         self.typ = 'Subroutine'
 
     def __str__(self):
-        return 'SUBROUTINE '+self.name+' ('+self.argstring+')'
+        return "SUBROUTINE {}({})".format(self.name, ", ".join(self.args))
 
 
 class Function(Procedure):
 
-    def __init__(self,name,argstring,parent):
+    def __init__(self,name,argstring,parent, result_type=None, result_name=None):
         super().__init__(name, argstring, parent)
         self.typ = 'Function'
+        self.result_type = result_type
+        self.result_name = result_name
 
     def __str__(self):
-        return 'FUNCTION '+self.name+' ('+self.argstring+')'
+        header = ""
+        if self.result_type is not None:
+            header += result_typ+" "
+        header += "FUNCTION {}({})".format(self.name, ", ".join(self.args))
+        if self.result_name is not None:
+            header += " RESULT({})".format(self.result_name)
+        return header
 
 
 class Module(Codeblock):
@@ -665,9 +733,9 @@ def str_to_use(string):
 
 
 def str_to_arg(string):
-    if string is None: return None, ""
-    args = [arg.strip() for arg in string.split(",")]
-    if len(args) == 0: return None, ""
+    if string is None: return [], ""
+    args = [arg.strip() for arg in string.split(",") if len(arg.strip())>0]
+    if len(args) == 0: return [], ""
     return args, ", ".join(args)
 
 
